@@ -43,7 +43,7 @@ public class FoWChess extends Application {
         widthLabel = new Label[width];
         heightLabel = new Label[height];
         for(int i = 0; i < width; i++){
-            for(int j = 0; j < width; j++){
+            for(int j = 0; j < height; j++){
                 lastCreatedTile = TileFactory.getInstance().makeTile(i, j);
                 board[i][j] = lastCreatedTile;
                 lastCreatedTile.setMinSize(size,size);
