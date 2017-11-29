@@ -25,14 +25,14 @@ import javafx.stage.Stage;
  */
 public class FoWChess extends Application {
     
-    private Tile[][] board;
-    private Label[] widthLabel;
-    private Label[] heightLabel;
+    private Tile[][] board;//two dimensional array for the tiles
+    private Label[] widthLabel;//labels for x axis
+    private Label[] heightLabel;//labels for y axis
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
 
-    public void makeLabel(int pos,int size){
-        lastCreatedLabel = new Label(Integer.toString(pos));
+    public void makeLabel(String text,int size){
+        lastCreatedLabel = new Label(text);
         lastCreatedLabel.setMinSize(size, size);
         lastCreatedLabel.setAlignment(Pos.CENTER);
     }
@@ -42,6 +42,7 @@ public class FoWChess extends Application {
         board = new Tile[width][height];
         widthLabel = new Label[width];
         heightLabel = new Label[height];
+        //Place tiles and give them color
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 lastCreatedTile = TileFactory.getInstance().makeTile(i, j);
@@ -51,16 +52,18 @@ public class FoWChess extends Application {
                 lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
             }
         }
+        //Place x axis labels
         for(int i = 1; i <= width; i++){
-            makeLabel(i,size);
+            makeLabel(Integer.toString(i),size);
             root.add(lastCreatedLabel,i + 1,1);
-            makeLabel(i,size);
+            makeLabel(Integer.toString(i),size);
             root.add(lastCreatedLabel,i + 1,height + 2);
         }
+        //Place y axis labels
         for(int j = 1; j <= height; j++){
-            makeLabel(j,size);
+            makeLabel(Integer.toString(j),size);
             root.add(lastCreatedLabel,1,height - j + 2);
-            makeLabel(j,size);
+            makeLabel(Integer.toString(j),size);
             root.add(lastCreatedLabel,width + 2,height - j + 2);
         }
         return root;
