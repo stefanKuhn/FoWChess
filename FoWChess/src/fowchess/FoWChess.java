@@ -65,7 +65,7 @@ public class FoWChess extends Application {
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("All Hail Satan!");
         primaryStage.setScene(scene);
         primaryStage.show();
         
