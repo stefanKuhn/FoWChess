@@ -10,10 +10,13 @@ import Objects.Tile;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -44,15 +47,23 @@ public class FoWChess extends Application {
         }
         for(int i = 1; i <= width; i++){
             lastCreatedLabel = new Label(Integer.toString(i));
+            lastCreatedLabel.setMinSize(size, size);
+            lastCreatedLabel.setAlignment(Pos.CENTER);
             root.add(lastCreatedLabel,i + 1,1);
             lastCreatedLabel = new Label(Integer.toString(i));
+            lastCreatedLabel.setMinSize(size, size);
+            lastCreatedLabel.setAlignment(Pos.CENTER);
             root.add(lastCreatedLabel,i + 1,height + 2);
         }
         for(int j = 1; j <= height; j++){
             lastCreatedLabel = new Label(Integer.toString(j));
-            root.add(lastCreatedLabel,1,j + 1);
+            lastCreatedLabel.setMinSize(size, size);
+            lastCreatedLabel.setAlignment(Pos.CENTER);
+            root.add(lastCreatedLabel,1,height - j + 2);
             lastCreatedLabel = new Label(Integer.toString(j));
-            root.add(lastCreatedLabel,width + 2,j + 1);
+            lastCreatedLabel.setMinSize(size, size);
+            lastCreatedLabel.setAlignment(Pos.CENTER);
+            root.add(lastCreatedLabel,width + 2,height - j + 2);
         }
         return root;
     }
@@ -61,11 +72,12 @@ public class FoWChess extends Application {
     public void start(Stage primaryStage) {
         
         GridPane root = generateBoard(8,8,50);
-        
-        Scene scene = new Scene(root, 300, 250);
+        root.setPadding(new Insets(15,15,15,15));        
+        Scene scene = new Scene(root, 530, 530);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 
