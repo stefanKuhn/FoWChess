@@ -15,7 +15,7 @@ import javafx.scene.paint.Paint;
  */
 public class Tile extends Button{
     boolean isVisible, containsMob;
-    Background tileColor;
+    public Background tileColor;
     Mob mob;
     int x,y,lightlevel;
 
