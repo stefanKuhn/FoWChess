@@ -31,9 +31,13 @@ public class FoWChess extends Application {
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
 
+    public void makeLabel(int pos,int size){
+        lastCreatedLabel = new Label(Integer.toString(pos));
+        lastCreatedLabel.setMinSize(size, size);
+        lastCreatedLabel.setAlignment(Pos.CENTER);
+    }
     
     public GridPane generateBoard(int width, int height, int size){
-        int fuckthis=1;
         GridPane root = new GridPane();
         board = new Tile[width][height];
         widthLabel = new Label[width];
@@ -48,36 +52,32 @@ public class FoWChess extends Application {
             }
         }
         for(int i = 1; i <= width; i++){
-            lastCreatedLabel = new Label(Integer.toString(i));
-            lastCreatedLabel.setMinSize(size, size);
-            lastCreatedLabel.setAlignment(Pos.CENTER);
+            makeLabel(i,size);
             root.add(lastCreatedLabel,i + 1,1);
-            lastCreatedLabel = new Label(Integer.toString(i));
-            lastCreatedLabel.setMinSize(size, size);
-            lastCreatedLabel.setAlignment(Pos.CENTER);
+            makeLabel(i,size);
             root.add(lastCreatedLabel,i + 1,height + 2);
         }
         for(int j = 1; j <= height; j++){
-            lastCreatedLabel = new Label(Integer.toString(j));
-            lastCreatedLabel.setMinSize(size, size);
-            lastCreatedLabel.setAlignment(Pos.CENTER);
+            makeLabel(j,size);
             root.add(lastCreatedLabel,1,height - j + 2);
-            lastCreatedLabel = new Label(Integer.toString(j));
-            lastCreatedLabel.setMinSize(size, size);
-            lastCreatedLabel.setAlignment(Pos.CENTER);
+            makeLabel(j,size);
             root.add(lastCreatedLabel,width + 2,height - j + 2);
         }
         return root;
+    }
+    
+    public Scene makeScene(int width, int height, int size){
+        GridPane root = generateBoard(width,height,size);
+        Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
+        return scene;
     }
         
     @Override
     public void start(Stage primaryStage) {
         
-        GridPane root = generateBoard(8,8,50);
-        root.setPadding(new Insets(15,15,15,15));        
-        Scene scene = new Scene(root, 530, 530);
+        Scene scene = makeScene(9,8,50);
                 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
