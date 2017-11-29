@@ -33,6 +33,7 @@ public class FoWChess extends Application {
 
     
     public GridPane generateBoard(int width, int height, int size){
+        int fuckthis=1;
         GridPane root = new GridPane();
         board = new Tile[width][height];
         widthLabel = new Label[width];
