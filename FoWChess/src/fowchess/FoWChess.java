@@ -5,11 +5,14 @@
  */
 package fowchess;
 
+import Factory.TileFactory;
+import Objects.Tile;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,20 +22,45 @@ import javafx.stage.Stage;
  */
 public class FoWChess extends Application {
     
+    private Tile[][] board;
+    private Label[] widthLabel;
+    private Label[] heightLabel;
+    private Tile lastCreatedTile;
+    private Label lastCreatedLabel;
+
+    
+    public GridPane generateBoard(int width, int height, int size){
+        GridPane root = new GridPane();
+        board = new Tile[width][height];
+        widthLabel = new Label[width];
+        heightLabel = new Label[height];
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < width; j++){
+                lastCreatedTile = TileFactory.getInstance().makeTile(i, j);
+                board[i][j] = lastCreatedTile;
+                lastCreatedTile.setMinSize(size,size);
+                root.add(lastCreatedTile, i + 2, j + 2);
+            }
+        }
+        for(int i = 1; i <= width; i++){
+            lastCreatedLabel = new Label(Integer.toString(i));
+            root.add(lastCreatedLabel,i + 1,1);
+            lastCreatedLabel = new Label(Integer.toString(i));
+            root.add(lastCreatedLabel,i + 1,height + 2);
+        }
+        for(int j = 1; j <= height; j++){
+            lastCreatedLabel = new Label(Integer.toString(j));
+            root.add(lastCreatedLabel,1,j + 1);
+            lastCreatedLabel = new Label(Integer.toString(j));
+            root.add(lastCreatedLabel,width + 2,j + 1);
+        }
+        return root;
+    }
+        
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        GridPane root = generateBoard(8,8,50);
         
         Scene scene = new Scene(root, 300, 250);
         
