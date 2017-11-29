@@ -37,15 +37,16 @@ public class TileFactory {
         }//on uneven rows
         else {
             //uneven tiles are black
-             if (y<<31>>31==1){
-                lastGivenBG=PaintMakerAndHolder.getInstance().getBlack();
-            } else {
+             if (y<<31>>31==0){
                 lastGivenBG=PaintMakerAndHolder.getInstance().getWhite();
+            } else {
+                lastGivenBG=PaintMakerAndHolder.getInstance().getBlack();
             }
         }
-        
+       
         
         lastCreated = new Tile(lastGivenBG, x, y, 0);
+        
         return lastCreated;
     }
 }

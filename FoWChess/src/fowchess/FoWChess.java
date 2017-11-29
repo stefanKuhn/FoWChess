@@ -44,6 +44,7 @@ public class FoWChess extends Application {
                 board[i][j] = lastCreatedTile;
                 lastCreatedTile.setMinSize(size,size);
                 root.add(lastCreatedTile, i + 2, j + 2);
+                lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
             }
         }
         for(int i = 1; i <= width; i++){
@@ -80,6 +81,7 @@ public class FoWChess extends Application {
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
+        
     }
 
     /**
