@@ -74,7 +74,7 @@ public class FoWChess extends Application {
         GridPane root = generateBoard(8,8,50);
         root.setPadding(new Insets(15,15,15,15));        
         Scene scene = new Scene(root, 530, 530);
-        
+                
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
