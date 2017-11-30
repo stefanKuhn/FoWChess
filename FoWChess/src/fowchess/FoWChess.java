@@ -45,8 +45,8 @@ public class FoWChess extends Application {
         //Place tiles and give them color
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
-                lastCreatedTile = TileFactory.getInstance().makeTile(i, j);
-                board[i][j] = lastCreatedTile;
+                lastCreatedTile = TileFactory.getInstance().makeTile(i,height - j - 1);
+                board[i][height - j - 1] = lastCreatedTile;
                 lastCreatedTile.setMinSize(size,size);
                 root.add(lastCreatedTile, i + 2, j + 2);
                 lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
@@ -78,7 +78,7 @@ public class FoWChess extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        Scene scene = makeScene(9,8,50);
+        Scene scene = makeScene(8,8,50);
                 
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
