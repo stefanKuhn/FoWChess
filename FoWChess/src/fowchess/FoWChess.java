@@ -7,6 +7,7 @@ package fowchess;
 
 import Factory.TileFactory;
 import Objects.Tile;
+import java.util.Stack;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +31,8 @@ public class FoWChess extends Application {
     private Label[] heightLabel;//labels for y axis
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
+    private int whoseTurn;
+    private static Stack<Tile> highlightedTiles;
     private static Tile selected;//tile that is currently selected;
 
     public void makeLabel(String text,int size){
@@ -46,8 +49,8 @@ public class FoWChess extends Application {
         //Place tiles and give them color
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
-                lastCreatedTile = TileFactory.getInstance().makeTile(i, j);
-                board[i][j] = lastCreatedTile;
+                lastCreatedTile = TileFactory.getInstance().makeTile(i,height - j - 1);
+                board[i][height - j - 1] = lastCreatedTile;
                 lastCreatedTile.setMinSize(size,size);
                 root.add(lastCreatedTile, i + 2, j + 2);
                 lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
@@ -70,17 +73,44 @@ public class FoWChess extends Application {
         }
         return root;
     }
+
+    public static Tile[][] getBoard() {
+        return board;
+    }
+
+    public static Stack<Tile> getHighlightedTiles() {
+        return highlightedTiles;
+    }
     
     public Scene makeScene(int width, int height, int size){
         GridPane root = generateBoard(width,height,size);
         Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
         return scene;
     }
+    
+    public void eventHandler(Tile[][] board){
+        for (Tile[] row : board){
+            for (Tile tile : row){
+                tile.setOnAction((ActionEvent event) -> {
+                    if (tile.isIsHighlighted()){
+                        //todo: add code for movement
+                    }
+                    else{
+                        if (tile.isContainsMob()){
+                            if (tile.getMob().getOwnerId() == whoseTurn){
+                                //todo: add code for highlighting tiles
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
         
     @Override
     public void start(Stage primaryStage) {
         
-        Scene scene = makeScene(9,8,50);
+        Scene scene = makeScene(8,8,50);
                 
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
@@ -89,9 +119,7 @@ public class FoWChess extends Application {
         
     }
     
-    public static Tile[][] getBoard(){
-        return board;
-    }
+
 
     public static Tile getSelected() {
         return selected;

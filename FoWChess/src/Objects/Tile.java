@@ -15,7 +15,7 @@ import javafx.scene.paint.Paint;
  * @author Sumpf
  */
 public class Tile extends Button{
-    boolean isVisible, containsMob;
+    boolean isVisible, containsMob, isHighlighted;
     public Background tileColor;
     Mob mob;
     int x,y,lightlevel;
@@ -43,6 +43,14 @@ public class Tile extends Button{
         else {
             setBackground(tileColor);
         }
+    }
+
+    public boolean isIsHighlighted() {
+        return isHighlighted;
+    }
+
+    public void setIsHighlighted(boolean isHighlighted) {
+        this.isHighlighted = isHighlighted;
     }
 
     public boolean isIsVisible() {

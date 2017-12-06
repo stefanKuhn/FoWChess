@@ -5,7 +5,7 @@
  */
 package Factory;
 
-import Objects.MovePattern;
+import MovePattern.MovePattern;
 
 /**
  *
@@ -13,5 +13,24 @@ import Objects.MovePattern;
  */
 public class MovePatternHolder {
     MovePattern pawn, rook, bishop, knight, queen, king;
-
+    static MovePatternHolder instance;
+    
+    private MovePatternHolder(){
+        init();
+    }
+    
+    public static MovePatternHolder getInstance(){
+        if (instance == null){
+            instance = new MovePatternHolder();
+        }
+        return instance;
+    }
+    
+    public void init(){
+        
+    }
+    
+    public void makePawnPattern(){
+        
+    }
 }
