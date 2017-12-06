@@ -7,6 +7,7 @@ package fowchess;
 
 import Factory.TileFactory;
 import Objects.Tile;
+import java.util.Stack;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,11 +26,13 @@ import javafx.stage.Stage;
  */
 public class FoWChess extends Application {
     
-    private Tile[][] board;//two dimensional array for the tiles
+    private static Tile[][] board;//two dimensional array for the tiles
     private Label[] widthLabel;//labels for x axis
     private Label[] heightLabel;//labels for y axis
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
+    private int whoseTurn;
+    private static Stack<Tile> highlightedTiles;
 
     public void makeLabel(String text,int size){
         lastCreatedLabel = new Label(text);
@@ -68,11 +71,38 @@ public class FoWChess extends Application {
         }
         return root;
     }
+
+    public static Tile[][] getBoard() {
+        return board;
+    }
+
+    public static Stack<Tile> getHighlightedTiles() {
+        return highlightedTiles;
+    }
     
     public Scene makeScene(int width, int height, int size){
         GridPane root = generateBoard(width,height,size);
         Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
         return scene;
+    }
+    
+    public void eventHandler(Tile[][] board){
+        for (Tile[] row : board){
+            for (Tile tile : row){
+                tile.setOnAction((ActionEvent event) -> {
+                    if (tile.isIsHighlighted()){
+                        //todo: add code for movement
+                    }
+                    else{
+                        if (tile.isContainsMob()){
+                            if (tile.getMob().getOwnerId() == whoseTurn){
+                                //todo: add code for highlighting tiles
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
         
     @Override

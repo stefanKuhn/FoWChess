@@ -12,5 +12,29 @@ package Objects;
 public class Mob {
     int ownerId, vision;
     char identity;
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public int getVision() {
+        return vision;
+    }
+
+    public void setVision(int vision) {
+        this.vision = vision;
+    }
+
+    public char getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(char identity) {
+        this.identity = identity;
+    }
     
 }
