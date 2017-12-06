@@ -26,15 +26,15 @@ public class Pawn extends MovePattern{
         y = from.getY();
         if (from.getMob().getOwnerId() == 0){
             if (y + 1 < height){
-                if(!(lastChosenTile = FoWChess.getBoard()[x][y + 1]).isContainsMob()){
+                if(!(lastChosenTile = FoWChess.getBoard()[x][y + 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }
-                if (x + 1 < width && (lastChosenTile = FoWChess.getBoard()[x + 1][y + 1]).isContainsMob()){
+                if (x + 1 < width && (lastChosenTile = FoWChess.getBoard()[x + 1][y + 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }    
-                if (x - 1 >= 0 && (lastChosenTile = FoWChess.getBoard()[x - 1][y + 1]).isContainsMob()){
+                if (x - 1 >= 0 && (lastChosenTile = FoWChess.getBoard()[x - 1][y + 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }    
@@ -42,15 +42,15 @@ public class Pawn extends MovePattern{
         }
         else{
             if (y - 1 >= 0){
-                if(!(lastChosenTile = FoWChess.getBoard()[x][y - 1]).isContainsMob()){
+                if(!(lastChosenTile = FoWChess.getBoard()[x][y - 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }
-                if (x + 1 < width && (lastChosenTile = FoWChess.getBoard()[x + 1][y - 1]).isContainsMob()){
+                if (x + 1 < width && (lastChosenTile = FoWChess.getBoard()[x + 1][y - 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }    
-                if (x - 1 >= 0 && (lastChosenTile = FoWChess.getBoard()[x - 1][y - 1]).isContainsMob()){
+                if (x - 1 >= 0 && (lastChosenTile = FoWChess.getBoard()[x - 1][y - 1]).containsMob()){
                     lastChosenTile.setIsHighlighted(true);
                     FoWChess.getHighlightedTiles().push(lastChosenTile);
                 }    

@@ -44,6 +44,17 @@ public class Tile extends Button{
             setBackground(tileColor);
         }
     }
+    
+    
+    public void highLight(){
+        if (lightlevel>0){
+        setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
+        }
+        else
+        {
+            setBackground(PaintMakerAndHolder.getInstance().getHighlightedFog());
+        }
+    }
 
     public boolean isIsHighlighted() {
         return isHighlighted;
@@ -61,7 +72,7 @@ public class Tile extends Button{
         this.isVisible = isVisible;
     }
 
-    public boolean isContainsMob() {
+    public boolean containsMob() {
         return containsMob;
     }
 

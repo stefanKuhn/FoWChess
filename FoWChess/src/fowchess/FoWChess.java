@@ -54,7 +54,7 @@ public class FoWChess extends Application {
                 lastCreatedTile.setMinSize(size,size);
                 root.add(lastCreatedTile, i + 2, j + 2);
                 lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
-                //lastCreatedTile.adaptBG();//this line is only here to test against nullpointers.
+                lastCreatedTile.adaptBG();//this line is only here to test against nullpointers.
             }
         }
         //Place x axis labels
@@ -96,7 +96,7 @@ public class FoWChess extends Application {
                         //todo: add code for movement
                     }
                     else{
-                        if (tile.isContainsMob()){
+                        if (tile.containsMob()){
                             if (tile.getMob().getOwnerId() == whoseTurn){
                                 //todo: add code for highlighting tiles
                             }
@@ -118,8 +118,7 @@ public class FoWChess extends Application {
         primaryStage.show();
         
     }
-    
-
+  
 
     public static Tile getSelected() {
         return selected;
