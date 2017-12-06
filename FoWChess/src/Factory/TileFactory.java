@@ -45,7 +45,7 @@ public class TileFactory {
         }
        
         
-        lastCreated = new Tile(lastGivenBG, x, y, 0);
+        lastCreated = new Tile(lastGivenBG, x, y, 1);
         
         return lastCreated;
     }

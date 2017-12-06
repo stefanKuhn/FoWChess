@@ -25,11 +25,12 @@ import javafx.stage.Stage;
  */
 public class FoWChess extends Application {
     
-    private Tile[][] board;//two dimensional array for the tiles
+    private static Tile[][] board;//two dimensional array for the tiles
     private Label[] widthLabel;//labels for x axis
     private Label[] heightLabel;//labels for y axis
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
+    private static Tile selected;//tile that is currently selected;
 
     public void makeLabel(String text,int size){
         lastCreatedLabel = new Label(text);
@@ -50,6 +51,7 @@ public class FoWChess extends Application {
                 lastCreatedTile.setMinSize(size,size);
                 root.add(lastCreatedTile, i + 2, j + 2);
                 lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
+                //lastCreatedTile.adaptBG();//this line is only here to test against nullpointers.
             }
         }
         //Place x axis labels
@@ -86,6 +88,20 @@ public class FoWChess extends Application {
         primaryStage.show();
         
     }
+    
+    public static Tile[][] getBoard(){
+        return board;
+    }
+
+    public static Tile getSelected() {
+        return selected;
+    }
+
+    public static void setSelected(Tile selected) {
+        FoWChess.selected = selected;
+    }
+    
+    
 
     /**
      * @param args the command line arguments
