@@ -26,6 +26,7 @@ public class Tile extends Button{
         this.x = x;
         this.y = y;
         this.lightlevel = lightlevel;
+        this.isHighlighted=false;
     }
     
     
@@ -43,6 +44,7 @@ public class Tile extends Button{
         else {
             setBackground(tileColor);
         }
+        isHighlighted=false;
     }
     
     
@@ -54,6 +56,7 @@ public class Tile extends Button{
         {
             setBackground(PaintMakerAndHolder.getInstance().getHighlightedFog());
         }
+        this.isHighlighted = true;
     }
 
     public boolean isIsHighlighted() {

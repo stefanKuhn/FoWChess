@@ -14,6 +14,13 @@ public class Mob {
     char identity;
     String name;
 
+    public Mob(int ownerId, int vision, char identity, String name) {
+        this.ownerId = ownerId;
+        this.vision = vision;
+        this.identity = identity;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

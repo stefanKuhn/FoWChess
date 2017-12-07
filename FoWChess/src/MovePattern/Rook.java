@@ -6,7 +6,6 @@
 package MovePattern;
 
 import Objects.Tile;
-import fowchess.FoWChess;
 
 /**
  *
@@ -20,55 +19,10 @@ public class Rook extends MovePattern{
 
     @Override
     public void highlight(Tile from) {
-        x = from.getX();
-        y = from.getY();
-        if (y + 2 < height){
-            if(x + 1 < width){
-                (tempTile = FoWChess.getBoard()[x + 1][y + 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-            if(x - 1 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 1][y + 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-        }
-        if (y - 2 >= 0){
-            if(x + 1 < width){
-                (tempTile = FoWChess.getBoard()[x + 1][y - 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-            if(x - 1 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 1][y - 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-        }
-        if (y + 1 < height){
-            if(x + 2 < width){
-                (tempTile = FoWChess.getBoard()[x + 2][y + 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-            if(x - 2 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 2][y + 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-        }
-        if (y - 1 >= 0){
-            if(x + 2 < width){
-                (tempTile = FoWChess.getBoard()[x + 2][y - 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-            if(x - 2 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 2][y - 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
-            }
-        }
+        mph.highlightNorth(from);
+        mph.highlightWest(from);
+        mph.highlightEast(from);
+        mph.highlightWest(from);
     }
+    
 }

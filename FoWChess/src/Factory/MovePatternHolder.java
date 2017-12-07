@@ -7,11 +7,11 @@ package Factory;
 
 import MovePattern.Bishop;
 import MovePattern.King;
-import MovePattern.Knight;
+import MovePattern.Rook;
 import MovePattern.MovePattern;
 import MovePattern.Pawn;
 import MovePattern.Queen;
-import MovePattern.Rook;
+import MovePattern.Knight;
 import Objects.Tile;
 import fowchess.FoWChess;
 
@@ -52,17 +52,13 @@ public class MovePatternHolder {
     private MovePatternHolder(){
         this.width = FoWChess.getWidth();
         this.height = FoWChess.getHeight();
-        pawn = new Pawn(width,height);
-        rook = new Rook(width,height);
-        bishop = new Bishop(width,height);
-        knight = new Knight(width,height);
-        queen = new Queen(width,height);
-        king = new King(width,height);
+        
     }
     
     public static MovePatternHolder getInstance(){
         if (instance == null){
             instance = new MovePatternHolder();
+            instance.init();
         }
         return instance;
     }
@@ -154,5 +150,14 @@ public class MovePatternHolder {
                 highlightSouthWest(tempTile);
             }
         }
+    }
+    
+    public void init(){
+        pawn = new Pawn(width,height);
+        rook = new Rook(width,height);
+        bishop = new Bishop(width,height);
+        knight = new Knight(width,height);
+        queen = new Queen(width,height);
+        king = new King(width,height);
     }
 }
