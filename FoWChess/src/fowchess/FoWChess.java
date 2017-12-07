@@ -31,7 +31,7 @@ public class FoWChess extends Application {
     private Label[] heightLabel;//labels for y axis
     private Tile lastCreatedTile;
     private Label lastCreatedLabel;
-    private int whoseTurn;
+    private static int whoseTurn, width, height;
     private static Stack<Tile> highlightedTiles;
 
     public void makeLabel(String text,int size){
@@ -76,6 +76,14 @@ public class FoWChess extends Application {
         return board;
     }
 
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
     public static Stack<Tile> getHighlightedTiles() {
         return highlightedTiles;
     }
@@ -94,7 +102,7 @@ public class FoWChess extends Application {
                         //todo: add code for movement
                     }
                     else{
-                        if (tile.isContainsMob()){
+                        if (tile.getMob() != null){
                             if (tile.getMob().getOwnerId() == whoseTurn){
                                 //todo: add code for highlighting tiles
                             }
@@ -107,8 +115,8 @@ public class FoWChess extends Application {
         
     @Override
     public void start(Stage primaryStage) {
-        
-        Scene scene = makeScene(8,8,50);
+        init(8,8);
+        Scene scene = makeScene(width,height,50);
                 
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
@@ -117,6 +125,59 @@ public class FoWChess extends Application {
         
     }
 
+    public void init(int width, int height){
+        this.width = width;
+        this.height = height;
+    }
+    public static Tile getNorth(Tile tile){
+        if (tile.getY() + 1 < height){
+            return board[tile.getX()][tile.getY() + 1];
+        }
+        return null;
+    }
+    public static Tile getEast(Tile tile){
+        if (tile.getX() + 1 < width){
+            return board[tile.getX() + 1][tile.getY()];
+        }
+        return null;
+    }
+    public static Tile getSouth(Tile tile){
+        if (tile.getY() - 1 >= 0){
+            return board[tile.getX()][tile.getY() - 1];
+        }
+        return null;
+    }
+    public static Tile getWest(Tile tile){
+        if (tile.getX() - 1 >= 0){
+            return board[tile.getX() - 1][tile.getY()];
+        }
+        return null;
+    }
+    
+    public static Tile getNorthEast(Tile tile){
+        if (tile.getX() + 1 < width || tile.getY() + 1 < height){
+            return board[tile.getX() + 1][tile.getY() + 1];
+        }
+        return null;
+    }
+    public static Tile getNorthWest(Tile tile){
+        if (tile.getX() - 1 >= 0 || tile.getY() + 1 < height){
+            return board[tile.getX() - 1][tile.getY() + 1];
+        }
+        return null;
+    }
+    public static Tile getSouthEast(Tile tile){
+        if (tile.getX() + 1 < width || tile.getY() - 1 >= 0){
+            return board[tile.getX() + 1][tile.getY() - 1];
+        }
+        return null;
+    }
+    public static Tile getSouthWest(Tile tile){
+        if (tile.getX() - 1 >= 0 || tile.getY() - 1 >= 0){
+            return board[tile.getX() - 1][tile.getY() - 1];
+        }
+        return null;
+    }
     /**
      * @param args the command line arguments
      */

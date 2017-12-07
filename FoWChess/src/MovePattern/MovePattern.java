@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Objects.MovePattern;
+package MovePattern;
 
+import Factory.MovePatternHolder;
 import Objects.Tile;
 
 /**
@@ -14,10 +15,12 @@ import Objects.Tile;
 public abstract class MovePattern {
     int width, height, x, y;
     Tile lastChosenTile;
+    MovePatternHolder mph;
 
     public MovePattern(int width, int height) {
         this.width = width;
         this.height = height;
+        this.mph = MovePatternHolder.getInstance();
     }
     
     public abstract void highlight(Tile from);

@@ -3,27 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Objects.MovePattern;
+package MovePattern;
 
 import Objects.Tile;
-import fowchess.FoWChess;
 
 /**
  *
  * @author danie
  */
-public class Bishop extends MovePattern{
+public class Knight extends MovePattern{
 
-    public Bishop(int width, int height) {
+    public Knight(int width, int height) {
         super(width, height);
     }
 
     @Override
     public void highlight(Tile from) {
-        x = from.getX();
-        y = from.getY();
-        for (int i = 0; i < width; i++){
-            
-        }
+        mph.highlightNorth(from);
+        mph.highlightWest(from);
+        mph.highlightEast(from);
+        mph.highlightWest(from);
     }
+    
 }
