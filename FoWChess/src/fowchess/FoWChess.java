@@ -5,7 +5,9 @@
  */
 package fowchess;
 
+import Factory.MovePatternHolder;
 import Factory.TileFactory;
+import Objects.Mob;
 import Objects.Tile;
 import java.util.Stack;
 import javafx.application.Application;
@@ -29,16 +31,18 @@ public class FoWChess extends Application {
     private static Tile[][] board;//two dimensional array for the tiles
     private Label[] widthLabel;//labels for x axis
     private Label[] heightLabel;//labels for y axis
-    private Tile lastCreatedTile;
-    private Label lastCreatedLabel;
+    private Tile tempTile;
+    private Label tempLabel;
     private static int whoseTurn, width, height;
     private static Stack<Tile> highlightedTiles;
     private static Tile selected;//tile that is currently selected;
+    private MovePatternHolder mph;
+    private Mob tempMob;
 
     public void makeLabel(String text,int size){
-        lastCreatedLabel = new Label(text);
-        lastCreatedLabel.setMinSize(size, size);
-        lastCreatedLabel.setAlignment(Pos.CENTER);
+        tempLabel = new Label(text);
+        tempLabel.setMinSize(size, size);
+        tempLabel.setAlignment(Pos.CENTER);
     }
     
     public GridPane generateBoard(int width, int height, int size){
@@ -49,27 +53,27 @@ public class FoWChess extends Application {
         //Place tiles and give them color
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
-                lastCreatedTile = TileFactory.getInstance().makeTile(i,height - j - 1);
-                board[i][height - j - 1] = lastCreatedTile;
-                lastCreatedTile.setMinSize(size,size);
-                root.add(lastCreatedTile, i + 2, j + 2);
-                lastCreatedTile.setBackground(lastCreatedTile.getTileColor());
-                lastCreatedTile.adaptBG();//this line is only here to test against nullpointers.
+                tempTile = TileFactory.getInstance().makeTile(i,height - j - 1);
+                board[i][height - j - 1] = tempTile;
+                tempTile.setMinSize(size,size);
+                root.add(tempTile, i + 2, j + 2);
+                tempTile.setBackground(tempTile.getTileColor());
+                tempTile.adaptBG();//this line is only here to test against nullpointers.
             }
         }
         //Place x axis labels
         for(int i = 1; i <= width; i++){
             makeLabel(Integer.toString(i),size);
-            root.add(lastCreatedLabel,i + 1,1);
+            root.add(tempLabel,i + 1,1);
             makeLabel(Integer.toString(i),size);
-            root.add(lastCreatedLabel,i + 1,height + 2);
+            root.add(tempLabel,i + 1,height + 2);
         }
         //Place y axis labels
         for(int j = 1; j <= height; j++){
             makeLabel(Integer.toString(j),size);
-            root.add(lastCreatedLabel,1,height - j + 2);
+            root.add(tempLabel,1,height - j + 2);
             makeLabel(Integer.toString(j),size);
-            root.add(lastCreatedLabel,width + 2,height - j + 2);
+            root.add(tempLabel,width + 2,height - j + 2);
         }
         return root;
     }
@@ -104,9 +108,39 @@ public class FoWChess extends Application {
                         //todo: add code for movement
                     }
                     else{
-                        if (tile.getMob() != null){
-                            if (tile.getMob().getOwnerId() == whoseTurn){
-                                //todo: add code for highlighting tiles
+                        if (highlightedTiles.empty()){
+                            if (tile.getMob() != null){
+                                if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn){
+                                    setSelected(tile);
+                                    switch(tempMob.getName()){
+                                        case "pawn":
+                                            mph.getPawn().highlight(tile);
+                                            break;
+                                        case "rook":
+                                            mph.getRook().highlight(tile);
+                                            break;
+                                        case "bishop":
+                                            mph.getBishop().highlight(tile);
+                                            break;
+                                        case "knight":
+                                            mph.getKnight().highlight(tile);
+                                            break;
+                                        case "queen":
+                                            mph.getQueen().highlight(tile);
+                                            break;
+                                        case "king":
+                                            mph.getKing().highlight(tile);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            if(tile.equals(selected)){
+                                setSelected(null);
+                                dehighlight();
                             }
                         }
                     }
@@ -117,8 +151,7 @@ public class FoWChess extends Application {
         
     @Override
     public void start(Stage primaryStage) {
-        init(8,8);
-        Scene scene = makeScene(width,height,50);
+        Scene scene = init(8,8,50);
                 
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
@@ -127,7 +160,6 @@ public class FoWChess extends Application {
         
     }
   
-
     public static Tile getSelected() {
         return selected;
     }
@@ -136,12 +168,22 @@ public class FoWChess extends Application {
         FoWChess.selected = selected;
     }
     
-    
+    public void dehighlight(){
+        while(!highlightedTiles.empty()){
+            tempTile = highlightedTiles.pop();
+            tempTile.adaptBG();
+            tempTile.setIsHighlighted(false);
+        }
+    }
 
-    public void init(int width, int height){
+    public Scene init(int width, int height, int size){
+        highlightedTiles = new Stack();
+        this.mph = MovePatternHolder.getInstance();
         this.width = width;
         this.height = height;
+        return makeScene(width,height,size);
     }
+    
     public static Tile getNorth(Tile tile){
         if (tile.getY() + 1 < height){
             return board[tile.getX()][tile.getY() + 1];

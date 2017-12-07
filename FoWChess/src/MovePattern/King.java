@@ -21,44 +21,44 @@ public class King extends MovePattern{
     @Override
     public void highlight(Tile from) {
         if (FoWChess.getNorth(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getNorthEast(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getNorthWest(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getSouth(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getSouthEast(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getSouthWest(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getWest(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
         if (FoWChess.getEast(from) != null){
-            (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
+            (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
         }
     }
     

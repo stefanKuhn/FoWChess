@@ -22,8 +22,32 @@ import fowchess.FoWChess;
 public class MovePatternHolder {
     MovePattern pawn, rook, bishop, knight, queen, king;
     static MovePatternHolder instance;
-    static Tile lastChosenTile;
+    static Tile tempTile;
     int width, height;
+
+    public MovePattern getPawn() {
+        return pawn;
+    }
+
+    public MovePattern getRook() {
+        return rook;
+    }
+
+    public MovePattern getBishop() {
+        return bishop;
+    }
+
+    public MovePattern getKnight() {
+        return knight;
+    }
+
+    public MovePattern getQueen() {
+        return queen;
+    }
+
+    public MovePattern getKing() {
+        return king;
+    }
     
     private MovePatternHolder(){
         this.width = FoWChess.getWidth();
@@ -45,89 +69,89 @@ public class MovePatternHolder {
     
     public static void highlightNorth(Tile tile){
         if (FoWChess.getNorth(tile) != null ){
-            lastChosenTile = FoWChess.getNorth(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightNorth(lastChosenTile);
+            tempTile = FoWChess.getNorth(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightNorth(tempTile);
             }
         }
     }
     public static void highlightEast(Tile tile){
         if (FoWChess.getEast(tile) != null ){
-            lastChosenTile = FoWChess.getEast(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightEast(lastChosenTile);
+            tempTile = FoWChess.getEast(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightEast(tempTile);
             }
         }
     }
     public static void highlightSouth(Tile tile){
         if (FoWChess.getSouth(tile) != null ){
-            lastChosenTile = FoWChess.getSouth(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightSouth(lastChosenTile);
+            tempTile = FoWChess.getSouth(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightSouth(tempTile);
             }
         }
     }
     public static void highlightWest(Tile tile){
         if (FoWChess.getWest(tile) != null ){
-            lastChosenTile = FoWChess.getWest(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightWest(lastChosenTile);
+            tempTile = FoWChess.getWest(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightWest(tempTile);
             }
         }
     }
     public static void highlightNorthEast(Tile tile){
         if (FoWChess.getNorthEast(tile) != null ){
-            lastChosenTile = FoWChess.getNorthEast(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightNorthEast(lastChosenTile);
+            tempTile = FoWChess.getNorthEast(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightNorthEast(tempTile);
             }
         }
     }
     public static void highlightNorthWest(Tile tile){
         if (FoWChess.getNorthWest(tile) != null ){
-            lastChosenTile = FoWChess.getNorthWest(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightNorthWest(lastChosenTile);
+            tempTile = FoWChess.getNorthWest(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightNorthWest(tempTile);
             }
         }
     }
     public static void highlightSouthEast(Tile tile){
         if (FoWChess.getSouthEast(tile) != null ){
-            lastChosenTile = FoWChess.getSouthEast(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightSouthEast(lastChosenTile);
+            tempTile = FoWChess.getSouthEast(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightSouthEast(tempTile);
             }
         }
     }
     public static void highlightSouthWest(Tile tile){
         if (FoWChess.getSouthWest(tile) != null ){
-            lastChosenTile = FoWChess.getSouthWest(tile);
-            lastChosenTile.setIsHighlighted(true);
-            FoWChess.getHighlightedTiles().push(lastChosenTile);
-            lastChosenTile.highLight();
-            if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
-                highlightSouthWest(lastChosenTile);
+            tempTile = FoWChess.getSouthWest(tile);
+            tempTile.setIsHighlighted(true);
+            FoWChess.getHighlightedTiles().push(tempTile);
+            tempTile.highLight();
+            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+                highlightSouthWest(tempTile);
             }
         }
     }

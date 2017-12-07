@@ -12,6 +12,15 @@ package Objects;
 public class Mob {
     int ownerId, vision;
     char identity;
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getOwnerId() {
         return ownerId;

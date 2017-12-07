@@ -14,7 +14,7 @@ import Objects.Tile;
  */
 public abstract class MovePattern {
     int width, height, x, y;
-    Tile lastChosenTile;
+    Tile tempTile;
     MovePatternHolder mph;
 
     public MovePattern(int width, int height) {
