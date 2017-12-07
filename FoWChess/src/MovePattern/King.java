@@ -23,34 +23,42 @@ public class King extends MovePattern{
         if (FoWChess.getNorth(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getNorthEast(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getNorthWest(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getSouth(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getSouthEast(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getSouthWest(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getWest(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
         if (FoWChess.getEast(from) != null){
             (lastChosenTile = FoWChess.getNorth(from)).setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
         }
     }
     

@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import Factory.PaintMakerAndHolder;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Paint;
@@ -26,6 +27,34 @@ public class Tile extends Button{
         this.y = y;
         this.lightlevel = lightlevel;
     }
+    
+    
+    public void adaptBG(){
+        //if tile is not visible we use the corresponding fog color, otherwise tilecolor.
+        if (lightlevel==0){
+            if (getTileColor()==PaintMakerAndHolder.getInstance().getBlack()){                    
+                    setBackground(PaintMakerAndHolder.getInstance().getFogBlack());
+                    System.out.println("black fog");
+            } else {
+                setBackground(PaintMakerAndHolder.getInstance().getFogWhite());
+                System.out.println("white fog");
+            }
+        }
+        else {
+            setBackground(tileColor);
+        }
+    }
+    
+    
+    public void highLight(){
+        if (lightlevel>0){
+        setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
+        }
+        else
+        {
+            setBackground(PaintMakerAndHolder.getInstance().getHighlightedFog());
+        }
+    }
 
     public boolean isIsHighlighted() {
         return isHighlighted;
@@ -43,7 +72,7 @@ public class Tile extends Button{
         this.isVisible = isVisible;
     }
 
-    public boolean isContainsMob() {
+    public boolean containsMob() {
         return containsMob;
     }
 
@@ -59,7 +88,15 @@ public class Tile extends Button{
         this.tileColor = tileColor;
     }
 
-
+    public boolean hasLeft(){
+        if (x==0){
+            return false;
+        }
+        return true;
+    }
+    public Tile getLeft(){
+        return fowchess.FoWChess.getBoard()[x-1][y];
+    }
 
     public Mob getMob() {
         return mob;

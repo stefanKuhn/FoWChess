@@ -48,6 +48,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getNorth(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightNorth(lastChosenTile);
             }
@@ -58,6 +59,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getEast(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightEast(lastChosenTile);
             }
@@ -68,6 +70,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getSouth(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightSouth(lastChosenTile);
             }
@@ -78,6 +81,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getWest(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightWest(lastChosenTile);
             }
@@ -88,6 +92,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getNorthEast(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightNorthEast(lastChosenTile);
             }
@@ -98,6 +103,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getNorthWest(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightNorthWest(lastChosenTile);
             }
@@ -108,6 +114,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getSouthEast(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightSouthEast(lastChosenTile);
             }
@@ -118,6 +125,7 @@ public class MovePatternHolder {
             lastChosenTile = FoWChess.getSouthWest(tile);
             lastChosenTile.setIsHighlighted(true);
             FoWChess.getHighlightedTiles().push(lastChosenTile);
+            lastChosenTile.highLight();
             if (lastChosenTile.getMob() != null && lastChosenTile.getLightlevel() > 0){
                 highlightSouthWest(lastChosenTile);
             }

@@ -26,40 +26,48 @@ public class Rook extends MovePattern{
             if(x + 1 < width){
                 (lastChosenTile = FoWChess.getBoard()[x + 1][y + 2]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
             if(x - 1 >= 0){
                 (lastChosenTile = FoWChess.getBoard()[x - 1][y + 2]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
         }
         if (y - 2 >= 0){
             if(x + 1 < width){
                 (lastChosenTile = FoWChess.getBoard()[x + 1][y - 2]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
             if(x - 1 >= 0){
                 (lastChosenTile = FoWChess.getBoard()[x - 1][y - 2]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
         }
         if (y + 1 < height){
             if(x + 2 < width){
                 (lastChosenTile = FoWChess.getBoard()[x + 2][y + 1]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
             if(x - 2 >= 0){
                 (lastChosenTile = FoWChess.getBoard()[x - 2][y + 1]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
         }
         if (y - 1 >= 0){
             if(x + 2 < width){
                 (lastChosenTile = FoWChess.getBoard()[x + 2][y - 1]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
             if(x - 2 >= 0){
                 (lastChosenTile = FoWChess.getBoard()[x - 2][y - 1]).setIsHighlighted(true);
                 FoWChess.getHighlightedTiles().push(lastChosenTile);
+                lastChosenTile.highLight();
             }
         }
     }
