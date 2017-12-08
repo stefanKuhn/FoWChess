@@ -54,6 +54,7 @@ public class FoWChess extends Application {
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 tempTile = TileFactory.getInstance().makeTile(i,height - j - 1);
+
                 board[i][height - j - 1] = tempTile;
                 tempTile.setMinSize(size,size);
                 root.add(tempTile, i + 2, j + 2);
@@ -75,6 +76,11 @@ public class FoWChess extends Application {
             makeLabel(Integer.toString(j),size);
             root.add(tempLabel,width + 2,height - j + 2);
         }
+        
+        
+
+       getBoard()[3][3].setMob(new Mob(0,3,'p',"pawn"));
+       getBoard()[4][4].setMob(new Mob(0,3,'p',"rook"));         
         return root;
     }
 
@@ -178,10 +184,16 @@ public class FoWChess extends Application {
 
     public Scene init(int width, int height, int size){
         highlightedTiles = new Stack();
-        this.mph = MovePatternHolder.getInstance();
+        
         this.width = width;
         this.height = height;
-        return makeScene(width,height,size);
+        this.mph = MovePatternHolder.getInstance();
+        Scene returnThis = makeScene(width,height,size);
+                
+        eventHandler(board);
+        whoseTurn = 0;
+        
+        return returnThis;
     }
     
     public static Tile getNorth(Tile tile){
