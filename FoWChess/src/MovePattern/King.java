@@ -20,29 +20,29 @@ public class King extends MovePattern{
 
     @Override
     public void highlight(Tile from) {
-        if (FoWChess.getNorth(from) != null && (FoWChess.getNorth(from).getMob() == null || FoWChess.getNorth(from).getMob() != null && FoWChess.getNorth(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+        if (from.isHn() && (from.getN().getMob() == null || from.getN().getMob() != null && from.getN().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             FoWChess.getNorth(from).highLight();
         }
-        if (FoWChess.getNorthEast(from) != null && (FoWChess.getNorthEast(from).getMob() == null || FoWChess.getNorthEast(from).getMob() != null && FoWChess.getNorthEast(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getNorthEast(from).highLight();
+        if (from.isHne() && (from.getNe().getMob() == null || from.getNe().getMob() != null && from.getNe().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getNe().highLight();
         }
-        if (FoWChess.getNorthWest(from) != null && (FoWChess.getNorthWest(from).getMob() == null || FoWChess.getNorthWest(from).getMob() != null && FoWChess.getNorthWest(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getNorthWest(from).highLight();
+        if (from.isHnw() && (from.getNw().getMob() == null || from.getNw().getMob() != null && from.getNw().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getNw().highLight();
         }
-        if (FoWChess.getSouth(from) != null && (FoWChess.getSouth(from).getMob() == null || FoWChess.getSouth(from).getMob() != null && FoWChess.getSouth(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getSouth(from).highLight();
+        if (from.isHs() && (from.getS().getMob() == null || from.getS().getMob() != null && from.getS().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getS().highLight();
         }
-        if (FoWChess.getSouthEast(from) != null && (FoWChess.getSouthEast(from).getMob() == null || FoWChess.getSouthEast(from).getMob() != null && FoWChess.getSouthEast(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getSouthEast(from).highLight();
+        if (from.isHse() && (from.getSe().getMob() == null || from.getSe().getMob() != null && from.getSe().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getSe().highLight();
         }
-        if (FoWChess.getSouthWest(from) != null && (FoWChess.getSouthWest(from).getMob() == null || FoWChess.getSouthWest(from).getMob() != null && FoWChess.getSouthWest(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getSouthWest(from).highLight();
+        if (from.isHsw() && (from.getSw().getMob() == null || from.getSw().getMob() != null && from.getSw().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getSw().highLight();
         }
-        if (FoWChess.getWest(from) != null && (FoWChess.getWest(from).getMob() == null || FoWChess.getWest(from).getMob() != null && FoWChess.getWest(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getWest(from).highLight();
+        if (from.isHw() && (from.getW().getMob() == null || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getW().highLight();
         }
-        if (FoWChess.getEast(from) != null && (FoWChess.getEast(from).getMob() == null || FoWChess.getEast(from).getMob() != null && FoWChess.getEast(from).getMob().getOwnerId() != FoWChess.getWhoseTurn())){
-            FoWChess.getEast(from).highLight();
+        if (from.isHe() && (from.getE().getMob() == null || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
+            from.getE().highLight();
         }
     }
     

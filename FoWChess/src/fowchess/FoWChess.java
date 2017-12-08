@@ -54,7 +54,6 @@ public class FoWChess extends Application {
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 tempTile = TileFactory.getInstance().makeTile(i,height - j - 1);
-
                 board[i][height - j - 1] = tempTile;
                 tempTile.setMinSize(size,size);
                 root.add(tempTile, i + 2, j + 2);
@@ -111,6 +110,7 @@ public class FoWChess extends Application {
             for (Tile tile : row){
                 tile.setOnAction((ActionEvent event) -> {
                     if (tile.isIsHighlighted()){
+                        
                         //todo: add code for movement
                     }
                     else{
@@ -158,7 +158,6 @@ public class FoWChess extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = init(8,8,50);
-                
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
@@ -183,17 +182,26 @@ public class FoWChess extends Application {
 
     public Scene init(int width, int height, int size){
         highlightedTiles = new Stack();
-        
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
         Scene returnThis = makeScene(width,height,size);
-                
         eventHandler(board);
         whoseTurn = 0;
-        
+        mapButtons();
         return returnThis;
     }
+    
+    
+    
+    public void mapButtons(){
+        for (Tile[] row : board){
+            for (Tile tile : row){
+                tile.map();
+            }
+        }
+    }
+    
     
     public static Tile getNorth(Tile tile){
         if (tile.getY() + 1 < height){
@@ -221,25 +229,25 @@ public class FoWChess extends Application {
     }
     
     public static Tile getNorthEast(Tile tile){
-        if (tile.getX() + 1 < width || tile.getY() + 1 < height){
+        if (tile.getX() + 1 < width && tile.getY() + 1 < height){
             return board[tile.getX() + 1][tile.getY() + 1];
         }
         return null;
     }
     public static Tile getNorthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 || tile.getY() + 1 < height){
+        if (tile.getX() - 1 >= 0 && tile.getY() + 1 < height){
             return board[tile.getX() - 1][tile.getY() + 1];
         }
         return null;
     }
     public static Tile getSouthEast(Tile tile){
-        if (tile.getX() + 1 < width || tile.getY() - 1 >= 0){
+        if (tile.getX() + 1 < width && tile.getY() - 1 >= 0){
             return board[tile.getX() + 1][tile.getY() - 1];
         }
         return null;
     }
     public static Tile getSouthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 || tile.getY() - 1 >= 0){
+        if (tile.getX() - 1 >= 0 && tile.getY() - 1 >= 0){
             return board[tile.getX() - 1][tile.getY() - 1];
         }
         return null;
