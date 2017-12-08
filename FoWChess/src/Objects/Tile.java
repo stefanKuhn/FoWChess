@@ -43,12 +43,14 @@ public class Tile extends Button{
         else {
             setBackground(tileColor);
         }
+        isHighlighted=false;
     }
     
     
     public void highLight(){
         if (lightlevel>0){
         setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
+        fowchess.FoWChess.getHighlightedTiles().push(this);
         }
         else
         {
