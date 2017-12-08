@@ -19,6 +19,9 @@ public class Tile extends Button{
     public Background tileColor;
     Mob mob;
     int x,y,lightlevel;
+    
+    Tile e, ne, n, nw, w, sw, s, se;
+    boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
     public Tile(Background bg, int x, int y, int lightlevel) {
         this.isVisible = false;
@@ -27,6 +30,7 @@ public class Tile extends Button{
         this.y = y;
         this.lightlevel = lightlevel;
         this.isHighlighted=false;
+        mapped=false;
     }
     
     
@@ -45,6 +49,91 @@ public class Tile extends Button{
             setBackground(tileColor);
         }
         isHighlighted=false;
+    }
+    
+    public void adaptLight(){
+        if (getMob()!=null){
+            lightlevel=3;
+        }
+        propagateLight(lightlevel);
+    }
+    
+    public void propagateLight(int lightLevel){
+        //
+        if (lightLevel<this.lightlevel){
+            return;
+        }
+        
+        this.lightlevel=lightLevel;
+        if (lightLevel<=1){
+            return;
+        }
+        lightLevel--;
+        
+        //performance imp: mapping once after board initialisation
+        if (!mapped){
+            map();
+        }
+        if (he){
+            e.propagateLight(lightLevel);
+        }
+        if (hne){
+            ne.propagateLight(lightLevel);
+        }
+        if (hn){
+            n.propagateLight(lightLevel);
+        }
+        if (hnw){
+            nw.propagateLight(lightLevel);
+        }
+        if (hw){
+            w.propagateLight(lightLevel);
+        }
+        if (hsw){
+            sw.propagateLight(lightLevel);
+        }
+        if (hs){
+            s.propagateLight(lightLevel);
+        }
+        if (hse){
+            se.propagateLight(lightLevel);
+        }
+    }
+    
+    public void map(){
+    if (fowchess.FoWChess.getEast(this)!=null){
+            he=true;
+            e=fowchess.FoWChess.getEast(this);
+        }
+    if (fowchess.FoWChess.getNorthEast(this)!=null){
+            hne=true;
+            ne=fowchess.FoWChess.getNorthEast(this);
+        }
+    if (fowchess.FoWChess.getNorth(this)!=null){
+            hn=true;
+            n=fowchess.FoWChess.getNorth(this);
+        }
+    if (fowchess.FoWChess.getNorthWest(this)!=null){
+            hnw=true;
+            nw=fowchess.FoWChess.getNorthWest(this);
+        }
+    if (fowchess.FoWChess.getWest(this)!=null){
+            hw=true;
+            w=fowchess.FoWChess.getEast(this);
+        }
+    if (fowchess.FoWChess.getSouthWest(this)!=null){
+            hsw=true;
+            sw=fowchess.FoWChess.getSouthWest(this);
+        }
+    if (fowchess.FoWChess.getSouth(this)!=null){
+            hs=true;
+            s=fowchess.FoWChess.getSouth(this);
+        }
+    if (fowchess.FoWChess.getSouthEast(this)!=null){
+            hse=true;
+            se=fowchess.FoWChess.getSouthEast(this);
+        }
+    mapped=true;
     }
     
     
