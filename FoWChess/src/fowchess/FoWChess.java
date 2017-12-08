@@ -178,7 +178,6 @@ public class FoWChess extends Application {
         while(!highlightedTiles.empty()){
             tempTile = highlightedTiles.pop();
             tempTile.adaptBG();
-            tempTile.setIsHighlighted(false);
         }
     }
 
@@ -250,6 +249,10 @@ public class FoWChess extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static int getWhoseTurn() {
+        return whoseTurn;
     }
     
 }

@@ -25,36 +25,24 @@ public class Pawn extends MovePattern{
         y = from.getY();
         if (from.getMob().getOwnerId() == 0){
             if (FoWChess.getNorth(from) != null && FoWChess.getNorth(from).getMob() == null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getNorth(from).highLight();
             }
-            if (FoWChess.getNorthEast(from) != null && FoWChess.getNorth(from).getMob() != null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+            if (FoWChess.getNorthEast(from) != null && FoWChess.getNorthEast(from).getMob() != null && FoWChess.getNorthEast(from).getMob().getOwnerId() != 0){
+                FoWChess.getNorthEast(from).highLight();
             }
-            if (FoWChess.getNorthWest(from) != null && FoWChess.getNorth(from).getMob() != null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+            if (FoWChess.getNorthWest(from) != null && FoWChess.getNorthWest(from).getMob() != null && FoWChess.getNorthWest(from).getMob().getOwnerId() != 0){
+                FoWChess.getNorthWest(from).highLight();
             }
         }
         else{
-            if (FoWChess.getSouth(from) != null && FoWChess.getNorth(from).getMob() == null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+            if (FoWChess.getSouth(from) != null && FoWChess.getSouth(from).getMob() == null){
+                FoWChess.getSouth(from).highLight();
             }
-            if (FoWChess.getSouthEast(from) != null && FoWChess.getNorth(from).getMob() != null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+            if (FoWChess.getSouthEast(from) != null && FoWChess.getSouthEast(from).getMob() != null && FoWChess.getSouthEast(from).getMob().getOwnerId() != 1){
+                FoWChess.getSouthEast(from).highLight();
             }
-            if (FoWChess.getSouthWest(from) != null && FoWChess.getNorth(from).getMob() != null){
-                (tempTile = FoWChess.getNorth(from)).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+            if (FoWChess.getSouthWest(from) != null && FoWChess.getSouthWest(from).getMob() != null && FoWChess.getSouthWest(from).getMob().getOwnerId() != 1){
+                FoWChess.getSouthWest(from).highLight();
             }
         }
     }  

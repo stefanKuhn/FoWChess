@@ -24,50 +24,34 @@ public class Knight extends MovePattern{
         y = from.getY();
         if (y + 2 < height){
             if(x + 1 < width){
-                (tempTile = FoWChess.getBoard()[x + 1][y + 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x + 1][y + 2].highLight();
             }
             if(x - 1 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 1][y + 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x - 1][y + 2].highLight();
             }
         }
         if (y - 2 >= 0){
             if(x + 1 < width){
-                (tempTile = FoWChess.getBoard()[x + 1][y - 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x + 1][y - 2].highLight();
             }
             if(x - 1 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 1][y - 2]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x - 1][y - 2].highLight();
             }
         }
         if (y + 1 < height){
             if(x + 2 < width){
-                (tempTile = FoWChess.getBoard()[x + 2][y + 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x + 2][y + 1].highLight();
             }
             if(x - 2 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 2][y + 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x - 2][y + 1].highLight();
             }
         }
         if (y - 1 >= 0){
             if(x + 2 < width){
-                (tempTile = FoWChess.getBoard()[x + 2][y - 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x + 2][y - 1].highLight();
             }
             if(x - 2 >= 0){
-                (tempTile = FoWChess.getBoard()[x - 2][y - 1]).setIsHighlighted(true);
-                FoWChess.getHighlightedTiles().push(tempTile);
-                tempTile.highLight();
+                FoWChess.getBoard()[x - 2][y - 1].highLight();
             }
         }
     }
