@@ -9,6 +9,7 @@ import Factory.MovePatternHolder;
 import Factory.TileFactory;
 import Objects.Mob;
 import Objects.Tile;
+import java.util.ArrayList;
 import java.util.Stack;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -38,6 +39,7 @@ public class FoWChess extends Application {
     private static Tile selected;//tile that is currently selected;
     private MovePatternHolder mph;
     private Mob tempMob;
+    private static ArrayList<Mob> targetsForEnPassant;
 
     public void makeLabel(String text,int size){
         tempLabel = new Label(text);
@@ -183,6 +185,7 @@ public class FoWChess extends Application {
 
     public Scene init(int width, int height, int size){
         highlightedTiles = new Stack();
+        targetsForEnPassant = new ArrayList();
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
@@ -192,8 +195,10 @@ public class FoWChess extends Application {
         mapButtons();
         return returnThis;
     }
-    
-    
+
+    public static ArrayList<Mob> getTargetsForEnPassant() {
+        return targetsForEnPassant;
+    }
     
     public void mapButtons(){
         for (Tile[] row : board){
