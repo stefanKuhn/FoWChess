@@ -109,12 +109,12 @@ public class FoWChess extends Application {
         for (Tile[] row : board){
             for (Tile tile : row){
                 tile.setOnAction((ActionEvent event) -> {
+                    System.out.println(highlightedTiles.size());
                     if (tile.isIsHighlighted()){
-                        
                         //todo: add code for movement
                     }
                     else{
-                        if (highlightedTiles.empty()){
+                        if (highlightedTiles.isEmpty()){
                             if (tile.getMob() != null){
                                 if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn){
                                     setSelected(tile);
@@ -144,7 +144,8 @@ public class FoWChess extends Application {
                             }
                         }
                         else{
-                            if(tile.equals(selected)){
+                            if(tile==selected){
+                                System.out.println("should deselect");
                                 setSelected(null);
                                 dehighlight();
                             }

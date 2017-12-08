@@ -67,7 +67,7 @@ public class MovePatternHolder {
         if (tile.isHn() && (tile.getN().getMob() == null || tile.getN().getMob() != null && tile.getN().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getN();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightNorth(tempTile);
             }
         }
@@ -76,7 +76,7 @@ public class MovePatternHolder {
         if (tile.isHe() && (tile.getE().getMob() == null || tile.getE().getMob() != null && tile.getE().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getE();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightEast(tempTile);
             }
         }
@@ -85,7 +85,7 @@ public class MovePatternHolder {
         if (tile.isHs() && (tile.getS().getMob() == null || tile.getS().getMob() != null && tile.getS().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getS();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightSouth(tempTile);
             }
         }
@@ -94,7 +94,7 @@ public class MovePatternHolder {
         if (tile.isHw() && (tile.getW().getMob() == null || tile.getW().getMob() != null && tile.getW().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getW();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightWest(tempTile);
             }
         }
@@ -103,7 +103,7 @@ public class MovePatternHolder {
         if (tile.isHne() && (tile.getNe().getMob() == null || tile.getNe().getMob() != null && tile.getNe().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getNe();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightNorthEast(tempTile);
             }
         }
@@ -112,7 +112,7 @@ public class MovePatternHolder {
         if (tile.isHnw() && (tile.getNw().getMob() == null || tile.getNw().getMob() != null && tile.getNw().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getNw();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightNorthWest(tempTile);
             }
         }
@@ -121,7 +121,7 @@ public class MovePatternHolder {
         if (tile.isHse() && (tile.getSe().getMob() == null || tile.getSe().getMob() != null && tile.getSe().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getSe();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightSouthEast(tempTile);
             }
         }
@@ -130,7 +130,7 @@ public class MovePatternHolder {
         if (tile.isHsw() && (tile.getSw().getMob() == null || tile.getSw().getMob() != null && tile.getSw().getMob().getOwnerId() != FoWChess.getWhoseTurn())){
             tempTile = tile.getSw();
             tempTile.highLight();
-            if (tempTile.getMob() != null && tempTile.getLightlevel() > 0){
+            if (tempTile.getMob() != null || tempTile.getLightlevel() == 0){
                 highlightSouthWest(tempTile);
             }
         }

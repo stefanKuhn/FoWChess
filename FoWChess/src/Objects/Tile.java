@@ -119,7 +119,7 @@ public class Tile extends Button{
         }
     if (fowchess.FoWChess.getWest(this)!=null){
             hw=true;
-            w=fowchess.FoWChess.getEast(this);
+            w=fowchess.FoWChess.getWest(this);
         }
     if (fowchess.FoWChess.getSouthWest(this)!=null){
             hsw=true;
@@ -138,9 +138,10 @@ public class Tile extends Button{
     
     
     public void highLight(){
+        fowchess.FoWChess.getHighlightedTiles().push(this);
         if (lightlevel>0){
         setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
-        fowchess.FoWChess.getHighlightedTiles().push(this);
+        
         }
         else
         {
