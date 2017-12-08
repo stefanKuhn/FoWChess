@@ -214,6 +214,74 @@ public class Tile extends Button{
     public int getY() {
         return y;
     }
+
+    public Tile getE() {
+        return e;
+    }
+
+    public Tile getNe() {
+        return ne;
+    }
+
+    public Tile getN() {
+        return n;
+    }
+
+    public Tile getNw() {
+        return nw;
+    }
+
+    public Tile getW() {
+        return w;
+    }
+
+    public Tile getSw() {
+        return sw;
+    }
+
+    public Tile getS() {
+        return s;
+    }
+
+    public Tile getSe() {
+        return se;
+    }
+
+    public boolean isHe() {
+        return he;
+    }
+
+    public boolean isHne() {
+        return hne;
+    }
+
+    public boolean isHn() {
+        return hn;
+    }
+
+    public boolean isHnw() {
+        return hnw;
+    }
+
+    public boolean isHw() {
+        return hw;
+    }
+
+    public boolean isHsw() {
+        return hsw;
+    }
+
+    public boolean isHs() {
+        return hs;
+    }
+
+    public boolean isHse() {
+        return hse;
+    }
+
+    public boolean isMapped() {
+        return mapped;
+    }
     
     
     
