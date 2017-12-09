@@ -13,6 +13,15 @@ public class Mob {
     int ownerId, vision;
     char identity;
     String name;
+    boolean hasMoved;
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
 
     public Mob(int ownerId, int vision, char identity, String name) {
         this.ownerId = ownerId;

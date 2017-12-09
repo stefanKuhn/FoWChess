@@ -22,7 +22,7 @@ public class Rook extends MovePattern{
         mph.highlightNorth(from);
         mph.highlightWest(from);
         mph.highlightEast(from);
-        mph.highlightWest(from);
+        mph.highlightSouth(from);
     }
     
 }

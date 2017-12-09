@@ -25,8 +25,8 @@ public class Queen extends MovePattern{
         mph.highlightSouthWest(from);
         mph.highlightNorth(from);
         mph.highlightWest(from);
+        mph.highlightSouth(from);
         mph.highlightEast(from);
-        mph.highlightWest(from);
     }
     
 }

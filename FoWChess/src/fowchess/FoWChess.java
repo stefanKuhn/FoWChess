@@ -9,6 +9,7 @@ import Factory.MovePatternHolder;
 import Factory.TileFactory;
 import Objects.Mob;
 import Objects.Tile;
+import java.util.ArrayList;
 import java.util.Stack;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -38,6 +39,7 @@ public class FoWChess extends Application {
     private static Tile selected;//tile that is currently selected;
     private MovePatternHolder mph;
     private Mob tempMob;
+    private static ArrayList<Mob> targetsForEnPassant;
 
     public void makeLabel(String text,int size){
         tempLabel = new Label(text);
@@ -54,7 +56,6 @@ public class FoWChess extends Application {
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 tempTile = TileFactory.getInstance().makeTile(i,height - j - 1);
-
                 board[i][height - j - 1] = tempTile;
                 tempTile.setMinSize(size,size);
                 root.add(tempTile, i + 2, j + 2);
@@ -110,11 +111,12 @@ public class FoWChess extends Application {
         for (Tile[] row : board){
             for (Tile tile : row){
                 tile.setOnAction((ActionEvent event) -> {
+                    System.out.println(highlightedTiles.size());
                     if (tile.isIsHighlighted()){
                         //todo: add code for movement
                     }
                     else{
-                        if (highlightedTiles.empty()){
+                        if (highlightedTiles.isEmpty()){
                             if (tile.getMob() != null){
                                 if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn){
                                     setSelected(tile);
@@ -144,7 +146,8 @@ public class FoWChess extends Application {
                             }
                         }
                         else{
-                            if(tile.equals(selected)){
+                            if(tile==selected){
+                                System.out.println("should deselect");
                                 setSelected(null);
                                 dehighlight();
                             }
@@ -158,7 +161,6 @@ public class FoWChess extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = init(8,8,50);
-                
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
@@ -178,23 +180,34 @@ public class FoWChess extends Application {
         while(!highlightedTiles.empty()){
             tempTile = highlightedTiles.pop();
             tempTile.adaptBG();
-            tempTile.setIsHighlighted(false);
         }
     }
 
     public Scene init(int width, int height, int size){
         highlightedTiles = new Stack();
-        
+        targetsForEnPassant = new ArrayList();
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
         Scene returnThis = makeScene(width,height,size);
-                
         eventHandler(board);
         whoseTurn = 0;
-        
+        mapButtons();
         return returnThis;
     }
+
+    public static ArrayList<Mob> getTargetsForEnPassant() {
+        return targetsForEnPassant;
+    }
+    
+    public void mapButtons(){
+        for (Tile[] row : board){
+            for (Tile tile : row){
+                tile.map();
+            }
+        }
+    }
+    
     
     public static Tile getNorth(Tile tile){
         if (tile.getY() + 1 < height){
@@ -222,25 +235,25 @@ public class FoWChess extends Application {
     }
     
     public static Tile getNorthEast(Tile tile){
-        if (tile.getX() + 1 < width || tile.getY() + 1 < height){
+        if (tile.getX() + 1 < width && tile.getY() + 1 < height){
             return board[tile.getX() + 1][tile.getY() + 1];
         }
         return null;
     }
     public static Tile getNorthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 || tile.getY() + 1 < height){
+        if (tile.getX() - 1 >= 0 && tile.getY() + 1 < height){
             return board[tile.getX() - 1][tile.getY() + 1];
         }
         return null;
     }
     public static Tile getSouthEast(Tile tile){
-        if (tile.getX() + 1 < width || tile.getY() - 1 >= 0){
+        if (tile.getX() + 1 < width && tile.getY() - 1 >= 0){
             return board[tile.getX() + 1][tile.getY() - 1];
         }
         return null;
     }
     public static Tile getSouthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 || tile.getY() - 1 >= 0){
+        if (tile.getX() - 1 >= 0 && tile.getY() - 1 >= 0){
             return board[tile.getX() - 1][tile.getY() - 1];
         }
         return null;
@@ -256,6 +269,10 @@ public class FoWChess extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static int getWhoseTurn() {
+        return whoseTurn;
     }
     
 }
