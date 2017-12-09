@@ -245,6 +245,12 @@ public class FoWChess extends Application {
         }
         return null;
     }
+
+    public static int getWhoseTurn() {
+        return whoseTurn;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

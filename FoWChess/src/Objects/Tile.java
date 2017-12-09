@@ -51,9 +51,16 @@ public class Tile extends Button{
         isHighlighted=false;
     }
     
+    //here come the light related functions
+    
+    public void goDark(){
+        this.lightlevel = 0;
+    }
+    
     public void adaptLight(){
         if (getMob()!=null){
-            lightlevel=3;
+            if (getMob().ownerId==fowchess.FoWChess.getWhoseTurn())
+            lightlevel=getMob().getVision();
         }
         propagateLight(lightlevel);
     }
@@ -70,10 +77,6 @@ public class Tile extends Button{
         }
         lightLevel--;
         
-        //performance imp: mapping once after board initialisation
-        if (!mapped){
-            map();
-        }
         if (he){
             e.propagateLight(lightLevel);
         }
