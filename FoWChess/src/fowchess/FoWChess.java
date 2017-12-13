@@ -114,6 +114,19 @@ public class FoWChess extends Application {
                     System.out.println(highlightedTiles.size());
                     if (tile.isIsHighlighted()){
                         //todo: add code for movement
+                        //knight code
+                        if (selected.getMob().getName().equals("knight")){
+                            
+                        }
+                        
+                        if (selected.getX()-tile.getX()>0){
+                            //if selected is right of clicked
+                            if (selected.getY()-tile.getY()>0){
+                                //and above the clicked
+                                //then the unit moves up to the right and is a Bishop, queen, King or Pawn that moves or attacks
+                                //selected.getNw().getMob()
+                            }
+                        }
                     }
                     else{
                         if (highlightedTiles.isEmpty()){
