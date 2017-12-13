@@ -24,5 +24,21 @@ public class Rook extends MovePattern{
         mph.highlightEast(from);
         mph.highlightSouth(from);
     }
+
+    @Override
+    public void move(Tile from, Tile to) {
+        if (mph.isNorth(from,to)){
+            mph.moveNorth(from, to);
+        }
+        if (mph.isSouth(from,to)){
+            mph.moveSouth(from, to);
+        }
+        if (mph.isWest(from,to)){
+            mph.moveWest(from, to);
+        }
+        if (mph.isEast(from,to)){
+            mph.moveEast(from, to);
+        }
+    }
     
 }

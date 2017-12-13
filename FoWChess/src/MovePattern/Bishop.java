@@ -27,4 +27,20 @@ public class Bishop extends MovePattern{
         mph.highlightSouthEast(from);
         mph.highlightSouthWest(from);
     }
+
+    @Override
+    public void move(Tile from, Tile to) {
+        if (mph.isNorthEast(from,to)){
+            mph.moveNorthEast(from, to);
+        }
+        if (mph.isSouthWest(from,to)){
+            mph.moveSouthWest(from, to);
+        }
+        if (mph.isNorthWest(from,to)){
+            mph.moveNorthWest(from, to);
+        }
+        if (mph.isSouthEast(from,to)){
+            mph.moveSouthEast(from, to);
+        }
+    }
 }

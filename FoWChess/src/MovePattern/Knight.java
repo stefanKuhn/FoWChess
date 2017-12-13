@@ -55,4 +55,9 @@ public class Knight extends MovePattern{
             }
         }
     }
+
+    @Override
+    public void move(Tile from, Tile to) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

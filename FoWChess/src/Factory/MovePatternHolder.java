@@ -136,6 +136,182 @@ public class MovePatternHolder {
         }
     }
     
+    public static boolean isNorth(Tile from, Tile to){
+        if (to.getY() - from.getY() > 0){
+            return true;
+        }
+        return false;
+    }
+    
+     public static boolean isSouth(Tile from, Tile to){
+        if (to.getY() - from.getY() < 0){
+            return true;
+        }
+        return false;
+    }
+     
+    public static boolean isEast(Tile from, Tile to){
+        if (to.getX() - from.getX() > 0){
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean isWest(Tile from, Tile to){
+        if (to.getX() - from.getX() < 0){
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean isNorthEast(Tile from, Tile to){
+        if (to.getY() - from.getY() == to.getX() - from.getX() && isNorth(from,to)){
+            return true;
+        }
+        return false;
+    }
+    
+     public static boolean isSouthWest(Tile from, Tile to){
+        if (to.getY() - from.getY() == to.getX() - from.getX() && isSouth(from,to)){
+            return true;
+        }
+        return false;
+    }
+     
+    public static boolean isSouthEast(Tile from, Tile to){
+        if (to.getY() - from.getY() == -(to.getX() - from.getX()) && isSouth(from,to)){
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean isNorthWest(Tile from, Tile to){
+        if (to.getY() - from.getY() == -(to.getX() - from.getX()) && isNorth(from,to)){
+            return true;
+        }
+        return false;
+    }
+    
+    public static void moveNorth(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getN().getMob() != null){
+            returnState = true;
+        }
+        from.getN().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveNorth(from.getN(),to);
+        }
+    }
+    
+    public static void moveSouth(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getS().getMob() != null){
+            returnState = true;
+        }
+        from.getS().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveSouth(from.getS(),to);
+        }
+    }
+    
+    public static void moveEast(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getE().getMob() != null){
+            returnState = true;
+        }
+        from.getE().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveEast(from.getE(),to);
+        }
+    }
+    
+    public static void moveWest(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getW().getMob() != null){
+            returnState = true;
+        }
+        from.getW().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveWest(from.getW(),to);
+        }
+    }
+    
+    public static void moveNorthEast(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getNe().getMob() != null){
+            returnState = true;
+        }
+        from.getNe().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveNorthEast(from.getNe(),to);
+        }
+    }
+    
+    public static void moveNorthWest(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getNw().getMob() != null){
+            returnState = true;
+        }
+        from.getNw().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveNorthWest(from.getNw(),to);
+        }
+    }
+    
+    public static void moveSouthEast(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getSe().getMob() != null){
+            returnState = true;
+        }
+        from.getSe().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveSouthEast(from.getSe(),to);
+        }
+    }
+    
+    public static void moveSouthWest(Tile from, Tile to){
+        if (from.equals(to)){
+            return;
+        }
+        boolean returnState = false;
+        if(from.getSw().getMob() != null){
+            returnState = true;
+        }
+        from.getSw().setMob(from.getMob());
+        from.setMob(null);
+        if (!returnState){
+            moveSouthWest(from.getSw(),to);
+        }
+    }
+    
     public void init(){
         pawn = new Pawn(width,height);
         rook = new Rook(width,height);

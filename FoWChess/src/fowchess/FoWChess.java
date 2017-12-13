@@ -113,7 +113,29 @@ public class FoWChess extends Application {
                 tile.setOnAction((ActionEvent event) -> {
                     System.out.println(highlightedTiles.size());
                     if (tile.isIsHighlighted()){
-                        //todo: add code for movement
+                        switch(tempMob.getName()){
+                            case "pawn":
+                                mph.getPawn().move(selected,tile);
+                                break;
+                            case "rook":
+                                mph.getRook().move(selected,tile);
+                                break;
+                            case "bishop":
+                                mph.getBishop().move(selected,tile);
+                                break;
+                            case "knight":
+                                mph.getKnight().move(selected,tile);
+                                break;
+                            case "queen":
+                                mph.getQueen().move(selected,tile);
+                                break;
+                            case "king":
+                                mph.getKing().move(selected,tile);
+                                break;
+                            default:
+                                break;
+                        }
+                        dehighlight();
                     }
                     else{
                         if (highlightedTiles.isEmpty()){
@@ -146,7 +168,7 @@ public class FoWChess extends Application {
                             }
                         }
                         else{
-                            if(tile==selected){
+                            if(tile.equals(selected)){
                                 System.out.println("should deselect");
                                 setSelected(null);
                                 dehighlight();
