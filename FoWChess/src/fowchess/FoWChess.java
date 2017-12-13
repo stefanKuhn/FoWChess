@@ -271,8 +271,5 @@ public class FoWChess extends Application {
         launch(args);
     }
 
-    public static int getWhoseTurn() {
-        return whoseTurn;
-    }
     
 }
