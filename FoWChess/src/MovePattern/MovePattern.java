@@ -6,6 +6,7 @@
 package MovePattern;
 
 import Factory.MovePatternHolder;
+import Objects.Mob;
 import Objects.Tile;
 
 /**
@@ -16,6 +17,7 @@ public abstract class MovePattern {
     int width, height, x, y;
     Tile tempTile;
     MovePatternHolder mph;
+    Mob tempMob;
 
     public MovePattern(int width, int height) {
         this.width = width;

@@ -59,6 +59,25 @@ public class Pawn extends MovePattern{
 
     @Override
     public void move(Tile from, Tile to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tempMob = from.getMob();
+        if (!tempMob.isHasMoved()){
+            tempMob.setHasMoved(true);
+            if (Math.abs(to.getY() - from.getY()) == 2){
+                FoWChess.getTargetsForEnPassant().add(tempMob);
+            }
+        }
+        else{
+            if (FoWChess.getTargetsForEnPassant().contains(tempMob)){
+                FoWChess.getTargetsForEnPassant().remove(tempMob);
+            }
+            else if (to.getX() - from.getX() == 1 && !from.getE().getMob().equals(null) && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob())){
+                from.getE().setMob(null);
+            }
+            else if(to.getX() - from.getX() == -1 && !from.getW().getMob().equals(null) && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob())){
+                from.getW().setMob(null);
+            }
+        }
+        to.setMob(tempMob);
+        from.setMob(null);
     }
 }

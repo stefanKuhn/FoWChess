@@ -28,6 +28,7 @@ public class Mob {
         this.vision = vision;
         this.identity = identity;
         this.name = name;
+        this.hasMoved = false;
     }
 
     public String getName() {
