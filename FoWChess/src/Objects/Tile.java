@@ -285,10 +285,81 @@ public class Tile extends Button{
 
     public boolean isMapped() {
         return mapped;
+    }       
+    
+    public void drawFigure()
+    {
+    	if(this.mob == null)
+    	{
+    		
+    	}
+    	else
+    	{
+	    	switch(this.mob.getName()) 
+		    {
+		    	case "Bishop" :
+		    		if(this.mob.getOwnerId() == 0)
+		    		{
+		    			
+		    		}
+		    		else
+		    		{
+		    			
+		    		}
+		    		break;
+		    	case "King" :
+			    	if(this.mob.getOwnerId() == 0)
+					{
+						
+					}
+					else
+					{
+						
+					}
+		    		break;
+		    	case "Knight" :
+			    	if(this.mob.getOwnerId() == 0)
+					{
+						
+					}
+					else
+					{
+						
+					}
+					break;
+		    	case "Queen" :
+			    	if(this.mob.getOwnerId() == 0)
+					{
+						
+					}
+					else
+					{
+						
+					}
+					break;
+		    	case "Rook" :
+			    	if(this.mob.getOwnerId() == 0)
+					{
+						
+					}
+					else
+					{
+						
+					}
+					break;
+		    	default :             // Pawn = default
+		    		if(this.mob.getOwnerId() == 0)
+					{
+						
+					}
+					else
+					{
+						
+					}
+		    		break;
+		    }
+    	}
     }
-    
-    
-    
     
     
 }
