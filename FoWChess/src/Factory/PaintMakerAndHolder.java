@@ -28,7 +28,6 @@ public class PaintMakerAndHolder {
         if (instance==null){
             instance= new PaintMakerAndHolder();
             instance.init();
-            
         }
         return instance;
     }
