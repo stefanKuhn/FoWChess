@@ -7,3 +7,4 @@ Impediment List
 - misunderstanding of Scrum-Documentation: 
   Expectation to create a documenationfile (with Word) of the individuel sprints and upload it to Github (Gavi)
 - ??? (Gavi)
+- Ant, Netbeans and TravisCI do not like to work together. (Alle)
