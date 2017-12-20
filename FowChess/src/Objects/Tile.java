@@ -8,6 +8,7 @@ package Objects;
 import Factory.PaintMakerAndHolder;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Paint;
 
@@ -20,7 +21,7 @@ public class Tile extends Button{
     public Background tileColor;
     Mob mob;
     int x,y,lightlevel;
-    
+    Image image;
     Tile e, ne, n, nw, w, sw, s, se;
     boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
@@ -303,64 +304,66 @@ public class Tile extends Button{
 		    	case "Bishop" :
 		    		if(this.mob.getOwnerId() == 0)
 		    		{
-		    			Image image = new Image("/images/whitebishop.bmp", tileWidth, tileHeight, false, false);
+		    			image = new Image("/images/whitebishop.bmp", tileWidth, tileHeight, false, false);
 		    		}
 		    		else
 		    		{
-		    	    	Image image = new Image("/images/blackbishop.bmp", tileWidth, tileHeight, false, false);
+		    	    	image = new Image("/images/blackbishop.bmp", tileWidth, tileHeight, false, false);
 		    		}
 		    		break;
 		    	case "King" :
 			    	if(this.mob.getOwnerId() == 0)
 					{
-			    		Image image = new Image("/images/whiteking.bmp", tileWidth, tileHeight, false, false);
+			    		image = new Image("/images/whiteking.bmp", tileWidth, tileHeight, false, false);
 					}
 					else
 					{
-						Image image = new Image("/images/blackking.bmp", tileWidth, tileHeight, false, false);
+						image = new Image("/images/blackking.bmp", tileWidth, tileHeight, false, false);
 					}
 		    		break;
 		    	case "Knight" :
 			    	if(this.mob.getOwnerId() == 0)
 					{
-			    		Image image = new Image("/images/whiteknight.bmp", tileWidth, tileHeight, false, false);
+			    		image = new Image("/images/whiteknight.bmp", tileWidth, tileHeight, false, false);
 					}
 					else
 					{
-						Image image = new Image("/images/blackknight.bmp", tileWidth, tileHeight, false, false);
+						image = new Image("/images/blackknight.bmp", tileWidth, tileHeight, false, false);
 					}
 					break;
 		    	case "Queen" :
 			    	if(this.mob.getOwnerId() == 0)
 					{
-			    		Image image = new Image("/images/whitequeen.bmp", tileWidth, tileHeight, false, false);
+			    		image = new Image("/images/whitequeen.bmp", tileWidth, tileHeight, false, false);
 					}
 					else
 					{
-						Image image = new Image("/images/blackqueen.bmp", tileWidth, tileHeight, false, false);
+						image = new Image("/images/blackqueen.bmp", tileWidth, tileHeight, false, false);
 					}
 					break;
 		    	case "Rook" :
 			    	if(this.mob.getOwnerId() == 0)
 					{
-			    		Image image = new Image("/images/whiterook.bmp", tileWidth, tileHeight, false, false);
+			    		image = new Image("/images/whiterook.bmp", tileWidth, tileHeight, false, false);
 					}
 					else
 					{
-						Image image = new Image("/images/blackrook.bmp", tileWidth, tileHeight, false, false);
+						image = new Image("/images/blackrook.bmp", tileWidth, tileHeight, false, false);
 					}
 					break;
 		    	default :             // Pawn = default
 		    		if(this.mob.getOwnerId() == 0)
 					{
-		    			Image image = new Image("/images/whitepawn.bmp", tileWidth, tileHeight, false, false);
+		    			image = new Image("/images/whitepawn.bmp", tileWidth, tileHeight, false, false);
 					}
 					else
 					{
-						Image image = new Image("/images/blackpawn.bmp", tileWidth, tileHeight, false, false);
+						image = new Image("/images/blackpawn.bmp", tileWidth, tileHeight, false, false);
 					}
 		    		break;
 		    }
+	    	ImageView imv = new ImageView();
+	    	imv.setImage(image);
     	}
     }
     
