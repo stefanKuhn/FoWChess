@@ -81,6 +81,7 @@ public class FoWChess extends Application {
         
 
        getBoard()[3][3].setMob(new Mob(0,3,'p',"pawn"));
+       getBoard()[2][5].setMob(new Mob(1,3,'p',"pawn"));
        getBoard()[4][4].setMob(new Mob(0,3,'p',"rook"));         
         return root;
     }
@@ -168,7 +169,7 @@ public class FoWChess extends Application {
                             }
                         }
                         else{
-                            if(tile.equals(selected)){
+                            if(tile == selected){
                                 System.out.println("should deselect");
                                 setSelected(null);
                                 dehighlight();

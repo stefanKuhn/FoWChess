@@ -193,7 +193,7 @@ public class MovePatternHolder {
     }
     
     public static void moveNorth(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -208,7 +208,7 @@ public class MovePatternHolder {
     }
     
     public static void moveSouth(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -223,7 +223,7 @@ public class MovePatternHolder {
     }
     
     public static void moveEast(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -238,7 +238,7 @@ public class MovePatternHolder {
     }
     
     public static void moveWest(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -253,7 +253,7 @@ public class MovePatternHolder {
     }
     
     public static void moveNorthEast(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -268,7 +268,7 @@ public class MovePatternHolder {
     }
     
     public static void moveNorthWest(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -283,7 +283,7 @@ public class MovePatternHolder {
     }
     
     public static void moveSouthEast(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
@@ -298,7 +298,7 @@ public class MovePatternHolder {
     }
     
     public static void moveSouthWest(Tile from, Tile to){
-        if (from.equals(to)){
+        if (from == to){
             return;
         }
         boolean returnState = false;
