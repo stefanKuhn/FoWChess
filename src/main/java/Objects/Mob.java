@@ -10,7 +10,7 @@ package Objects;
  * @author Sumpf
  */
 public class Mob {
-    int ownerId, vision; // 0 = white owner, 1 = black owner;
+    int ownerId, vision;
     char identity;
     String name;
     boolean hasMoved;

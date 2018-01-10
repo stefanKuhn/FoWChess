@@ -97,10 +97,6 @@ public class FoWChess extends Application {
     public static int getHeight() {
         return height;
     }
-    
-    public void endTurn(){
-        TurnEnder.getInstance().endTurn(this);
-    }
 
     public static Stack<Tile> getHighlightedTiles() {
         return highlightedTiles;

@@ -1,4 +1,0 @@
-# FoWChess
-
-//Gavi was here ;)
-
