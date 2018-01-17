@@ -12,7 +12,6 @@ package Objects;
 public class Mob {
 
     int ownerId, vision;
-    char identity;
     String name;
     boolean hasMoved;
 
@@ -24,10 +23,9 @@ public class Mob {
         this.hasMoved = hasMoved;
     }
 
-    public Mob(int ownerId, int vision, char identity, String name) {
+    public Mob(int ownerId, int vision, String name) {
         this.ownerId = ownerId;
         this.vision = vision;
-        this.identity = identity;
         this.name = name;
         this.hasMoved = false;
     }
@@ -56,12 +54,5 @@ public class Mob {
         this.vision = vision;
     }
 
-    public char getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(char identity) {
-        this.identity = identity;
-    }
 
 }

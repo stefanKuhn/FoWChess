@@ -78,15 +78,12 @@ public class FoWChess extends Application {
             root.add(tempLabel, width + 2, height - j + 2);
         }
 
-<<<<<<< HEAD
        getBoard()[3][3].setMob(new Mob(0,3,"pawn"));
        getBoard()[2][5].setMob(new Mob(1,3,"pawn"));
        getBoard()[4][4].setMob(new Mob(0,3,"rook"));         
-=======
-        getBoard()[3][3].setMob(new Mob(0, 3, 'p', "pawn"));
-        getBoard()[2][5].setMob(new Mob(1, 3, 'p', "pawn"));
-        getBoard()[4][4].setMob(new Mob(0, 3, 'r', "rook"));
->>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
+        getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+        getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
+        getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
         return root;
     }
 

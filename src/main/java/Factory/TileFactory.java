@@ -6,6 +6,7 @@
 package Factory;
 
 import Objects.Tile;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 
 /**
@@ -45,9 +46,9 @@ public class TileFactory {
                 lastGivenBG = PaintMakerAndHolder.getInstance().getWhite();
             } else {
                 lastGivenBG = PaintMakerAndHolder.getInstance().getBlack();
-            }
+            };
 
-        lastCreated = new Tile(lastGivenBG, x, y, 1);
+        lastCreated = new Tile(lastGivenBG, x, y, 1, new ImageView());
 
         return lastCreated;
     }

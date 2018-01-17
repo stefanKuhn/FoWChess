@@ -6,7 +6,7 @@
 package Objects;
 
 import Factory.PaintMakerAndHolder;
-import images.ImageHelper;
+import Objects.ImageHelper;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -21,13 +21,10 @@ public class Tile extends Button {
     boolean isVisible, containsMob, isHighlighted;
     public Background tileColor;
     Mob mob;
-<<<<<<< HEAD
     int x,y,lightlevel;
     ImageView view;
-=======
-    int x, y, lightlevel;
 
->>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
+
     Tile e, ne, n, nw, w, sw, s, se;
     boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
@@ -38,14 +35,11 @@ public class Tile extends Button {
         this.x = x;
         this.y = y;
         this.lightlevel = lightlevel;
-<<<<<<< HEAD
         this.isHighlighted=false;
         view=i;
         mapped=false;
-=======
         this.isHighlighted = false;
         mapped = false;
->>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
     }
 
     public void adaptBG() {
@@ -63,7 +57,6 @@ public class Tile extends Button {
         }
         isHighlighted = false;
     }
-<<<<<<< HEAD
     
     public void adaptFigurine(){
 	   	if (this.lightlevel!=0){
@@ -106,9 +99,7 @@ public class Tile extends Button {
 	    }
     }
     
-=======
 
->>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
     //here come the light related functions
     public void goDark() {
         this.lightlevel = 0;
