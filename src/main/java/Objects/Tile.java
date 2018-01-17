@@ -6,7 +6,9 @@
 package Objects;
 
 import Factory.PaintMakerAndHolder;
+import images.ImageHelper;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Paint;
 
@@ -19,19 +21,31 @@ public class Tile extends Button {
     boolean isVisible, containsMob, isHighlighted;
     public Background tileColor;
     Mob mob;
+<<<<<<< HEAD
+    int x,y,lightlevel;
+    ImageView view;
+=======
     int x, y, lightlevel;
 
+>>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
     Tile e, ne, n, nw, w, sw, s, se;
     boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
-    public Tile(Background bg, int x, int y, int lightlevel) {
-        this.isVisible = false;
+    public Tile(Background bg, int x, int y, int lightlevel, ImageView i) {
+    	super("",i);
+    	this.isVisible = false;
         this.tileColor = bg;
         this.x = x;
         this.y = y;
         this.lightlevel = lightlevel;
+<<<<<<< HEAD
+        this.isHighlighted=false;
+        view=i;
+        mapped=false;
+=======
         this.isHighlighted = false;
         mapped = false;
+>>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
     }
 
     public void adaptBG() {
@@ -49,7 +63,52 @@ public class Tile extends Button {
         }
         isHighlighted = false;
     }
+<<<<<<< HEAD
+    
+    public void adaptFigurine(){
+	   	if (this.lightlevel!=0){
+	    	if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWPawn());
+	    	}
+	    	if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBPawn());
+	    	}
+	    	if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWKing());
+	    	}
+	    	if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBKing());
+	    	}
+	    	if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWQueen());
+	    	}
+	    	if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBQueen());
+	    	}
+	    	if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWKnight());
+	    	}
+	    	if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBKnight());
+	    	}
+	    	if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWRook());
+	    	}
+	    	if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBRook());
+	    	}
+	    	if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWRunner());
+	    	}
+	    	if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBRunner());
+	    	}	    	
+	    }
+    }
+    
+=======
 
+>>>>>>> branch 'master' of git://github.com/stefanKuhn/FoWChess.git
     //here come the light related functions
     public void goDark() {
         this.lightlevel = 0;
