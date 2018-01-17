@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -40,7 +41,10 @@ public class FoWChess extends Application {
     private MovePatternHolder mph;
     private Mob tempMob;
     private static ArrayList<Mob> targetsForEnPassant;
-
+    Button changebtn;
+    
+    
+    
     public void makeLabel(String text, int size) {
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
@@ -81,9 +85,9 @@ public class FoWChess extends Application {
        getBoard()[3][3].setMob(new Mob(0,3,"pawn"));
        getBoard()[2][5].setMob(new Mob(1,3,"pawn"));
        getBoard()[4][4].setMob(new Mob(0,3,"rook"));         
-        getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
-        getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
-        getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
+       getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+       getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
+       getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
         return root;
     }
 
@@ -109,6 +113,17 @@ public class FoWChess extends Application {
         return scene;
     }
 
+    
+    
+    public void setChangeButton(Button changebtn){
+    	changebtn = new Button("hu");
+    	changebtn.setMinSize(50, 100);
+    	changebtn.setAlignment(Pos.BOTTOM_LEFT);
+		changebtn.setOnAction((ActionEvent event) -> {
+    		endTurn();
+    	});
+    }
+    
     public void eventHandler(Tile[][] board) {
         for (Tile[] row : board) {
             for (Tile tile : row) {
