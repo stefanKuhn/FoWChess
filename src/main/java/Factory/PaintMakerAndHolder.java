@@ -17,25 +17,25 @@ import javafx.scene.paint.Paint;
  * @author Sumpf
  */
 public class PaintMakerAndHolder {
+
     static PaintMakerAndHolder instance;
-    
+
     Background black, white, selected, highlighted, fogBlack, fogWhite, highlightedFog;
-    
+
     private PaintMakerAndHolder() {
     }
-    
-    public static PaintMakerAndHolder getInstance(){
-        if (instance==null){
-            instance= new PaintMakerAndHolder();
+
+    public static PaintMakerAndHolder getInstance() {
+        if (instance == null) {
+            instance = new PaintMakerAndHolder();
             instance.init();
-            
+
         }
         return instance;
     }
-    
-    
+
     //instantiates all BG's
-    private void init(){
+    private void init() {
         black = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY));
         white = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
         selected = new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY));
@@ -73,11 +73,8 @@ public class PaintMakerAndHolder {
         this.fogWhite = fogWhite;
     }
 
-    
     public Background getHighlightedFog() {
         return highlightedFog;
     }
-    
-    
-    
+
 }

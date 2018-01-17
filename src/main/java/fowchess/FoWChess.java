@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  * @author Sumpf
  */
 public class FoWChess extends Application {
-    
+
     private static Tile[][] board;//two dimensional array for the tiles
     private Label[] widthLabel;//labels for x axis
     private Label[] heightLabel;//labels for y axis
@@ -41,48 +41,46 @@ public class FoWChess extends Application {
     private Mob tempMob;
     private static ArrayList<Mob> targetsForEnPassant;
 
-    public void makeLabel(String text,int size){
+    public void makeLabel(String text, int size) {
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
         tempLabel.setAlignment(Pos.CENTER);
     }
-    
-    public GridPane generateBoard(int width, int height, int size){
+
+    public GridPane generateBoard(int width, int height, int size) {
         GridPane root = new GridPane();
         board = new Tile[width][height];
         widthLabel = new Label[width];
         heightLabel = new Label[height];
         //Place tiles and give them color
-        for(int i = 0; i < width; i++){
-            for(int j = 0; j < height; j++){
-                tempTile = TileFactory.getInstance().makeTile(i,height - j - 1);
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                tempTile = TileFactory.getInstance().makeTile(i, height - j - 1);
                 board[i][height - j - 1] = tempTile;
-                tempTile.setMinSize(size,size);
+                tempTile.setMinSize(size, size);
                 root.add(tempTile, i + 2, j + 2);
                 tempTile.setBackground(tempTile.getTileColor());
                 tempTile.adaptBG();//this line is only here to test against nullpointers.
             }
         }
         //Place x axis labels
-        for(int i = 1; i <= width; i++){
-            makeLabel(Integer.toString(i),size);
-            root.add(tempLabel,i + 1,1);
-            makeLabel(Integer.toString(i),size);
-            root.add(tempLabel,i + 1,height + 2);
+        for (int i = 1; i <= width; i++) {
+            makeLabel(Integer.toString(i), size);
+            root.add(tempLabel, i + 1, 1);
+            makeLabel(Integer.toString(i), size);
+            root.add(tempLabel, i + 1, height + 2);
         }
         //Place y axis labels
-        for(int j = 1; j <= height; j++){
-            makeLabel(Integer.toString(j),size);
-            root.add(tempLabel,1,height - j + 2);
-            makeLabel(Integer.toString(j),size);
-            root.add(tempLabel,width + 2,height - j + 2);
+        for (int j = 1; j <= height; j++) {
+            makeLabel(Integer.toString(j), size);
+            root.add(tempLabel, 1, height - j + 2);
+            makeLabel(Integer.toString(j), size);
+            root.add(tempLabel, width + 2, height - j + 2);
         }
-        
-        
 
-       getBoard()[3][3].setMob(new Mob(0,3,'p',"pawn"));
-       getBoard()[2][5].setMob(new Mob(1,3,'p',"pawn"));
-       getBoard()[4][4].setMob(new Mob(0,3,'p',"rook"));         
+        getBoard()[3][3].setMob(new Mob(0, 3, 'p', "pawn"));
+        getBoard()[2][5].setMob(new Mob(1, 3, 'p', "pawn"));
+        getBoard()[4][4].setMob(new Mob(0, 3, 'r', "rook"));
         return root;
     }
 
@@ -101,96 +99,90 @@ public class FoWChess extends Application {
     public static Stack<Tile> getHighlightedTiles() {
         return highlightedTiles;
     }
-    
-    public Scene makeScene(int width, int height, int size){
-        GridPane root = generateBoard(width,height,size);
+
+    public Scene makeScene(int width, int height, int size) {
+        GridPane root = generateBoard(width, height, size);
         Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
         return scene;
     }
-    
-    public void eventHandler(Tile[][] board){
-        for (Tile[] row : board){
-            for (Tile tile : row){
+
+    public void eventHandler(Tile[][] board) {
+        for (Tile[] row : board) {
+            for (Tile tile : row) {
                 tile.setOnAction((ActionEvent event) -> {
                     System.out.println(highlightedTiles.size());
-                    if (tile.isIsHighlighted()){
-                        switch(tempMob.getName()){
+                    if (tile.isIsHighlighted()) {
+                        switch (tempMob.getName()) {
                             case "pawn":
-                                mph.getPawn().move(selected,tile);
+                                mph.getPawn().move(selected, tile);
                                 break;
                             case "rook":
-                                mph.getRook().move(selected,tile);
+                                mph.getRook().move(selected, tile);
                                 break;
                             case "bishop":
-                                mph.getBishop().move(selected,tile);
+                                mph.getBishop().move(selected, tile);
                                 break;
                             case "knight":
-                                mph.getKnight().move(selected,tile);
+                                mph.getKnight().move(selected, tile);
                                 break;
                             case "queen":
-                                mph.getQueen().move(selected,tile);
+                                mph.getQueen().move(selected, tile);
                                 break;
                             case "king":
-                                mph.getKing().move(selected,tile);
+                                mph.getKing().move(selected, tile);
                                 break;
                             default:
                                 break;
                         }
                         dehighlight();
-                    }
-                    else{
-                        if (highlightedTiles.isEmpty()){
-                            if (tile.getMob() != null){
-                                if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn){
-                                    setSelected(tile);
-                                    switch(tempMob.getName()){
-                                        case "pawn":
-                                            mph.getPawn().highlight(tile);
-                                            break;
-                                        case "rook":
-                                            mph.getRook().highlight(tile);
-                                            break;
-                                        case "bishop":
-                                            mph.getBishop().highlight(tile);
-                                            break;
-                                        case "knight":
-                                            mph.getKnight().highlight(tile);
-                                            break;
-                                        case "queen":
-                                            mph.getQueen().highlight(tile);
-                                            break;
-                                        case "king":
-                                            mph.getKing().highlight(tile);
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                    } else if (highlightedTiles.isEmpty()) {
+                        if (tile.getMob() != null) {
+                            if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn) {
+                                setSelected(tile);
+                                switch (tempMob.getName()) {
+                                    case "pawn":
+                                        mph.getPawn().highlight(tile);
+                                        break;
+                                    case "rook":
+                                        mph.getRook().highlight(tile);
+                                        break;
+                                    case "bishop":
+                                        mph.getBishop().highlight(tile);
+                                        break;
+                                    case "knight":
+                                        mph.getKnight().highlight(tile);
+                                        break;
+                                    case "queen":
+                                        mph.getQueen().highlight(tile);
+                                        break;
+                                    case "king":
+                                        mph.getKing().highlight(tile);
+                                        break;
+                                    default:
+                                        break;
                                 }
                             }
                         }
-                        else{
-                            if(tile == selected){
-                                System.out.println("should deselect");
-                                setSelected(null);
-                                dehighlight();
-                            }
-                        }
+                    } else if (tile == selected) {
+                        System.out.println("should deselect");
+                        setSelected(null);
+                        dehighlight();
                     }
                 });
             }
         }
     }
-        
+
     @Override
     public void start(Stage primaryStage) {
-        Scene scene = init(8,8,50);
+        Scene scene = init(8, 8, 50);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
-        
+
     }
-  
+
     public static Tile getSelected() {
         return selected;
     }
@@ -198,21 +190,21 @@ public class FoWChess extends Application {
     public static void setSelected(Tile selected) {
         FoWChess.selected = selected;
     }
-    
-    public void dehighlight(){
-        while(!highlightedTiles.empty()){
+
+    public void dehighlight() {
+        while (!highlightedTiles.empty()) {
             tempTile = highlightedTiles.pop();
             tempTile.adaptBG();
         }
     }
 
-    public Scene init(int width, int height, int size){
+    public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
         targetsForEnPassant = new ArrayList();
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
-        Scene returnThis = makeScene(width,height,size);
+        Scene returnThis = makeScene(width, height, size);
         eventHandler(board);
         whoseTurn = 0;
         mapButtons();
@@ -222,61 +214,66 @@ public class FoWChess extends Application {
     public static ArrayList<Mob> getTargetsForEnPassant() {
         return targetsForEnPassant;
     }
-    
-    public void mapButtons(){
-        for (Tile[] row : board){
-            for (Tile tile : row){
+
+    public void mapButtons() {
+        for (Tile[] row : board) {
+            for (Tile tile : row) {
                 tile.map();
             }
         }
     }
-    
-    
-    public static Tile getNorth(Tile tile){
-        if (tile.getY() + 1 < height){
+
+    public static Tile getNorth(Tile tile) {
+        if (tile.getY() + 1 < height) {
             return board[tile.getX()][tile.getY() + 1];
         }
         return null;
     }
-    public static Tile getEast(Tile tile){
-        if (tile.getX() + 1 < width){
+
+    public static Tile getEast(Tile tile) {
+        if (tile.getX() + 1 < width) {
             return board[tile.getX() + 1][tile.getY()];
         }
         return null;
     }
-    public static Tile getSouth(Tile tile){
-        if (tile.getY() - 1 >= 0){
+
+    public static Tile getSouth(Tile tile) {
+        if (tile.getY() - 1 >= 0) {
             return board[tile.getX()][tile.getY() - 1];
         }
         return null;
     }
-    public static Tile getWest(Tile tile){
-        if (tile.getX() - 1 >= 0){
+
+    public static Tile getWest(Tile tile) {
+        if (tile.getX() - 1 >= 0) {
             return board[tile.getX() - 1][tile.getY()];
         }
         return null;
     }
-    
-    public static Tile getNorthEast(Tile tile){
-        if (tile.getX() + 1 < width && tile.getY() + 1 < height){
+
+    public static Tile getNorthEast(Tile tile) {
+        if (tile.getX() + 1 < width && tile.getY() + 1 < height) {
             return board[tile.getX() + 1][tile.getY() + 1];
         }
         return null;
     }
-    public static Tile getNorthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 && tile.getY() + 1 < height){
+
+    public static Tile getNorthWest(Tile tile) {
+        if (tile.getX() - 1 >= 0 && tile.getY() + 1 < height) {
             return board[tile.getX() - 1][tile.getY() + 1];
         }
         return null;
     }
-    public static Tile getSouthEast(Tile tile){
-        if (tile.getX() + 1 < width && tile.getY() - 1 >= 0){
+
+    public static Tile getSouthEast(Tile tile) {
+        if (tile.getX() + 1 < width && tile.getY() - 1 >= 0) {
             return board[tile.getX() + 1][tile.getY() - 1];
         }
         return null;
     }
-    public static Tile getSouthWest(Tile tile){
-        if (tile.getX() - 1 >= 0 && tile.getY() - 1 >= 0){
+
+    public static Tile getSouthWest(Tile tile) {
+        if (tile.getX() - 1 >= 0 && tile.getY() - 1 >= 0) {
             return board[tile.getX() - 1][tile.getY() - 1];
         }
         return null;
@@ -285,8 +282,7 @@ public class FoWChess extends Application {
     public static int getWhoseTurn() {
         return whoseTurn;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -294,5 +290,4 @@ public class FoWChess extends Application {
         launch(args);
     }
 
-    
 }

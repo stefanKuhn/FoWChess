@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,12 +14,13 @@ import javafx.scene.paint.Paint;
  *
  * @author Sumpf
  */
-public class Tile extends Button{
+public class Tile extends Button {
+
     boolean isVisible, containsMob, isHighlighted;
     public Background tileColor;
     Mob mob;
-    int x,y,lightlevel;
-    
+    int x, y, lightlevel;
+
     Tile e, ne, n, nw, w, sw, s, se;
     boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
@@ -29,125 +30,120 @@ public class Tile extends Button{
         this.x = x;
         this.y = y;
         this.lightlevel = lightlevel;
-        this.isHighlighted=false;
-        mapped=false;
+        this.isHighlighted = false;
+        mapped = false;
     }
-    
-    
-    public void adaptBG(){
+
+    public void adaptBG() {
         //if tile is not visible we use the corresponding fog color, otherwise tilecolor.
-        if (lightlevel==0){
-            if (getTileColor()==PaintMakerAndHolder.getInstance().getBlack()){                    
-                    setBackground(PaintMakerAndHolder.getInstance().getFogBlack());
-                    System.out.println("black fog");
+        if (lightlevel == 0) {
+            if (getTileColor() == PaintMakerAndHolder.getInstance().getBlack()) {
+                setBackground(PaintMakerAndHolder.getInstance().getFogBlack());
+                System.out.println("black fog");
             } else {
                 setBackground(PaintMakerAndHolder.getInstance().getFogWhite());
                 System.out.println("white fog");
             }
-        }
-        else {
+        } else {
             setBackground(tileColor);
         }
-        isHighlighted=false;
+        isHighlighted = false;
     }
-    
+
     //here come the light related functions
-    
-    public void goDark(){
+    public void goDark() {
         this.lightlevel = 0;
     }
-    
-    public void adaptLight(){
-        if (getMob()!=null){
-            if (getMob().ownerId==fowchess.FoWChess.getWhoseTurn())
-            lightlevel=getMob().getVision();
+
+    public void adaptLight() {
+        if (getMob() != null) {
+            if (getMob().ownerId == fowchess.FoWChess.getWhoseTurn()) {
+                lightlevel = getMob().getVision();
+            }
         }
         propagateLight(lightlevel);
     }
-    
-    public void propagateLight(int lightLevel){
+
+    public void propagateLight(int lightLevel) {
         //
-        if (lightLevel<this.lightlevel){
+        if (lightLevel < this.lightlevel) {
             return;
         }
-        
-        this.lightlevel=lightLevel;
-        if (lightLevel<=1){
+
+        this.lightlevel = lightLevel;
+        if (lightLevel <= 1) {
             return;
         }
         lightLevel--;
-        
-        if (he){
+
+        if (he) {
             e.propagateLight(lightLevel);
         }
-        if (hne){
+        if (hne) {
             ne.propagateLight(lightLevel);
         }
-        if (hn){
+        if (hn) {
             n.propagateLight(lightLevel);
         }
-        if (hnw){
+        if (hnw) {
             nw.propagateLight(lightLevel);
         }
-        if (hw){
+        if (hw) {
             w.propagateLight(lightLevel);
         }
-        if (hsw){
+        if (hsw) {
             sw.propagateLight(lightLevel);
         }
-        if (hs){
+        if (hs) {
             s.propagateLight(lightLevel);
         }
-        if (hse){
+        if (hse) {
             se.propagateLight(lightLevel);
         }
     }
-    
-    public void map(){
-    if (fowchess.FoWChess.getEast(this)!=null){
-            he=true;
-            e=fowchess.FoWChess.getEast(this);
+
+    public void map() {
+        if (fowchess.FoWChess.getEast(this) != null) {
+            he = true;
+            e = fowchess.FoWChess.getEast(this);
         }
-    if (fowchess.FoWChess.getNorthEast(this)!=null){
-            hne=true;
-            ne=fowchess.FoWChess.getNorthEast(this);
+        if (fowchess.FoWChess.getNorthEast(this) != null) {
+            hne = true;
+            ne = fowchess.FoWChess.getNorthEast(this);
         }
-    if (fowchess.FoWChess.getNorth(this)!=null){
-            hn=true;
-            n=fowchess.FoWChess.getNorth(this);
+        if (fowchess.FoWChess.getNorth(this) != null) {
+            hn = true;
+            n = fowchess.FoWChess.getNorth(this);
         }
-    if (fowchess.FoWChess.getNorthWest(this)!=null){
-            hnw=true;
-            nw=fowchess.FoWChess.getNorthWest(this);
+        if (fowchess.FoWChess.getNorthWest(this) != null) {
+            hnw = true;
+            nw = fowchess.FoWChess.getNorthWest(this);
         }
-    if (fowchess.FoWChess.getWest(this)!=null){
-            hw=true;
-            w=fowchess.FoWChess.getWest(this);
+        if (fowchess.FoWChess.getWest(this) != null) {
+            hw = true;
+            w = fowchess.FoWChess.getWest(this);
         }
-    if (fowchess.FoWChess.getSouthWest(this)!=null){
-            hsw=true;
-            sw=fowchess.FoWChess.getSouthWest(this);
+        if (fowchess.FoWChess.getSouthWest(this) != null) {
+            hsw = true;
+            sw = fowchess.FoWChess.getSouthWest(this);
         }
-    if (fowchess.FoWChess.getSouth(this)!=null){
-            hs=true;
-            s=fowchess.FoWChess.getSouth(this);
+        if (fowchess.FoWChess.getSouth(this) != null) {
+            hs = true;
+            s = fowchess.FoWChess.getSouth(this);
         }
-    if (fowchess.FoWChess.getSouthEast(this)!=null){
-            hse=true;
-            se=fowchess.FoWChess.getSouthEast(this);
+        if (fowchess.FoWChess.getSouthEast(this) != null) {
+            hse = true;
+            se = fowchess.FoWChess.getSouthEast(this);
         }
-    mapped=true;
+        mapped = true;
     }
-    
-    
-    public void highLight(){
+
+    public void highLight() {
         fowchess.FoWChess.getHighlightedTiles().push(this);
-        if (lightlevel>0){
-        setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
-        
-        }
-        else
-        {
+        if (lightlevel > 0) {
+            setBackground(PaintMakerAndHolder.getInstance().getHighlighted());
+
+        } else {
             setBackground(PaintMakerAndHolder.getInstance().getHighlightedFog());
         }
         this.isHighlighted = true;
@@ -185,14 +181,15 @@ public class Tile extends Button{
         this.tileColor = tileColor;
     }
 
-    public boolean hasLeft(){
-        if (x==0){
+    public boolean hasLeft() {
+        if (x == 0) {
             return false;
         }
         return true;
     }
-    public Tile getLeft(){
-        return fowchess.FoWChess.getBoard()[x-1][y];
+
+    public Tile getLeft() {
+        return fowchess.FoWChess.getBoard()[x - 1][y];
     }
 
     public Mob getMob() {
@@ -286,9 +283,5 @@ public class Tile extends Button{
     public boolean isMapped() {
         return mapped;
     }
-    
-    
-    
-    
-    
+
 }

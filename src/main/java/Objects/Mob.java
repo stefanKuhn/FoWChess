@@ -10,6 +10,7 @@ package Objects;
  * @author Sumpf
  */
 public class Mob {
+
     int ownerId, vision;
     char identity;
     String name;
@@ -62,5 +63,5 @@ public class Mob {
     public void setIdentity(char identity) {
         this.identity = identity;
     }
-    
+
 }

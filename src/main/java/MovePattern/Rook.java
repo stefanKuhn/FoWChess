@@ -11,7 +11,7 @@ import Objects.Tile;
  *
  * @author danie
  */
-public class Rook extends MovePattern{
+public class Rook extends MovePattern {
 
     public Rook(int width, int height) {
         super(width, height);
@@ -27,18 +27,18 @@ public class Rook extends MovePattern{
 
     @Override
     public void move(Tile from, Tile to) {
-        if (mph.isNorth(from,to)){
+        if (mph.isNorth(from, to)) {
             mph.moveNorth(from, to);
         }
-        if (mph.isSouth(from,to)){
+        if (mph.isSouth(from, to)) {
             mph.moveSouth(from, to);
         }
-        if (mph.isWest(from,to)){
+        if (mph.isWest(from, to)) {
             mph.moveWest(from, to);
         }
-        if (mph.isEast(from,to)){
+        if (mph.isEast(from, to)) {
             mph.moveEast(from, to);
         }
     }
-    
+
 }

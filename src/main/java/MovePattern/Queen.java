@@ -11,7 +11,7 @@ import Objects.Tile;
  *
  * @author danie
  */
-public class Queen extends MovePattern{
+public class Queen extends MovePattern {
 
     public Queen(int width, int height) {
         super(width, height);
@@ -31,30 +31,30 @@ public class Queen extends MovePattern{
 
     @Override
     public void move(Tile from, Tile to) {
-        if (mph.isNorth(from,to)){
+        if (mph.isNorth(from, to)) {
             mph.moveNorth(from, to);
         }
-        if (mph.isSouth(from,to)){
+        if (mph.isSouth(from, to)) {
             mph.moveSouth(from, to);
         }
-        if (mph.isWest(from,to)){
+        if (mph.isWest(from, to)) {
             mph.moveWest(from, to);
         }
-        if (mph.isEast(from,to)){
+        if (mph.isEast(from, to)) {
             mph.moveEast(from, to);
         }
-        if (mph.isNorthEast(from,to)){
+        if (mph.isNorthEast(from, to)) {
             mph.moveNorthEast(from, to);
         }
-        if (mph.isSouthWest(from,to)){
+        if (mph.isSouthWest(from, to)) {
             mph.moveSouthWest(from, to);
         }
-        if (mph.isNorthWest(from,to)){
+        if (mph.isNorthWest(from, to)) {
             mph.moveNorthWest(from, to);
         }
-        if (mph.isSouthEast(from,to)){
+        if (mph.isSouthEast(from, to)) {
             mph.moveSouthEast(from, to);
         }
     }
-    
+
 }

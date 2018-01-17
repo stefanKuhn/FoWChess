@@ -14,6 +14,7 @@ import Objects.Tile;
  * @author Sumpf
  */
 public abstract class MovePattern {
+
     int width, height, x, y;
     Tile tempTile;
     MovePatternHolder mph;
@@ -24,7 +25,8 @@ public abstract class MovePattern {
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
     }
-    
+
     public abstract void highlight(Tile from);
+
     public abstract void move(Tile from, Tile to);
 }
