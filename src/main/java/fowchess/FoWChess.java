@@ -19,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
@@ -109,19 +110,25 @@ public class FoWChess extends Application {
 
     public Scene makeScene(int width, int height, int size) {
         GridPane root = generateBoard(width, height, size);
-        Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
+        FlowPane flo = new FlowPane();
+        changebtn = new Button("hu");
+        flo.getChildren().addAll(root, setChangeButton(changebtn));
+        Scene scene = new Scene(flo, (width + 2) * size + 50 , (height + 2) * size + 100);
         return scene;
     }
 
+    //stefan.kuhn@hotmail.com
+    //s.kuhn@rafisa.ch
+    //daniel.baur@outlook.de
     
-    
-    public void setChangeButton(Button changebtn){
-    	changebtn = new Button("hu");
-    	changebtn.setMinSize(50, 100);
+    public Button setChangeButton(Button changebtn){
+    	
+    	changebtn.setMinSize(100, 50);
     	changebtn.setAlignment(Pos.BOTTOM_LEFT);
 		changebtn.setOnAction((ActionEvent event) -> {
     		endTurn();
     	});
+		return changebtn;
     }
     
     public void eventHandler(Tile[][] board) {
