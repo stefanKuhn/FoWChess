@@ -72,18 +72,17 @@ public class Pawn extends MovePattern {
             log.setVictimOfEnPassant(from.getW().getMob());
             from.getW().setMob(null);
         }
-        if (log.getVictimOfEnPassant() == null){
-            if (to.getMob() != null){
+        if (log.getVictimOfEnPassant() == null) {
+            if (to.getMob() != null) {
                 log.newEntry(from.getMob(), to);
             }
-        }
-        else{
+        } else {
             log.anotherNewEntry(from.getMob(), to);
             log.setVictimOfEnPassant(null);
         }
         to.setMob(tempMob);
         from.setMob(null);
-        if (FoWChess.getTurnsActive()){
+        if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
     }

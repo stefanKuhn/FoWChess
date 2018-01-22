@@ -50,23 +50,22 @@ public class FoWChess extends Application {
 
     Button changebtn;
     private static boolean turnsActive;
-    
-    
-    
+
     public void makeLabel(String text, int size) {
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
         tempLabel.setAlignment(Pos.CENTER);
     }
+
     public void makeLabel(int widthSize, int heightSize) {
         tempLabel = new Label();
         tempLabel.setMinSize(widthSize, heightSize);
         tempLabel.setAlignment(Pos.CENTER);
     }
 
-    
     /**
      * generates a board
+     *
      * @param width
      * @param height
      * @param size
@@ -103,12 +102,12 @@ public class FoWChess extends Application {
             root.add(tempLabel, width + 2, height - j + 2);
         }
 
-       getBoard()[3][3].setMob(new Mob(0,3,"pawn"));
-       getBoard()[2][5].setMob(new Mob(1,3,"pawn"));
-       getBoard()[4][4].setMob(new Mob(0,3,"rook"));         
-       getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
-       getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
-       getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
+        getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+        getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
+        getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
+        getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+        getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
+        getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
         return root;
     }
 
@@ -128,33 +127,33 @@ public class FoWChess extends Application {
         return highlightedTiles;
     }
 
-    public static boolean getTurnsActive(){
+    public static boolean getTurnsActive() {
         return turnsActive;
     }
-    
+
     public Scene makeScene(int width, int height, int size) {
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
         changebtn = new Button("Start Turn");
-        flo.getChildren().addAll(root, setChangeButton(changebtn));
-        Scene scene = new Scene(flo, (width + 2) * size + 50 , (height + 2) * size + 100);
+        makeLog(4 * size, size);
+        flo.getChildren().addAll(root, log, setChangeButton(changebtn));
+        Scene scene = new Scene(flo, (width + 2) * size + 200, (height + 2) * size + 50);
         return scene;
     }
 
     //stefan.kuhn@hotmail.com
     //s.kuhn@rafisa.ch
     //daniel.baur@outlook.de
-    
-    public Button setChangeButton(Button changebtn){
-    	
-    	changebtn.setMinSize(100, 50);
-    	changebtn.setAlignment(Pos.BOTTOM_LEFT);
-		changebtn.setOnAction((ActionEvent event) -> {
-    		startTurn();
-    	});
-		return changebtn;
+    public Button setChangeButton(Button changebtn) {
+
+        changebtn.setMinSize(100, 50);
+        changebtn.setAlignment(Pos.CENTER);
+        changebtn.setOnAction((ActionEvent event) -> {
+            startTurn();
+        });
+        return changebtn;
     }
-    
+
     public void eventHandler(Tile[][] board) {
         for (Tile[] row : board) {
             for (Tile tile : row) {
@@ -225,8 +224,8 @@ public class FoWChess extends Application {
     @Override
     public void start(Stage primaryStage) {
         //set globals
-        turnsActive=true;
-        
+        turnsActive = true;
+
         //JavaFX
         Scene scene = init(8, 8, 50);
         primaryStage.setTitle("FoWChess");
@@ -253,40 +252,39 @@ public class FoWChess extends Application {
             tempTile.adaptBG();
         }
     }
-    
-    
+
     /**
      * ends the turn by fogging the entire board
      */
-    public static void endTurn(){
-        for (Tile[] row : board){
-             for (Tile tile : row){
-            	 tile.goDark();
-             }
-    	 } 
-    }
-    
-    /**
-     * starts the turn by handing over vision to the other player
-     * and propagating light;
-     */
-    public static void startTurn(){
-    	switchActivePlayer();
-    	 for (Tile[] row : board){
-             for (Tile tile : row){
-            	 tile.adaptLight();
-            	 tile.adaptFigurine();
-             }
-    	 }
+    public static void endTurn() {
+        for (Tile[] row : board) {
+            for (Tile tile : row) {
+                tile.goDark();
+            }
+        }
     }
 
-    
+    /**
+     * starts the turn by handing over vision to the other player and
+     * propagating light;
+     */
+    public static void startTurn() {
+        switchActivePlayer();
+        for (Tile[] row : board) {
+            for (Tile tile : row) {
+                tile.adaptLight();
+                tile.adaptFigurine();
+            }
+        }
+    }
+
     /**
      * initializes scene
+     *
      * @param width: board with
      * @param height: board height
      * @param size
-     * @return 
+     * @return
      */
     public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
@@ -301,17 +299,16 @@ public class FoWChess extends Application {
         mapButtons();
         return returnThis;
     }
-    
+
     /**
-     *Switches the active Player to the next
+     * Switches the active Player to the next
      */
-    public static void switchActivePlayer(){
-        if (whoseTurn==0){
-    		whoseTurn=1;
-    	}
-    	else {
-    		whoseTurn=0;
-    	}
+    public static void switchActivePlayer() {
+        if (whoseTurn == 0) {
+            whoseTurn = 1;
+        } else {
+            whoseTurn = 0;
+        }
     }
 
     public static ArrayList<Mob> getTargetsForEnPassant() {
@@ -385,23 +382,23 @@ public class FoWChess extends Application {
     public static int getWhoseTurn() {
         return whoseTurn;
     }
-    
-    public void makeLog(int widthSize, int heightSize){
+
+    public void makeLog(int widthSize, int heightSize) {
         log = new VBox();
         log.setMinSize(widthSize, 10 * heightSize);
         logLabel = new Label[10];
-        for (int i = 0; i < 10; i++){
-            makeLabel(widthSize,heightSize);
+        for (int i = 0; i < 10; i++) {
+            makeLabel(widthSize, heightSize);
             logLabel[i] = tempLabel;
         }
     }
-    
-    public static void updateLog(){
-        for (int i = 0; i < logger.getLog().size(); i++){
+
+    public static void updateLog() {
+        for (int i = 0; i < logger.getLog().size(); i++) {
             logLabel[i].setText(logger.getLog().get(i));
         }
-        for (int i = 0; i < 10; i++){
-            if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null){
+        for (int i = 0; i < 10; i++) {
+            if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null) {
                 log.getChildren().add(logLabel[i]);
             }
         }

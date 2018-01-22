@@ -41,9 +41,9 @@ public class Bishop extends MovePattern {
         if (mph.isSouthEast(from, to)) {
             mph.moveSouthEast(from, to);
         }
-        if (FoWChess.getTurnsActive()){
+        if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
-        
+
     }
 }
