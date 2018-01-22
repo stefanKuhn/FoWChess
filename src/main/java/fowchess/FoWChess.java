@@ -7,6 +7,7 @@ package fowchess;
 
 import Factory.MovePatternHolder;
 import Factory.TileFactory;
+import Logger.Logger;
 import Objects.Mob;
 import Objects.Tile;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -42,6 +44,10 @@ public class FoWChess extends Application {
     private MovePatternHolder mph;
     private Mob tempMob;
     private static ArrayList<Mob> targetsForEnPassant;
+    private static Logger logger;
+    private static Label[] logLabel;
+    private static VBox log;
+
     Button changebtn;
     private static boolean turnsActive;
     
@@ -50,6 +56,11 @@ public class FoWChess extends Application {
     public void makeLabel(String text, int size) {
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
+        tempLabel.setAlignment(Pos.CENTER);
+    }
+    public void makeLabel(int widthSize, int heightSize) {
+        tempLabel = new Label();
+        tempLabel.setMinSize(widthSize, heightSize);
         tempLabel.setAlignment(Pos.CENTER);
     }
 
@@ -283,6 +294,7 @@ public class FoWChess extends Application {
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
+        this.logger = Logger.getInstance();
         Scene returnThis = makeScene(width, height, size);
         eventHandler(board);
         whoseTurn = 0;
@@ -372,6 +384,27 @@ public class FoWChess extends Application {
 
     public static int getWhoseTurn() {
         return whoseTurn;
+    }
+    
+    public void makeLog(int widthSize, int heightSize){
+        log = new VBox();
+        log.setMinSize(widthSize, 10 * heightSize);
+        logLabel = new Label[10];
+        for (int i = 0; i < 10; i++){
+            makeLabel(widthSize,heightSize);
+            logLabel[i] = tempLabel;
+        }
+    }
+    
+    public static void updateLog(){
+        for (int i = 0; i < logger.getLog().size(); i++){
+            logLabel[i].setText(logger.getLog().get(i));
+        }
+        for (int i = 0; i < 10; i++){
+            if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null){
+                log.getChildren().add(logLabel[i]);
+            }
+        }
     }
 
     /**

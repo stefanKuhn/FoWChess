@@ -6,6 +6,7 @@
 package MovePattern;
 
 import Factory.MovePatternHolder;
+import Logger.Logger;
 import Objects.Mob;
 import Objects.Tile;
 
@@ -19,11 +20,13 @@ public abstract class MovePattern {
     Tile tempTile;
     MovePatternHolder mph;
     Mob tempMob;
+    Logger log;
 
     public MovePattern(int width, int height) {
         this.width = width;
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
+        this.log = Logger.getInstance();
     }
 
     public abstract void highlight(Tile from);
