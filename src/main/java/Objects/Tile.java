@@ -7,6 +7,7 @@ package Objects;
 
 import Factory.PaintMakerAndHolder;
 import Objects.ImageHelper;
+import java.io.FileNotFoundException;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -35,7 +36,6 @@ public class Tile extends Button {
         this.y = y;
         this.lightlevel = lightlevel;
         this.isHighlighted = false;
-        view = i;
         mapped = false;
         this.isHighlighted = false;
         mapped = false;
@@ -57,43 +57,43 @@ public class Tile extends Button {
         isHighlighted = false;
     }
 
-    public void adaptFigurine() {
+    public void adaptFigurine() throws FileNotFoundException {
         if (this.lightlevel != 0) {
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWPawn());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWPawn());
             }
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBPawn());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBPawn());
             }
             if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWKing());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWKing());
             }
             if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBKing());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBKing());
             }
             if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWQueen());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWQueen());
             }
             if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBQueen());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBQueen());
             }
             if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWKnight());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWKnight());
             }
             if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBKnight());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBKnight());
             }
             if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWRook());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWRook());
             }
             if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBRook());
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBRook());
             }
-            if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 0) {
-                view.setImage(ImageHelper.getInstance().getWRunner());
+            if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 0) {
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWRunner());
             }
-            if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 1) {
-                view.setImage(ImageHelper.getInstance().getBRunner());
+            if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 1) {
+                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBRunner());
             }
         }
     }

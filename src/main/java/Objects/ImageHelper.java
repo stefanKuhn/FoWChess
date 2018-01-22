@@ -1,40 +1,33 @@
 package Objects;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javafx.scene.image.Image;
 
 public class ImageHelper {
 
-    Image bKing = new Image(getClass().getResourceAsStream("blackking.bmp"));
-    Image bKnight = new Image(getClass().getResourceAsStream("blackknight.bmp"));
-    Image bPawn = new Image(getClass().getResourceAsStream("blackpawn.bmp"));
-    Image bQueen = new Image(getClass().getResourceAsStream("blackqueen.bmp"));
-    Image bRook = new Image(getClass().getResourceAsStream("blackrook.bmp"));
-    Image bRunner = new Image(getClass().getResourceAsStream("blackrunner.bmp"));
-    Image wKing = new Image(getClass().getResourceAsStream("whiteking.bmp"));
-    Image wKnight = new Image(getClass().getResourceAsStream("whiteknight.bmp"));
-    Image wPawn = new Image(getClass().getResourceAsStream("whitepawn.bmp"));
-    Image wQueen = new Image(getClass().getResourceAsStream("whitequeen.bmp"));
-    Image wRook = new Image(getClass().getResourceAsStream("whiterook.bmp"));
-    Image wRunner = new Image(getClass().getResourceAsStream("whiterunner.bmp"));
+    Image bKing, bKnight, bPawn, bQueen,bRook,  bRunner, wKing, wKnight, wPawn, wQueen, wRook, wRunner;
 
-    private ImageHelper() {
-        this.bKing = new Image(getClass().getResourceAsStream("blackking.bmp"));
-        this.bKnight = new Image(getClass().getResourceAsStream("blackknight.bmp"));
-        this.bPawn = new Image(getClass().getResourceAsStream("blackpawn.bmp"));
-        this.bQueen = new Image(getClass().getResourceAsStream("blackqueen.bmp"));
-        this.bRook = new Image(getClass().getResourceAsStream("blackrook.bmp"));
-        this.bRunner = new Image(getClass().getResourceAsStream("blackrunner.bmp"));
-        this.wKing = new Image(getClass().getResourceAsStream("whiteking.bmp"));
-        this.wKnight = new Image(getClass().getResourceAsStream("whiteknight.bmp"));
-        this.wPawn = new Image(getClass().getResourceAsStream("whitepawn.bmp"));
-        this.wQueen = new Image(getClass().getResourceAsStream("whitequeen.bmp"));
-        this.wRook = new Image(getClass().getResourceAsStream("whiterook.bmp"));
-        this.wRunner = new Image(getClass().getResourceAsStream("whiterunner.bmp"));
-    }
+
+ private ImageHelper() throws FileNotFoundException{
+  this.bKing  = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackking.bmp")));
+  this.bKnight  = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackknight.bmp")));
+  this.bPawn = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackpawn.bmp")));
+  this.bQueen = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackqueen.bmp")));
+  this.bRook  = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackrook.bmp")));
+  this.bRunner = new Image(new FileInputStream(new File("src\\main\\java\\images\\blackrunner.bmp")));
+  this.wKing  = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiteking.bmp")));
+  this.wKnight  = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiteknight.bmp")));
+  this.wPawn = new Image(new FileInputStream(new File("src\\main\\java\\images\\whitepawn.bmp")));
+  this.wQueen = new Image(new FileInputStream(new File("src\\main\\java\\images\\whitequeen.bmp")));
+  this.wRook  = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiterook.bmp")));
+  this.wRunner = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiterook.bmp")));
+ }
 
     private static ImageHelper instance;
 
-    public static ImageHelper getInstance() {
+    public static ImageHelper getInstance() throws FileNotFoundException {
 
         if (instance == null) {
             instance = new ImageHelper();
