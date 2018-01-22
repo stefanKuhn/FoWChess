@@ -5,6 +5,7 @@
  */
 package Factory;
 
+import Logger.Logger;
 import MovePattern.Bishop;
 import MovePattern.King;
 import MovePattern.Rook;
@@ -25,6 +26,7 @@ public class MovePatternHolder {
     static MovePatternHolder instance;
     static Tile tempTile;
     int width, height;
+    static Logger log;
 
     public MovePattern getPawn() {
         return pawn;
@@ -53,7 +55,7 @@ public class MovePatternHolder {
     private MovePatternHolder() {
         this.width = FoWChess.getWidth();
         this.height = FoWChess.getHeight();
-
+        this.log = Logger.getInstance();
     }
 
     public static MovePatternHolder getInstance() {
@@ -207,6 +209,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getN().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getN());
         }
         from.getN().setMob(from.getMob());
         from.setMob(null);
@@ -222,6 +225,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getS().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getS());
         }
         from.getS().setMob(from.getMob());
         from.setMob(null);
@@ -237,6 +241,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getE().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getE());
         }
         from.getE().setMob(from.getMob());
         from.setMob(null);
@@ -252,6 +257,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getW().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getW());
         }
         from.getW().setMob(from.getMob());
         from.setMob(null);
@@ -267,6 +273,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getNe().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getNe());
         }
         from.getNe().setMob(from.getMob());
         from.setMob(null);
@@ -282,6 +289,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getNw().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getNw());
         }
         from.getNw().setMob(from.getMob());
         from.setMob(null);
@@ -297,6 +305,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getSe().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getSe());
         }
         from.getSe().setMob(from.getMob());
         from.setMob(null);
@@ -312,6 +321,7 @@ public class MovePatternHolder {
         boolean returnState = false;
         if (from.getSw().getMob() != null) {
             returnState = true;
+            log.newEntry(from.getMob(), from.getSw());
         }
         from.getSw().setMob(from.getMob());
         from.setMob(null);
