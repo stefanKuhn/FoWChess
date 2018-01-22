@@ -103,6 +103,7 @@ public class Tile extends Button {
     //here come the light related functions
     public void goDark() {
         this.lightlevel = 0;
+        this.adaptBG();
     }
 
     public void adaptLight() {

@@ -6,6 +6,7 @@
 package MovePattern;
 
 import Objects.Tile;
+import fowchess.FoWChess;
 
 /**
  *
@@ -54,6 +55,9 @@ public class Queen extends MovePattern {
         }
         if (mph.isSouthEast(from, to)) {
             mph.moveSouthEast(from, to);
+        }
+        if (FoWChess.getTurnsActive()){
+            FoWChess.endTurn();
         }
     }
 

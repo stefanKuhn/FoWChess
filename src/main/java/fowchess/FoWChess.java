@@ -43,6 +43,7 @@ public class FoWChess extends Application {
     private Mob tempMob;
     private static ArrayList<Mob> targetsForEnPassant;
     Button changebtn;
+    private static boolean turnsActive;
     
     
     
@@ -52,6 +53,14 @@ public class FoWChess extends Application {
         tempLabel.setAlignment(Pos.CENTER);
     }
 
+    
+    /**
+     * generates a board
+     * @param width
+     * @param height
+     * @param size
+     * @return a Gridpane that represents the board
+     */
     public GridPane generateBoard(int width, int height, int size) {
         GridPane root = new GridPane();
         board = new Tile[width][height];
@@ -108,10 +117,14 @@ public class FoWChess extends Application {
         return highlightedTiles;
     }
 
+    public static boolean getTurnsActive(){
+        return turnsActive;
+    }
+    
     public Scene makeScene(int width, int height, int size) {
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
-        changebtn = new Button("hu");
+        changebtn = new Button("Start Turn");
         flo.getChildren().addAll(root, setChangeButton(changebtn));
         Scene scene = new Scene(flo, (width + 2) * size + 50 , (height + 2) * size + 100);
         return scene;
@@ -126,7 +139,7 @@ public class FoWChess extends Application {
     	changebtn.setMinSize(100, 50);
     	changebtn.setAlignment(Pos.BOTTOM_LEFT);
 		changebtn.setOnAction((ActionEvent event) -> {
-    		endTurn();
+    		startTurn();
     	});
 		return changebtn;
     }
@@ -200,6 +213,10 @@ public class FoWChess extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //set globals
+        turnsActive=true;
+        
+        //JavaFX
         Scene scene = init(8, 8, 50);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
@@ -216,6 +233,9 @@ public class FoWChess extends Application {
         FoWChess.selected = selected;
     }
 
+    /**
+     * dehighlights all highlighted (blue) tiles;
+     */
     public void dehighlight() {
         while (!highlightedTiles.empty()) {
             tempTile = highlightedTiles.pop();
@@ -223,13 +243,24 @@ public class FoWChess extends Application {
         }
     }
     
+    
+    /**
+     * ends the turn by fogging the entire board
+     */
     public static void endTurn(){
-    	if (whoseTurn==0){
-    		whoseTurn=1;
-    	}
-    	else {
-    		whoseTurn=0;
-    	}
+        for (Tile[] row : board){
+             for (Tile tile : row){
+            	 tile.goDark();
+             }
+    	 } 
+    }
+    
+    /**
+     * starts the turn by handing over vision to the other player
+     * and propagating light;
+     */
+    public static void startTurn(){
+    	switchActivePlayer();
     	 for (Tile[] row : board){
              for (Tile tile : row){
             	 tile.adaptLight();
@@ -238,6 +269,14 @@ public class FoWChess extends Application {
     	 }
     }
 
+    
+    /**
+     * initializes scene
+     * @param width: board with
+     * @param height: board height
+     * @param size
+     * @return 
+     */
     public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
         targetsForEnPassant = new ArrayList();
@@ -249,6 +288,18 @@ public class FoWChess extends Application {
         whoseTurn = 0;
         mapButtons();
         return returnThis;
+    }
+    
+    /**
+     *Switches the active Player to the next
+     */
+    public static void switchActivePlayer(){
+        if (whoseTurn==0){
+    		whoseTurn=1;
+    	}
+    	else {
+    		whoseTurn=0;
+    	}
     }
 
     public static ArrayList<Mob> getTargetsForEnPassant() {

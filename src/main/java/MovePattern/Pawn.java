@@ -72,5 +72,8 @@ public class Pawn extends MovePattern {
         }
         to.setMob(tempMob);
         from.setMob(null);
+        if (FoWChess.getTurnsActive()){
+            FoWChess.endTurn();
+        }
     }
 }

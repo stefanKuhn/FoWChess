@@ -50,6 +50,9 @@ public class King extends MovePattern {
     public void move(Tile from, Tile to) {
         to.setMob(from.getMob());
         from.setMob(null);
+        if (FoWChess.getTurnsActive()){
+            FoWChess.endTurn();
+        }
     }
 
 }
