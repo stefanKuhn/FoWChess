@@ -40,7 +40,7 @@ public class Rook extends MovePattern {
         if (mph.isEast(from, to)) {
             mph.moveEast(from, to);
         }
-        if (FoWChess.getTurnsActive()){
+        if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
     }

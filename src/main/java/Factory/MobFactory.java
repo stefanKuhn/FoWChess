@@ -14,23 +14,26 @@ import javafx.scene.layout.Background;
  * @author Sumpf
  */
 public class MobFactory {
+
     static MobFactory instance;
-    private MobFactory(){};
+
+    private MobFactory() {
+    }
+    ;
     Mob lastCreated;
     Background lastGivenBG;
-    
+
     private int visionRange = 3;
-    
-    public static MobFactory getInstance(){
-        if (instance==null){
-            instance=new MobFactory();
+
+    public static MobFactory getInstance() {
+        if (instance == null) {
+            instance = new MobFactory();
         }
         return instance;
     }
-    
-    
-    public Mob pawn(int ownerId){
-        lastCreated=new Mob(ownerId, visionRange, "pawn");
+
+    public Mob pawn(int ownerId) {
+        lastCreated = new Mob(ownerId, visionRange, "pawn");
         return lastCreated;
     }
 }

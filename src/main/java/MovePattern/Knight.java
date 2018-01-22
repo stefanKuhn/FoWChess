@@ -58,12 +58,12 @@ public class Knight extends MovePattern {
 
     @Override
     public void move(Tile from, Tile to) {
-        if (to.getMob() != null){
+        if (to.getMob() != null) {
             log.newEntry(from.getMob(), to);
         }
         to.setMob(from.getMob());
         from.setMob(null);
-        if (FoWChess.getTurnsActive()){
+        if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
     }

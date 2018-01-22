@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author danie
  */
 public class Logger {
-    
+
     private static Logger instance;
     private ArrayList<String> log;
     private String lastEntry;
@@ -41,31 +41,31 @@ public class Logger {
     public void setLog(ArrayList<String> log) {
         this.log = log;
     }
-    
-    public static Logger getInstance(){
-        if (instance == null){
+
+    public static Logger getInstance() {
+        if (instance == null) {
             instance = new Logger();
         }
         return instance;
     }
-    
-    public void addEntry(String newEntry){
+
+    public void addEntry(String newEntry) {
         System.out.println(newEntry);
         log.add(0, newEntry);
-        if (log.size() >= 10){
+        if (log.size() >= 10) {
             log.remove(log.size() - 1);
         }
         FoWChess.updateLog();
     }
-    
-    public void newEntry(Mob attacker, Tile battlefield){
-        lastEntry = attacker.getName() + " beats "  + battlefield.getMob().getName() + " at (" + String.valueOf(battlefield.getX() + 1) + "," + String.valueOf(battlefield.getY() + 1) + ")";
+
+    public void newEntry(Mob attacker, Tile battlefield) {
+        lastEntry = attacker.getName() + " beats " + battlefield.getMob().getName() + " at (" + String.valueOf(battlefield.getX() + 1) + "," + String.valueOf(battlefield.getY() + 1) + ")";
         addEntry(lastEntry);
     }
 
-    public void anotherNewEntry(Mob attacker, Tile battlefield){
-        lastEntry = attacker.getName() + " beats "  + victimOfEnPassant.getName() + " en passant at (" + String.valueOf(battlefield.getX() + 1) + "," + String.valueOf(battlefield.getY() + 1) + ")";
+    public void anotherNewEntry(Mob attacker, Tile battlefield) {
+        lastEntry = attacker.getName() + " beats " + victimOfEnPassant.getName() + " en passant at (" + String.valueOf(battlefield.getX() + 1) + "," + String.valueOf(battlefield.getY() + 1) + ")";
         addEntry(lastEntry);
     }
-    
+
 }
