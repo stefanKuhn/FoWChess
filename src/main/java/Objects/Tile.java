@@ -6,7 +6,9 @@
 package Objects;
 
 import Factory.PaintMakerAndHolder;
+import Objects.ImageHelper;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Paint;
 
@@ -19,17 +21,23 @@ public class Tile extends Button {
     boolean isVisible, containsMob, isHighlighted;
     public Background tileColor;
     Mob mob;
-    int x, y, lightlevel;
+    int x,y,lightlevel;
+    ImageView view;
+
 
     Tile e, ne, n, nw, w, sw, s, se;
     boolean he, hne, hn, hnw, hw, hsw, hs, hse, mapped;
 
-    public Tile(Background bg, int x, int y, int lightlevel) {
-        this.isVisible = false;
+    public Tile(Background bg, int x, int y, int lightlevel, ImageView i) {
+    	super("",i);
+    	this.isVisible = false;
         this.tileColor = bg;
         this.x = x;
         this.y = y;
         this.lightlevel = lightlevel;
+        this.isHighlighted=false;
+        view=i;
+        mapped=false;
         this.isHighlighted = false;
         mapped = false;
     }
@@ -49,6 +57,48 @@ public class Tile extends Button {
         }
         isHighlighted = false;
     }
+    
+    public void adaptFigurine(){
+	   	if (this.lightlevel!=0){
+	    	if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWPawn());
+	    	}
+	    	if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBPawn());
+	    	}
+	    	if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWKing());
+	    	}
+	    	if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBKing());
+	    	}
+	    	if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWQueen());
+	    	}
+	    	if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBQueen());
+	    	}
+	    	if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWKnight());
+	    	}
+	    	if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBKnight());
+	    	}
+	    	if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWRook());
+	    	}
+	    	if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBRook());
+	    	}
+	    	if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 0){
+	    		view.setImage(ImageHelper.getInstance().getWRunner());
+	    	}
+	    	if (this.mob.getName().equals("runner") && this.mob.getOwnerId() == 1){
+	    		view.setImage(ImageHelper.getInstance().getBRunner());
+	    	}	    	
+	    }
+    }
+    
 
     //here come the light related functions
     public void goDark() {

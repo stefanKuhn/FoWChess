@@ -18,7 +18,9 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -46,6 +48,10 @@ public class FoWChess extends Application {
     private static Label[] logLabel;
     private static VBox log;
 
+    Button changebtn;
+    
+    
+    
     public void makeLabel(String text, int size) {
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
@@ -88,9 +94,12 @@ public class FoWChess extends Application {
             root.add(tempLabel, width + 2, height - j + 2);
         }
 
-        getBoard()[3][3].setMob(new Mob(0, 3, 'p', "pawn"));
-        getBoard()[2][5].setMob(new Mob(1, 3, 'p', "pawn"));
-        getBoard()[4][4].setMob(new Mob(0, 3, 'r', "rook"));
+       getBoard()[3][3].setMob(new Mob(0,3,"pawn"));
+       getBoard()[2][5].setMob(new Mob(1,3,"pawn"));
+       getBoard()[4][4].setMob(new Mob(0,3,"rook"));         
+       getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+       getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
+       getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
         return root;
     }
 
@@ -112,10 +121,27 @@ public class FoWChess extends Application {
 
     public Scene makeScene(int width, int height, int size) {
         GridPane root = generateBoard(width, height, size);
-        Scene scene = new Scene(root, (width + 2) * size, (height + 2) * size);
+        FlowPane flo = new FlowPane();
+        changebtn = new Button("hu");
+        flo.getChildren().addAll(root, setChangeButton(changebtn));
+        Scene scene = new Scene(flo, (width + 2) * size + 50 , (height + 2) * size + 100);
         return scene;
     }
 
+    //stefan.kuhn@hotmail.com
+    //s.kuhn@rafisa.ch
+    //daniel.baur@outlook.de
+    
+    public Button setChangeButton(Button changebtn){
+    	
+    	changebtn.setMinSize(100, 50);
+    	changebtn.setAlignment(Pos.BOTTOM_LEFT);
+		changebtn.setOnAction((ActionEvent event) -> {
+    		endTurn();
+    	});
+		return changebtn;
+    }
+    
     public void eventHandler(Tile[][] board) {
         for (Tile[] row : board) {
             for (Tile tile : row) {
@@ -206,6 +232,21 @@ public class FoWChess extends Application {
             tempTile = highlightedTiles.pop();
             tempTile.adaptBG();
         }
+    }
+    
+    public static void endTurn(){
+    	if (whoseTurn==0){
+    		whoseTurn=1;
+    	}
+    	else {
+    		whoseTurn=0;
+    	}
+    	 for (Tile[] row : board){
+             for (Tile tile : row){
+            	 tile.adaptLight();
+            	 tile.adaptFigurine();
+             }
+    	 }
     }
 
     public Scene init(int width, int height, int size) {
