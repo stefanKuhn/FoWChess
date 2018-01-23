@@ -8,6 +8,7 @@ package Objects;
 import Factory.PaintMakerAndHolder;
 import Objects.ImageHelper;
 import java.io.FileNotFoundException;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -61,44 +62,48 @@ public class Tile extends Button {
         if (this.lightlevel != 0) {
             view = (ImageView)this.getGraphic();
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWPawn());
+                view.setImage(ImageHelper.getInstance().getWPawn());
             }
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 1) {
                 view.setImage(ImageHelper.getInstance().getBPawn());
             }
             if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWKing());
+                view.setImage(ImageHelper.getInstance().getWKing());
             }
             if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBKing());
+                view.setImage(ImageHelper.getInstance().getBKing());
             }
             if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWQueen());
+                view.setImage(ImageHelper.getInstance().getWQueen());
             }
             if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBQueen());
+               view.setImage(ImageHelper.getInstance().getBQueen());
             }
             if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWKnight());
+                view.setImage(ImageHelper.getInstance().getWKnight());
             }
             if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBKnight());
+                view.setImage(ImageHelper.getInstance().getBKnight());
             }
             if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWRook());
+                view.setImage(ImageHelper.getInstance().getWRook());
             }
             if (this.mob.getName().equals("rook") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBRook());
+                view.setImage(ImageHelper.getInstance().getBRook());
             }
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 0) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWRunner());
+               view.setImage(ImageHelper.getInstance().getWRunner());
             }
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBRunner());
+                view.setImage(ImageHelper.getInstance().getBRunner());
             }
             view.setFitHeight(50);
             view.setFitWidth(50);
         }
+    }
+    
+    public void adaptNoFigurine(){
+        ((ImageView)(this.getGraphic())).setImage(null);
     }
 
     //here come the light related functions

@@ -84,6 +84,7 @@ public class FoWChess extends Application {
                 tempTile = TileFactory.getInstance().makeTile(i, height - j - 1);
                 board[i][height - j - 1] = tempTile;
                 tempTile.setMinSize(size, size);
+                tempTile.setMaxSize(size, size);
                 root.add(tempTile, i + 2, j + 2);
                 tempTile.setBackground(tempTile.getTileColor());
                 tempTile.adaptBG();//this line is only here to test against nullpointers.
@@ -104,9 +105,10 @@ public class FoWChess extends Application {
             root.add(tempLabel, width + 2, height - j + 2);
         }
 
-        getBoard()[3][3].setMob(new Mob(0, 3, "pawn"));
+        getBoard()[3][2].setMob(new Mob(0, 3, "pawn"));
         getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
-        getBoard()[4][4].setMob(new Mob(0, 3, "rook"));
+        getBoard()[4][4].setMob(new Mob(1, 3, "rook"));
+        getBoard()[5][4].setMob(new Mob(0, 3, "rook"));
         return root;
     }
 
@@ -276,6 +278,7 @@ public class FoWChess extends Application {
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.adaptLight();
+                tile.adaptNoFigurine();
                 if (tile.getMob() != null){
                     tile.adaptFigurine();
                 }

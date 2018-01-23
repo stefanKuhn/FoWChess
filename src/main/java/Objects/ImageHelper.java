@@ -40,7 +40,7 @@ public class ImageHelper {
     }
 
     public Image getBKnight() {
-        return wKnight;
+        return bKnight;
     }
 
     public Image getBPawn() {
@@ -60,7 +60,7 @@ public class ImageHelper {
     }
 
     public Image getWKing() {
-        return bKing;
+        return wKing;
     }
 
     public Image getWKnight() {
@@ -68,7 +68,7 @@ public class ImageHelper {
     }
 
     public Image getWQueen() {
-        return bQueen;
+        return wQueen;
     }
 
     public Image getWPawn() {
@@ -76,11 +76,11 @@ public class ImageHelper {
     }
 
     public Image getWRook() {
-        return bRook;
+        return wRook;
     }
 
     public Image getWRunner() {
-        return bRunner;
+        return wRunner;
     }
 
 }
