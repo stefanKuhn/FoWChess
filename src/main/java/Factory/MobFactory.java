@@ -54,7 +54,7 @@ public class MobFactory {
         return lastCreated;
     }
     public Mob rook(int ownerId) {
-        lastCreated = new Mob(ownerId, visionRange, "pawn");
+        lastCreated = new Mob(ownerId, visionRange, "rook");
         return lastCreated;
     }
 }

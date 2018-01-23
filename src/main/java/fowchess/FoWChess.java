@@ -5,6 +5,7 @@
  */
 package fowchess;
 
+import Factory.MobFactory;
 import Factory.MovePatternHolder;
 import Factory.TileFactory;
 import Logger.Logger;
@@ -104,12 +105,46 @@ public class FoWChess extends Application {
             makeLabel(Integer.toString(j), size);
             root.add(tempLabel, width + 2, height - j + 2);
         }
-
-        getBoard()[3][2].setMob(new Mob(0, 3, "pawn"));
-        getBoard()[2][5].setMob(new Mob(1, 3, "pawn"));
-        getBoard()[4][4].setMob(new Mob(1, 3, "rook"));
-        getBoard()[5][4].setMob(new Mob(0, 3, "rook"));
+        generalLineUp();
         return root;
+    }
+    
+    public void generalLineUp(){
+        for (int i = 0; i < width; i++){
+            getBoard()[i][1].setMob(MobFactory.getInstance().pawn(0));
+            getBoard()[i][height - 2].setMob(MobFactory.getInstance().pawn(1));
+        }
+        getBoard()[0][0].setMob(MobFactory.getInstance().rook(0));
+        getBoard()[1][0].setMob(MobFactory.getInstance().knight(0));
+        getBoard()[width - 1][0].setMob(MobFactory.getInstance().rook(0));
+        getBoard()[width - 2][0].setMob(MobFactory.getInstance().knight(0));
+        getBoard()[0][height - 1].setMob(MobFactory.getInstance().rook(1));
+        getBoard()[1][height - 1].setMob(MobFactory.getInstance().knight(1));
+        getBoard()[width - 1][height - 1].setMob(MobFactory.getInstance().rook(1));
+        getBoard()[width - 2][height - 1].setMob(MobFactory.getInstance().knight(1));
+        if(width << 31 == 0){
+            getBoard()[width / 2 - 2][0].setMob(MobFactory.getInstance().bishop(0));
+            getBoard()[width / 2 - 1][0].setMob(MobFactory.getInstance().queen(0));
+            getBoard()[width / 2 - 1][height - 1].setMob(MobFactory.getInstance().king(1));
+            getBoard()[width / 2 - 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            getBoard()[width / 2 + 1][0].setMob(MobFactory.getInstance().bishop(0));
+            getBoard()[width / 2][0].setMob(MobFactory.getInstance().king(0));
+            getBoard()[width / 2][height - 1].setMob(MobFactory.getInstance().queen(1));
+            getBoard()[width / 2 + 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
+        }
+        else{
+            getBoard()[(int)Math.floor(width / 2)][0].setMob(MobFactory.getInstance().king(0));
+            getBoard()[(int)Math.floor(width / 2)][height - 1].setMob(MobFactory.getInstance().king(1));
+            getBoard()[(int)Math.floor(width / 2) + 1][0].setMob(MobFactory.getInstance().queen(0));
+            getBoard()[(int)Math.floor(width / 2 - 1)][height - 1].setMob(MobFactory.getInstance().queen(1));
+            getBoard()[(int)Math.floor(width / 2 - 1)][0].setMob(MobFactory.getInstance().bishop(0));
+            getBoard()[(int)Math.floor(width / 2 + 1)][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            getBoard()[(int)Math.floor(width / 2) + 2][0].setMob(MobFactory.getInstance().bishop(0));
+            getBoard()[(int)Math.floor(width / 2 - 2)][height - 1].setMob(MobFactory.getInstance().bishop(1));
+        }
+        if (width > 8){
+            //for (int i )
+        }
     }
 
     public static Tile[][] getBoard() {
@@ -301,7 +336,12 @@ public class FoWChess extends Application {
     public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
         targetsForEnPassant = new ArrayList();
-        this.width = width;
+        if (width < 8){
+            this.width = 8;
+        }
+        else{
+            this.width = width;
+        }
         this.height = height;
         this.mph = MovePatternHolder.getInstance();
         this.logger = Logger.getInstance();

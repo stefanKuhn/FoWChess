@@ -22,7 +22,7 @@ public class ImageHelper {
   this.wPawn = new Image(new FileInputStream(new File("src\\main\\java\\images\\whitepawn.bmp")));
   this.wQueen = new Image(new FileInputStream(new File("src\\main\\java\\images\\whitequeen.bmp")));
   this.wRook  = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiterook.bmp")));
-  this.wRunner = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiterook.bmp")));
+  this.wRunner = new Image(new FileInputStream(new File("src\\main\\java\\images\\whiterunner.bmp")));
  }
 
     private static ImageHelper instance;
