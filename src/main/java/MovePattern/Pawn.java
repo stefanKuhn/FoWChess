@@ -46,10 +46,10 @@ public class Pawn extends MovePattern {
                     }
                 }
             }
-            if (from.isHse() && (from.getSe().getMob() != null && from.getSe().getMob().getOwnerId() != 1 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 0 && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob()))) {
+            if (from.isHse() && (from.getSe().getMob() != null && from.getSe().getMob().getOwnerId() != 1 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 1 && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob()))) {
                 from.getSe().highLight();
             }
-            if (from.isHsw() && (from.getSw().getMob() != null && from.getSw().getMob().getOwnerId() != 1 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 0 && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob()))) {
+            if (from.isHsw() && (from.getSw().getMob() != null && from.getSw().getMob().getOwnerId() != 1 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 1 && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob()))) {
                 from.getSw().highLight();
             }
         }

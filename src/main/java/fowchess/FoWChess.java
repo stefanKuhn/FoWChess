@@ -173,7 +173,7 @@ public class FoWChess extends Application {
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
         changebtn = new Button("Start Turn");
-        makeLog(4 * size, size);
+        makeLog(5 * size, size);
         flo.getChildren().addAll(root, log, setChangeButton(changebtn));
         Scene scene = new Scene(flo, (width + 2) * size + 250, (height + 2) * size + 50);
         return scene;
