@@ -278,8 +278,12 @@ public class FoWChess extends Application {
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.adaptLight();
-                tile.adaptNoFigurine();
-                if (tile.getMob() != null){
+            }
+        }
+                for (Tile[] row : board) {
+            for (Tile tile : row) {
+                tile.adaptLight();
+                if ((tile.getMob() != null) && (tile.getLightlevel()>0)){
                     tile.adaptFigurine();
                 }
             }

@@ -110,8 +110,11 @@ public class Tile extends Button {
     public void goDark() {
         this.lightlevel = 0;
         this.adaptBG();
+        this.adaptNoFigurine();
     }
-
+    
+    
+    
     public void adaptLight() {
         if (getMob() != null) {
             if (getMob().ownerId == fowchess.FoWChess.getWhoseTurn()) {
@@ -124,10 +127,12 @@ public class Tile extends Button {
     public void propagateLight(int lightLevel) {
         //
         if (lightLevel < this.lightlevel) {
+            adaptBG();
             return;
         }
 
         this.lightlevel = lightLevel;
+        adaptBG();
         if (lightLevel <= 1) {
             return;
         }
@@ -136,27 +141,33 @@ public class Tile extends Button {
         if (he) {
             e.propagateLight(lightLevel);
         }
+        /*
         if (hne) {
             ne.propagateLight(lightLevel);
         }
+        */
         if (hn) {
             n.propagateLight(lightLevel);
         }
+        /*
         if (hnw) {
             nw.propagateLight(lightLevel);
         }
+*/
         if (hw) {
             w.propagateLight(lightLevel);
         }
+        /*
         if (hsw) {
             sw.propagateLight(lightLevel);
         }
+*/
         if (hs) {
             s.propagateLight(lightLevel);
-        }
+        }/*
         if (hse) {
             se.propagateLight(lightLevel);
-        }
+        }*/
     }
 
     public void map() {
