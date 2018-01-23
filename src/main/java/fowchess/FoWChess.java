@@ -64,7 +64,7 @@ public class FoWChess extends Application {
     public void makeLabel(int widthSize, int heightSize) {
         tempLabel = new Label();
         tempLabel.setMinSize(widthSize, heightSize);
-        tempLabel.setAlignment(Pos.CENTER);
+        tempLabel.setAlignment(Pos.CENTER_LEFT);
     }
 
     /**
@@ -109,9 +109,9 @@ public class FoWChess extends Application {
         generalLineUp();
         return root;
     }
-    
-    public void generalLineUp(){
-        for (int i = 0; i < width; i++){
+
+    public void generalLineUp() {
+        for (int i = 0; i < width; i++) {
             getBoard()[i][1].setMob(MobFactory.getInstance().pawn(0));
             getBoard()[i][height - 2].setMob(MobFactory.getInstance().pawn(1));
         }
@@ -123,24 +123,44 @@ public class FoWChess extends Application {
         getBoard()[1][height - 1].setMob(MobFactory.getInstance().knight(1));
         getBoard()[width - 1][height - 1].setMob(MobFactory.getInstance().rook(1));
         getBoard()[width - 2][height - 1].setMob(MobFactory.getInstance().knight(1));
-        if(width << 31 == 0){
+        if (width << 31 == 0) {
             getBoard()[width / 2 - 1][height - 1].setMob(MobFactory.getInstance().king(1));
             getBoard()[width / 2 - 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
             getBoard()[width / 2][height - 1].setMob(MobFactory.getInstance().queen(1));
             getBoard()[width / 2 + 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            if (width > 8) {
+                for (int i = 2; i < (int) Math.floor(width / 2) - 2; i++) {
+                    getBoard()[i][height - 1].setMob(MobFactory.getInstance().pawn(0));
+                }
+                for (int i = (int) Math.floor(width / 2) + 2; i < width - 2; i++) {
+                    getBoard()[i][height - 1].setMob(MobFactory.getInstance().pawn(0));
+                }
+            }
+        } else {
+            getBoard()[(int) Math.floor(width / 2)][height - 1].setMob(MobFactory.getInstance().king(1));
+            getBoard()[(int) Math.floor(width / 2) + 1][height - 1].setMob(MobFactory.getInstance().queen(1));
+            getBoard()[(int) Math.floor(width / 2) - 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            getBoard()[(int) Math.floor(width / 2) + 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            if (width > 8) {
+                for (int i = 2; i < (int) Math.floor(width / 2) - 1; i++) {
+                    getBoard()[i][height - 1].setMob(MobFactory.getInstance().pawn(0));
+                }
+                for (int i = (int) Math.floor(width / 2) + 3; i < width - 2; i++) {
+                    getBoard()[i][height - 1].setMob(MobFactory.getInstance().pawn(0));
+                }
+            }
         }
-        else{
-            getBoard()[(int)Math.floor(width / 2)][height - 1].setMob(MobFactory.getInstance().king(1));
-            getBoard()[(int)Math.floor(width / 2) + 1][height - 1].setMob(MobFactory.getInstance().queen(1));
-            getBoard()[(int)Math.floor(width / 2) - 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
-            getBoard()[(int)Math.floor(width / 2) + 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
-        }
-        getBoard()[(int)Math.floor(width / 2)][0].setMob(MobFactory.getInstance().king(0));
-        getBoard()[(int)Math.floor(width / 2) - 2][0].setMob(MobFactory.getInstance().bishop(0));
-        getBoard()[(int)Math.floor(width / 2) - 1][0].setMob(MobFactory.getInstance().queen(0));
-        getBoard()[(int)Math.floor(width / 2) + 1][0].setMob(MobFactory.getInstance().bishop(0));
-        if (width > 8){
-            //for (int i = 2; i < )
+        getBoard()[(int) Math.floor(width / 2)][0].setMob(MobFactory.getInstance().king(0));
+        getBoard()[(int) Math.floor(width / 2) - 2][0].setMob(MobFactory.getInstance().bishop(0));
+        getBoard()[(int) Math.floor(width / 2) - 1][0].setMob(MobFactory.getInstance().queen(0));
+        getBoard()[(int) Math.floor(width / 2) + 1][0].setMob(MobFactory.getInstance().bishop(0));
+        if (width > 8) {
+            for (int i = 2; i < (int) Math.floor(width / 2) - 2; i++) {
+                getBoard()[i][0].setMob(MobFactory.getInstance().pawn(0));
+            }
+            for (int i = (int) Math.floor(width / 2) + 2; i < width - 2; i++) {
+                getBoard()[i][0].setMob(MobFactory.getInstance().pawn(0));
+            }
         }
     }
 
@@ -184,7 +204,7 @@ public class FoWChess extends Application {
         changebtn.setAlignment(Pos.CENTER);
         changebtn.setOnAction((ActionEvent event) -> {
             try {
-                if (!FoWChess.isIsTurn()){
+                if (!FoWChess.isIsTurn()) {
                     startTurn();
                 }
             } catch (FileNotFoundException ex) {
@@ -198,7 +218,7 @@ public class FoWChess extends Application {
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.setOnAction((ActionEvent event) -> {
-                    if (FoWChess.isIsTurn()){
+                    if (FoWChess.isIsTurn()) {
                         System.out.println(highlightedTiles.size());
                         if (tile.isIsHighlighted()) {
                             switch (tempMob.getName()) {
@@ -269,7 +289,7 @@ public class FoWChess extends Application {
         turnsActive = true;
 
         //JavaFX
-        Scene scene = init(8, 8, 50);
+        Scene scene = init(1, 1, 50);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
@@ -299,7 +319,7 @@ public class FoWChess extends Application {
      * ends the turn by fogging the entire board
      */
     public static void endTurn() {
-        isTurn=false;
+        isTurn = false;
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.goDark();
@@ -313,17 +333,17 @@ public class FoWChess extends Application {
      */
     public static void startTurn() throws FileNotFoundException {
         //setIsTurn is nonStatic, thus
-        isTurn=true;
+        isTurn = true;
         switchActivePlayer();
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.adaptLight();
             }
         }
-                for (Tile[] row : board) {
+        for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.adaptLight();
-                if ((tile.getMob() != null) && (tile.getLightlevel()>0)){
+                if ((tile.getMob() != null) && (tile.getLightlevel() > 0)) {
                     tile.adaptFigurine();
                 }
             }
@@ -341,21 +361,19 @@ public class FoWChess extends Application {
     public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
         targetsForEnPassant = new ArrayList();
-        if (width < 8){
+        if (width < 8) {
             this.width = 8;
-        }
-        else{
+        } else {
             this.width = width;
         }
-        if (height < 4){
+        if (height < 4) {
             this.height = 4;
-        }
-        else {
+        } else {
             this.height = height;
         }
         this.mph = MovePatternHolder.getInstance();
         this.logger = Logger.getInstance();
-        Scene returnThis = makeScene(width, height, size);
+        Scene returnThis = makeScene(this.width, this.height, size);
         eventHandler(board);
         whoseTurn = 1;
         mapButtons();
@@ -380,8 +398,6 @@ public class FoWChess extends Application {
     public void setIsTurn(boolean isTurn) {
         this.isTurn = isTurn;
     }
-    
-    
 
     public static ArrayList<Mob> getTargetsForEnPassant() {
         return targetsForEnPassant;
@@ -469,7 +485,7 @@ public class FoWChess extends Application {
         for (int i = 0; i < logger.getLog().size(); i++) {
             logLabel[i].setText(logger.getLog().get(i));
         }
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < height + 2; i++) {
             if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null) {
                 log.getChildren().add(logLabel[i]);
             }

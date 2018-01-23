@@ -60,7 +60,7 @@ public class Tile extends Button {
 
     public void adaptFigurine() throws FileNotFoundException {
         if (this.lightlevel != 0) {
-            view = (ImageView)this.getGraphic();
+            view = (ImageView) this.getGraphic();
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0) {
                 view.setImage(ImageHelper.getInstance().getWPawn());
             }
@@ -77,7 +77,7 @@ public class Tile extends Button {
                 view.setImage(ImageHelper.getInstance().getWQueen());
             }
             if (this.mob.getName().equals("queen") && this.mob.getOwnerId() == 1) {
-               view.setImage(ImageHelper.getInstance().getBQueen());
+                view.setImage(ImageHelper.getInstance().getBQueen());
             }
             if (this.mob.getName().equals("knight") && this.mob.getOwnerId() == 0) {
                 view.setImage(ImageHelper.getInstance().getWKnight());
@@ -92,7 +92,7 @@ public class Tile extends Button {
                 view.setImage(ImageHelper.getInstance().getBRook());
             }
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 0) {
-               view.setImage(ImageHelper.getInstance().getWRunner());
+                view.setImage(ImageHelper.getInstance().getWRunner());
             }
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 1) {
                 view.setImage(ImageHelper.getInstance().getBRunner());
@@ -101,9 +101,9 @@ public class Tile extends Button {
             view.setFitWidth(50);
         }
     }
-    
-    public void adaptNoFigurine(){
-        ((ImageView)(this.getGraphic())).setImage(null);
+
+    public void adaptNoFigurine() {
+        ((ImageView) (this.getGraphic())).setImage(null);
     }
 
     //here come the light related functions
@@ -112,9 +112,7 @@ public class Tile extends Button {
         this.adaptBG();
         this.adaptNoFigurine();
     }
-    
-    
-    
+
     public void adaptLight() {
         if (getMob() != null) {
             if (getMob().ownerId == fowchess.FoWChess.getWhoseTurn()) {
@@ -145,7 +143,7 @@ public class Tile extends Button {
         if (hne) {
             ne.propagateLight(lightLevel);
         }
-        */
+         */
         if (hn) {
             n.propagateLight(lightLevel);
         }
@@ -153,7 +151,7 @@ public class Tile extends Button {
         if (hnw) {
             nw.propagateLight(lightLevel);
         }
-*/
+         */
         if (hw) {
             w.propagateLight(lightLevel);
         }
@@ -161,7 +159,7 @@ public class Tile extends Button {
         if (hsw) {
             sw.propagateLight(lightLevel);
         }
-*/
+         */
         if (hs) {
             s.propagateLight(lightLevel);
         }/*

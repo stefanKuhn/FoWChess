@@ -23,7 +23,6 @@ public class Logger {
 
     private Logger() {
         this.log = new ArrayList();
-        this.lastEntry = "";
     }
 
     public ArrayList<String> getLog() {
@@ -52,7 +51,7 @@ public class Logger {
     public void addEntry(String newEntry) {
         System.out.println(newEntry);
         log.add(0, newEntry);
-        if (log.size() >= 10) {
+        if (log.size() > FoWChess.getHeight() + 2) {
             log.remove(log.size() - 1);
         }
         FoWChess.updateLog();
