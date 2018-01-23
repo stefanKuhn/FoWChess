@@ -124,27 +124,23 @@ public class FoWChess extends Application {
         getBoard()[width - 1][height - 1].setMob(MobFactory.getInstance().rook(1));
         getBoard()[width - 2][height - 1].setMob(MobFactory.getInstance().knight(1));
         if(width << 31 == 0){
-            getBoard()[width / 2 - 2][0].setMob(MobFactory.getInstance().bishop(0));
-            getBoard()[width / 2 - 1][0].setMob(MobFactory.getInstance().queen(0));
             getBoard()[width / 2 - 1][height - 1].setMob(MobFactory.getInstance().king(1));
             getBoard()[width / 2 - 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
-            getBoard()[width / 2 + 1][0].setMob(MobFactory.getInstance().bishop(0));
-            getBoard()[width / 2][0].setMob(MobFactory.getInstance().king(0));
             getBoard()[width / 2][height - 1].setMob(MobFactory.getInstance().queen(1));
             getBoard()[width / 2 + 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
         }
         else{
-            getBoard()[(int)Math.floor(width / 2)][0].setMob(MobFactory.getInstance().king(0));
             getBoard()[(int)Math.floor(width / 2)][height - 1].setMob(MobFactory.getInstance().king(1));
-            getBoard()[(int)Math.floor(width / 2) + 1][0].setMob(MobFactory.getInstance().queen(0));
-            getBoard()[(int)Math.floor(width / 2 - 1)][height - 1].setMob(MobFactory.getInstance().queen(1));
-            getBoard()[(int)Math.floor(width / 2 - 1)][0].setMob(MobFactory.getInstance().bishop(0));
-            getBoard()[(int)Math.floor(width / 2 + 1)][height - 1].setMob(MobFactory.getInstance().bishop(1));
-            getBoard()[(int)Math.floor(width / 2) + 2][0].setMob(MobFactory.getInstance().bishop(0));
-            getBoard()[(int)Math.floor(width / 2 - 2)][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            getBoard()[(int)Math.floor(width / 2) + 1][height - 1].setMob(MobFactory.getInstance().queen(1));
+            getBoard()[(int)Math.floor(width / 2) - 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
+            getBoard()[(int)Math.floor(width / 2) + 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
         }
+        getBoard()[(int)Math.floor(width / 2)][0].setMob(MobFactory.getInstance().king(0));
+        getBoard()[(int)Math.floor(width / 2) - 2][0].setMob(MobFactory.getInstance().bishop(0));
+        getBoard()[(int)Math.floor(width / 2) - 1][0].setMob(MobFactory.getInstance().queen(0));
+        getBoard()[(int)Math.floor(width / 2) + 1][0].setMob(MobFactory.getInstance().bishop(0));
         if (width > 8){
-            //for (int i )
+            //for (int i = 2; i < )
         }
     }
 
@@ -173,7 +169,7 @@ public class FoWChess extends Application {
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
         changebtn = new Button("Start Turn");
-        makeLog(5 * size, size);
+        makeLog(5 * size, size, height);
         flo.getChildren().addAll(root, log, setChangeButton(changebtn));
         Scene scene = new Scene(flo, (width + 2) * size + 250, (height + 2) * size + 50);
         return scene;
@@ -351,7 +347,12 @@ public class FoWChess extends Application {
         else{
             this.width = width;
         }
-        this.height = height;
+        if (height < 4){
+            this.height = 4;
+        }
+        else {
+            this.height = height;
+        }
         this.mph = MovePatternHolder.getInstance();
         this.logger = Logger.getInstance();
         Scene returnThis = makeScene(width, height, size);
@@ -454,11 +455,11 @@ public class FoWChess extends Application {
         return whoseTurn;
     }
 
-    public void makeLog(int widthSize, int heightSize) {
+    public void makeLog(int widthSize, int heightSize, int height) {
         log = new VBox();
-        log.setMinSize(widthSize, 10 * heightSize);
-        logLabel = new Label[10];
-        for (int i = 0; i < 10; i++) {
+        log.setMinSize(widthSize, (height + 2) * heightSize);
+        logLabel = new Label[height + 2];
+        for (int i = 0; i < height + 2; i++) {
             makeLabel(widthSize, heightSize);
             logLabel[i] = tempLabel;
         }
@@ -468,7 +469,7 @@ public class FoWChess extends Application {
         for (int i = 0; i < logger.getLog().size(); i++) {
             logLabel[i].setText(logger.getLog().get(i));
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < height; i++) {
             if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null) {
                 log.getChildren().add(logLabel[i]);
             }
