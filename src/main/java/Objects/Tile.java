@@ -59,11 +59,12 @@ public class Tile extends Button {
 
     public void adaptFigurine() throws FileNotFoundException {
         if (this.lightlevel != 0) {
+            view = (ImageView)this.getGraphic();
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0) {
                 ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWPawn());
             }
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 1) {
-                ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBPawn());
+                view.setImage(ImageHelper.getInstance().getBPawn());
             }
             if (this.mob.getName().equals("king") && this.mob.getOwnerId() == 0) {
                 ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getWKing());
@@ -95,6 +96,8 @@ public class Tile extends Button {
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 1) {
                 ((ImageView)(this.getGraphic())).setImage(ImageHelper.getInstance().getBRunner());
             }
+            view.setFitHeight(50);
+            view.setFitWidth(50);
         }
     }
 

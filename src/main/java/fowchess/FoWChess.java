@@ -10,8 +10,10 @@ import Factory.TileFactory;
 import Logger.Logger;
 import Objects.Mob;
 import Objects.Tile;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.logging.Level;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -146,7 +148,11 @@ public class FoWChess extends Application {
         changebtn.setMinSize(100, 50);
         changebtn.setAlignment(Pos.CENTER);
         changebtn.setOnAction((ActionEvent event) -> {
-            startTurn();
+            try {
+                startTurn();
+            } catch (FileNotFoundException ex) {
+                java.util.logging.Logger.getLogger(FoWChess.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         return changebtn;
     }
@@ -265,7 +271,7 @@ public class FoWChess extends Application {
      * starts the turn by handing over vision to the other player and
      * propagating light;
      */
-    public static void startTurn() {
+    public static void startTurn() throws FileNotFoundException {
         switchActivePlayer();
         for (Tile[] row : board) {
             for (Tile tile : row) {
