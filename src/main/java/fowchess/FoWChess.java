@@ -356,7 +356,7 @@ public class FoWChess extends Application {
         this.logger = Logger.getInstance();
         Scene returnThis = makeScene(width, height, size);
         eventHandler(board);
-        whoseTurn = 0;
+        whoseTurn = 1;
         mapButtons();
         return returnThis;
     }
