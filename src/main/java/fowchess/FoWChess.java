@@ -49,6 +49,7 @@ public class FoWChess extends Application {
     private static Logger logger;
     private static Label[] logLabel;
     private static VBox log;
+    private static boolean isTurn;
 
     Button changebtn;
     private static boolean turnsActive;
@@ -133,6 +134,7 @@ public class FoWChess extends Application {
     }
 
     public Scene makeScene(int width, int height, int size) {
+        setIsTurn(false);
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
         changebtn = new Button("Start Turn");
@@ -151,7 +153,9 @@ public class FoWChess extends Application {
         changebtn.setAlignment(Pos.CENTER);
         changebtn.setOnAction((ActionEvent event) -> {
             try {
-                startTurn();
+                if (!FoWChess.isIsTurn()){
+                    startTurn();
+                }
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(FoWChess.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -163,63 +167,65 @@ public class FoWChess extends Application {
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.setOnAction((ActionEvent event) -> {
-                    System.out.println(highlightedTiles.size());
-                    if (tile.isIsHighlighted()) {
-                        switch (tempMob.getName()) {
-                            case "pawn":
-                                mph.getPawn().move(selected, tile);
-                                break;
-                            case "rook":
-                                mph.getRook().move(selected, tile);
-                                break;
-                            case "bishop":
-                                mph.getBishop().move(selected, tile);
-                                break;
-                            case "knight":
-                                mph.getKnight().move(selected, tile);
-                                break;
-                            case "queen":
-                                mph.getQueen().move(selected, tile);
-                                break;
-                            case "king":
-                                mph.getKing().move(selected, tile);
-                                break;
-                            default:
-                                break;
-                        }
-                        dehighlight();
-                    } else if (highlightedTiles.isEmpty()) {
-                        if (tile.getMob() != null) {
-                            if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn) {
-                                setSelected(tile);
-                                switch (tempMob.getName()) {
-                                    case "pawn":
-                                        mph.getPawn().highlight(tile);
-                                        break;
-                                    case "rook":
-                                        mph.getRook().highlight(tile);
-                                        break;
-                                    case "bishop":
-                                        mph.getBishop().highlight(tile);
-                                        break;
-                                    case "knight":
-                                        mph.getKnight().highlight(tile);
-                                        break;
-                                    case "queen":
-                                        mph.getQueen().highlight(tile);
-                                        break;
-                                    case "king":
-                                        mph.getKing().highlight(tile);
-                                        break;
-                                    default:
-                                        break;
+                    if (FoWChess.isIsTurn()){
+                        System.out.println(highlightedTiles.size());
+                        if (tile.isIsHighlighted()) {
+                            switch (tempMob.getName()) {
+                                case "pawn":
+                                    mph.getPawn().move(selected, tile);
+                                    break;
+                                case "rook":
+                                    mph.getRook().move(selected, tile);
+                                    break;
+                                case "bishop":
+                                    mph.getBishop().move(selected, tile);
+                                    break;
+                                case "knight":
+                                    mph.getKnight().move(selected, tile);
+                                    break;
+                                case "queen":
+                                    mph.getQueen().move(selected, tile);
+                                    break;
+                                case "king":
+                                    mph.getKing().move(selected, tile);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            dehighlight();
+                        } else if (highlightedTiles.isEmpty()) {
+                            if (tile.getMob() != null) {
+                                if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn) {
+                                    setSelected(tile);
+                                    switch (tempMob.getName()) {
+                                        case "pawn":
+                                            mph.getPawn().highlight(tile);
+                                            break;
+                                        case "rook":
+                                            mph.getRook().highlight(tile);
+                                            break;
+                                        case "bishop":
+                                            mph.getBishop().highlight(tile);
+                                            break;
+                                        case "knight":
+                                            mph.getKnight().highlight(tile);
+                                            break;
+                                        case "queen":
+                                            mph.getQueen().highlight(tile);
+                                            break;
+                                        case "king":
+                                            mph.getKing().highlight(tile);
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
+                        } else if (tile == selected) {
+                            System.out.println("should deselect");
+                            setSelected(null);
+                            dehighlight();
                         }
-                    } else if (tile == selected) {
-                        System.out.println("should deselect");
-                        setSelected(null);
-                        dehighlight();
                     }
                 });
             }
@@ -262,6 +268,7 @@ public class FoWChess extends Application {
      * ends the turn by fogging the entire board
      */
     public static void endTurn() {
+        isTurn=false;
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.goDark();
@@ -274,6 +281,8 @@ public class FoWChess extends Application {
      * propagating light;
      */
     public static void startTurn() throws FileNotFoundException {
+        //setIsTurn is nonStatic, thus
+        isTurn=true;
         switchActivePlayer();
         for (Tile[] row : board) {
             for (Tile tile : row) {
@@ -322,6 +331,16 @@ public class FoWChess extends Application {
             whoseTurn = 0;
         }
     }
+
+    public static boolean isIsTurn() {
+        return isTurn;
+    }
+
+    public void setIsTurn(boolean isTurn) {
+        this.isTurn = isTurn;
+    }
+    
+    
 
     public static ArrayList<Mob> getTargetsForEnPassant() {
         return targetsForEnPassant;
