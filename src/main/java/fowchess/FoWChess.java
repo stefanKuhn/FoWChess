@@ -138,7 +138,7 @@ public class FoWChess extends Application {
         changebtn = new Button("Start Turn");
         makeLog(4 * size, size);
         flo.getChildren().addAll(root, log, setChangeButton(changebtn));
-        Scene scene = new Scene(flo, (width + 2) * size + 200, (height + 2) * size + 50);
+        Scene scene = new Scene(flo, (width + 2) * size + 250, (height + 2) * size + 50);
         return scene;
     }
 
