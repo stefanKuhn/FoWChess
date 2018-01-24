@@ -291,7 +291,7 @@ public class FoWChess extends Application {
         turnsActive = true;
 
         //JavaFX
-        Scene scene = init(8, 8, 60);
+        Scene scene = init(8, 8, 50);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
