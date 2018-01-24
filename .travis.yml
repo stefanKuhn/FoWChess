@@ -1,10 +1,3 @@
 language: java
 
-/**
-deploy: 
-  provider: releases
-  
-  file: target/FoWChess-1.0-SNAPSHOT.jar
-  skip_cleanup: true
- 
- **/
+
