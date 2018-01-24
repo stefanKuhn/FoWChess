@@ -4,20 +4,6 @@ import javafx.scene.image.Image;
 
 public class ImageHelper {
 
-    /*
-	Image bKing 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackking.bmp"));
-	Image bKnight 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackknight.bmp"));
-	Image bPawn	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackpawn.bmp"));
-	Image bQueen	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackqueen.bmp"));
-	Image bRook 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackrook.bmp"));
-	Image bRunner	= new Image(getClass().getClassLoader().getResourceAsStream("/images/blackrunner.bmp"));
-	Image wKing 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whiteking.bmp"));
-	Image wKnight 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whiteknight.bmp"));
-	Image wPawn	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whitepawn.bmp"));
-	Image wQueen	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whitequeen.bmp"));
-	Image wRook 	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whiterook.bmp"));
-	Image wRunner	= new Image(getClass().getClassLoader().getResourceAsStream("/images/whiterunner.bmp"));
-     */
     Image bKing, bKnight, bPawn, bQueen, bRook, bRunner, wKing, wKnight, wPawn, wQueen, wRook, wRunner;
 
     private static ImageHelper instance;
