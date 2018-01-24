@@ -39,29 +39,29 @@ public class FoWChess extends Application {
     private static Tile[][] board;//two dimensional array for the tiles
     private Label[] widthLabel;//labels for x axis
     private Label[] heightLabel;//labels for y axis
-    private Tile tempTile;
-    private Label tempLabel;
-    private static int whoseTurn, width, height;
-    private static Stack<Tile> highlightedTiles;
+    private Tile tempTile;//a temporary tile
+    private Label tempLabel;//a temporary label
+    private static int whoseTurn, width, height;//integers for storing whose turn it is, the numbers of rows and the numbers of columns of the chessboard generated
+    private static Stack<Tile> highlightedTiles;//stack for the tiles which are highlighted
     private static Tile selected;//tile that is currently selected;
-    private MovePatternHolder mph;
-    private Mob tempMob;
-    private static ArrayList<Mob> targetsForEnPassant;
-    private static Logger logger;
-    private static Label[] logLabel;
-    private static VBox log;
-    private static boolean isTurn;
+    private MovePatternHolder mph;//reference to a singleton
+    private Mob tempMob;//a temporary mob
+    private static ArrayList<Mob> targetsForEnPassant;//array to store legal targets for en passant
+    private static Logger logger;//reference to a singleton
+    private static Label[] logLabel;//labels for the log
+    private static VBox log;//VBox containing the log
+    private static boolean isTurn;//flag for if there is currently a turn active
 
     Button changebtn;
     private static boolean turnsActive;
 
-    public void makeLabel(String text, int size) {
+    public void makeLabel(String text, int size) {//makes a label to be used for the axes
         tempLabel = new Label(text);
         tempLabel.setMinSize(size, size);
         tempLabel.setAlignment(Pos.CENTER);
     }
 
-    public void makeLabel(int widthSize, int heightSize) {
+    public void makeLabel(int widthSize, int heightSize) {//makes a label to be used for the log
         tempLabel = new Label();
         tempLabel.setMinSize(widthSize, heightSize);
         tempLabel.setAlignment(Pos.CENTER_LEFT);
@@ -89,7 +89,7 @@ public class FoWChess extends Application {
                 tempTile.setMaxSize(size, size);
                 root.add(tempTile, i + 2, j + 2);
                 tempTile.setBackground(tempTile.getTileColor());
-                tempTile.adaptBG();//this line is only here to test against nullpointers.
+                tempTile.adaptBG();
             }
         }
         //Place x axis labels
@@ -110,11 +110,12 @@ public class FoWChess extends Application {
         return root;
     }
 
-    public void generalLineUp() {
-        for (int i = 0; i < width; i++) {
+    public void generalLineUp() {//lines up the figurines
+        for (int i = 0; i < width; i++) {//lines up the pawns in the second and second last row 
             getBoard()[i][1].setMob(MobFactory.getInstance().pawn(0));
             getBoard()[i][height - 2].setMob(MobFactory.getInstance().pawn(1));
         }
+        //lines up rooks and knights
         getBoard()[0][0].setMob(MobFactory.getInstance().rook(0));
         getBoard()[1][0].setMob(MobFactory.getInstance().knight(0));
         getBoard()[width - 1][0].setMob(MobFactory.getInstance().rook(0));
@@ -123,7 +124,8 @@ public class FoWChess extends Application {
         getBoard()[1][height - 1].setMob(MobFactory.getInstance().knight(1));
         getBoard()[width - 1][height - 1].setMob(MobFactory.getInstance().rook(1));
         getBoard()[width - 2][height - 1].setMob(MobFactory.getInstance().knight(1));
-        if (width << 31 == 0) {
+        //lines up the kings, queens and bishops and fills optional space with pawns
+        if (width << 31 == 0) {//the number of rows is even
             getBoard()[width / 2 - 1][height - 1].setMob(MobFactory.getInstance().king(1));
             getBoard()[width / 2 - 2][height - 1].setMob(MobFactory.getInstance().bishop(1));
             getBoard()[width / 2][height - 1].setMob(MobFactory.getInstance().queen(1));
@@ -136,7 +138,7 @@ public class FoWChess extends Application {
                     getBoard()[i][height - 1].setMob(MobFactory.getInstance().pawn(0));
                 }
             }
-        } else {
+        } else {//the number of rows is uneven
             getBoard()[(int) Math.floor(width / 2)][height - 1].setMob(MobFactory.getInstance().king(1));
             getBoard()[(int) Math.floor(width / 2) + 1][height - 1].setMob(MobFactory.getInstance().queen(1));
             getBoard()[(int) Math.floor(width / 2) - 1][height - 1].setMob(MobFactory.getInstance().bishop(1));
@@ -184,28 +186,28 @@ public class FoWChess extends Application {
         return turnsActive;
     }
 
-    public Scene makeScene(int width, int height, int size) {
+    public Scene makeScene(int width, int height, int size) {//initialises the scene
         setIsTurn(false);
         GridPane root = generateBoard(width, height, size);
         FlowPane flo = new FlowPane();
         changebtn = new Button("Start Turn");
         makeLog(5 * size, size, height);
-        flo.getChildren().addAll(root, log, setChangeButton(changebtn));
-        Scene scene = new Scene(flo, (width + 2) * size + 250, (height + 2) * size + 50);
+        flo.getChildren().addAll(root, log, setChangeButton(changebtn, size));
+        Scene scene = new Scene(flo, (width + 7) * size, (height + 3) * size);
         return scene;
     }
 
     //stefan.kuhn@hotmail.com
     //s.kuhn@rafisa.ch
     //daniel.baur@outlook.de
-    public Button setChangeButton(Button changebtn) {
+    public Button setChangeButton(Button changebtn, int size) {//sets action for klicking on start turn button
 
-        changebtn.setMinSize(100, 50);
+        changebtn.setMinSize(2 * size, size);
         changebtn.setAlignment(Pos.CENTER);
         changebtn.setOnAction((ActionEvent event) -> {
             try {
                 if (!FoWChess.isIsTurn()) {
-                    startTurn();
+                    startTurn(size);
                 }
             } catch (FileNotFoundException ex) {
                 java.util.logging.Logger.getLogger(FoWChess.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,14 +216,14 @@ public class FoWChess extends Application {
         return changebtn;
     }
 
-    public void eventHandler(Tile[][] board) {
+    public void eventHandler(Tile[][] board) {//sets action for klicking on board tiles
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.setOnAction((ActionEvent event) -> {
-                    if (FoWChess.isIsTurn()) {
-                        System.out.println(highlightedTiles.size());
-                        if (tile.isIsHighlighted()) {
-                            switch (tempMob.getName()) {
+                    if (FoWChess.isIsTurn()) {//turn is active
+                        //System.out.println(highlightedTiles.size());
+                        if (tile.isIsHighlighted()) {//tile is highlighted
+                            switch (tempMob.getName()) {//moves dependend on mob name
                                 case "pawn":
                                     mph.getPawn().move(selected, tile);
                                     break;
@@ -244,11 +246,11 @@ public class FoWChess extends Application {
                                     break;
                             }
                             dehighlight();
-                        } else if (highlightedTiles.isEmpty()) {
-                            if (tile.getMob() != null) {
-                                if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn) {
+                        } else if (highlightedTiles.isEmpty()) {//there is no tile highlighted
+                            if (tile.getMob() != null) {//there is a mob on the tile
+                                if ((tempMob = tile.getMob()).getOwnerId() == whoseTurn) {//mob is owned by the player whose turn it is
                                     setSelected(tile);
-                                    switch (tempMob.getName()) {
+                                    switch (tempMob.getName()) {//highlightes dependend on mob name
                                         case "pawn":
                                             mph.getPawn().highlight(tile);
                                             break;
@@ -272,8 +274,8 @@ public class FoWChess extends Application {
                                     }
                                 }
                             }
-                        } else if (tile == selected) {
-                            System.out.println("should deselect");
+                        } else if (tile == selected) {//the tile is currently selected
+                            //System.out.println("should deselect");
                             setSelected(null);
                             dehighlight();
                         }
@@ -289,7 +291,7 @@ public class FoWChess extends Application {
         turnsActive = true;
 
         //JavaFX
-        Scene scene = init(1, 1, 50);
+        Scene scene = init(8, 8, 60);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
@@ -308,7 +310,7 @@ public class FoWChess extends Application {
     /**
      * dehighlights all highlighted (blue) tiles;
      */
-    public void dehighlight() {
+    public void dehighlight() {//removes all the highlights
         while (!highlightedTiles.empty()) {
             tempTile = highlightedTiles.pop();
             tempTile.adaptBG();
@@ -331,7 +333,7 @@ public class FoWChess extends Application {
      * starts the turn by handing over vision to the other player and
      * propagating light;
      */
-    public static void startTurn() throws FileNotFoundException {
+    public static void startTurn(int size) throws FileNotFoundException {
         //setIsTurn is nonStatic, thus
         isTurn = true;
         switchActivePlayer();
@@ -344,7 +346,7 @@ public class FoWChess extends Application {
             for (Tile tile : row) {
                 tile.adaptLight();
                 if ((tile.getMob() != null) && (tile.getLightlevel() > 0)) {
-                    tile.adaptFigurine();
+                    tile.adaptFigurine(size);
                 }
             }
         }
@@ -361,12 +363,12 @@ public class FoWChess extends Application {
     public Scene init(int width, int height, int size) {
         highlightedTiles = new Stack();
         targetsForEnPassant = new ArrayList();
-        if (width < 8) {
+        if (width < 8) {//this is the minimal number of columns
             this.width = 8;
         } else {
             this.width = width;
         }
-        if (height < 4) {
+        if (height < 4) {//this is the minimal number of rows
             this.height = 4;
         } else {
             this.height = height;
@@ -403,7 +405,7 @@ public class FoWChess extends Application {
         return targetsForEnPassant;
     }
 
-    public void mapButtons() {
+    public void mapButtons() {//maps the buttons
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.map();
@@ -411,56 +413,56 @@ public class FoWChess extends Application {
         }
     }
 
-    public static Tile getNorth(Tile tile) {
+    public static Tile getNorth(Tile tile) {//gets northern tile
         if (tile.getY() + 1 < height) {
             return board[tile.getX()][tile.getY() + 1];
         }
         return null;
     }
 
-    public static Tile getEast(Tile tile) {
+    public static Tile getEast(Tile tile) {//gets eastern tile
         if (tile.getX() + 1 < width) {
             return board[tile.getX() + 1][tile.getY()];
         }
         return null;
     }
 
-    public static Tile getSouth(Tile tile) {
+    public static Tile getSouth(Tile tile) {//gets southern tile
         if (tile.getY() - 1 >= 0) {
             return board[tile.getX()][tile.getY() - 1];
         }
         return null;
     }
 
-    public static Tile getWest(Tile tile) {
+    public static Tile getWest(Tile tile) {//gets western tile
         if (tile.getX() - 1 >= 0) {
             return board[tile.getX() - 1][tile.getY()];
         }
         return null;
     }
 
-    public static Tile getNorthEast(Tile tile) {
+    public static Tile getNorthEast(Tile tile) {//gets north eastern tile
         if (tile.getX() + 1 < width && tile.getY() + 1 < height) {
             return board[tile.getX() + 1][tile.getY() + 1];
         }
         return null;
     }
 
-    public static Tile getNorthWest(Tile tile) {
+    public static Tile getNorthWest(Tile tile) {//gets north western tile
         if (tile.getX() - 1 >= 0 && tile.getY() + 1 < height) {
             return board[tile.getX() - 1][tile.getY() + 1];
         }
         return null;
     }
 
-    public static Tile getSouthEast(Tile tile) {
+    public static Tile getSouthEast(Tile tile) {//gets south eastern tile
         if (tile.getX() + 1 < width && tile.getY() - 1 >= 0) {
             return board[tile.getX() + 1][tile.getY() - 1];
         }
         return null;
     }
 
-    public static Tile getSouthWest(Tile tile) {
+    public static Tile getSouthWest(Tile tile) {//gets south western tile
         if (tile.getX() - 1 >= 0 && tile.getY() - 1 >= 0) {
             return board[tile.getX() - 1][tile.getY() - 1];
         }
@@ -471,21 +473,21 @@ public class FoWChess extends Application {
         return whoseTurn;
     }
 
-    public void makeLog(int widthSize, int heightSize, int height) {
+    public void makeLog(int widthSize, int heightSize, int height) {//initialises the log
         log = new VBox();
         log.setMinSize(widthSize, (height + 2) * heightSize);
         logLabel = new Label[height + 2];
-        for (int i = 0; i < height + 2; i++) {
+        for (int i = 0; i < height + 2; i++) {//initialises log entries
             makeLabel(widthSize, heightSize);
             logLabel[i] = tempLabel;
         }
     }
 
-    public static void updateLog() {
-        for (int i = 0; i < logger.getLog().size(); i++) {
+    public static void updateLog() {//updates the log
+        for (int i = 0; i < logger.getLog().size(); i++) {//sets the text for the entries
             logLabel[i].setText(logger.getLog().get(i));
         }
-        for (int i = 0; i < height + 2; i++) {
+        for (int i = 0; i < height + 2; i++) {//adds labels to the log currently not contained by it and themselves containing any text
             if (!log.getChildren().contains(logLabel[i]) && logLabel[i].getText() != null) {
                 log.getChildren().add(logLabel[i]);
             }

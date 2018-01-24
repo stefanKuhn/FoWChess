@@ -47,10 +47,10 @@ public class Tile extends Button {
         if (lightlevel == 0) {
             if (getTileColor() == PaintMakerAndHolder.getInstance().getBlack()) {
                 setBackground(PaintMakerAndHolder.getInstance().getFogBlack());
-                System.out.println("black fog");
+                //System.out.println("black fog");
             } else {
                 setBackground(PaintMakerAndHolder.getInstance().getFogWhite());
-                System.out.println("white fog");
+                //System.out.println("white fog");
             }
         } else {
             setBackground(tileColor);
@@ -58,7 +58,7 @@ public class Tile extends Button {
         isHighlighted = false;
     }
 
-    public void adaptFigurine() throws FileNotFoundException {
+    public void adaptFigurine(int size) throws FileNotFoundException {
         if (this.lightlevel != 0) {
             view = (ImageView) this.getGraphic();
             if (this.mob.getName().equals("pawn") && this.mob.getOwnerId() == 0) {
@@ -97,8 +97,8 @@ public class Tile extends Button {
             if (this.mob.getName().equals("bishop") && this.mob.getOwnerId() == 1) {
                 view.setImage(ImageHelper.getInstance().getBRunner());
             }
-            view.setFitHeight(50);
-            view.setFitWidth(50);
+            view.setFitHeight(size);
+            view.setFitWidth(size);
         }
     }
 

@@ -42,11 +42,13 @@ public class TileFactory {
             }
         }//on uneven rows
         else //uneven tiles are black
-         if (y << 31 >> 31 == 0) {
+        {
+            if (y << 31 >> 31 == 0) {
                 lastGivenBG = PaintMakerAndHolder.getInstance().getWhite();
             } else {
                 lastGivenBG = PaintMakerAndHolder.getInstance().getBlack();
-            };
+            }
+        };
 
         lastCreated = new Tile(lastGivenBG, x, y, 1, new ImageView());
 
