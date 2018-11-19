@@ -8,6 +8,7 @@ package MovePattern;
 import Factory.MovePatternHolder;
 import Objects.Tile;
 import fowchess.FoWChess;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,6 +26,14 @@ public class Bishop extends MovePattern {
         mph.highlightNorthWest(from);
         mph.highlightSouthEast(from);
         mph.highlightSouthWest(from);
+    }
+    
+    public void threaten(Tile from){
+        MovePatternHolder.clearThreatenedTiles();
+        mph.addNorthEast(from);
+        mph.addNorthWest(from);
+        mph.addSouthEast(from);
+        mph.addSouthWest(from);
     }
 
     @Override

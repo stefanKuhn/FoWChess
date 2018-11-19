@@ -5,8 +5,10 @@
  */
 package MovePattern;
 
+import Factory.MovePatternHolder;
 import Objects.Tile;
 import fowchess.FoWChess;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,6 +45,16 @@ public class Rook extends MovePattern {
         if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
+        
+    }
+
+    @Override
+    public void threaten(Tile from) {
+        MovePatternHolder.clearThreatenedTiles();
+        mph.addNorth(from);
+        mph.addWest(from);
+        mph.addEast(from);
+        mph.addSouth(from);
     }
 
 }

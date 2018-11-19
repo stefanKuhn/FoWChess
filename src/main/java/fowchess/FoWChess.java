@@ -13,6 +13,7 @@ import Objects.Mob;
 import Objects.Tile;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 import java.util.logging.Level;
 import javafx.application.Application;
@@ -44,13 +45,15 @@ public class FoWChess extends Application {
     private static int whoseTurn, width, height;//integers for storing whose turn it is, the numbers of rows and the numbers of columns of the chessboard generated
     private static Stack<Tile> highlightedTiles;//stack for the tiles which are highlighted
     private static Tile selected;//tile that is currently selected;
-    private MovePatternHolder mph;//reference to a singleton
+    private static MovePatternHolder mph;//reference to a singleton
     private Mob tempMob;//a temporary mob
-    private static ArrayList<Mob> targetsForEnPassant;//array to store legal targets for en passant
+    private static Mob targetForEnPassant;//single target for en passant
+    private static ArrayList<Tile> tilesUnderAttack;//ArrayList to store tiles which are under attack for rochade
     private static Logger logger;//reference to a singleton
     private static Label[] logLabel;//labels for the log
     private static VBox log;//VBox containing the log
     private static boolean isTurn;//flag for if there is currently a turn active
+    private static ArrayList<Tile> tilesContainingVisibleEnemies;//arraylist to store tiles containing visible enemies
 
     Button changebtn;
     private static boolean turnsActive;
@@ -275,7 +278,6 @@ public class FoWChess extends Application {
                                 }
                             }
                         } else if (tile == selected) {//the tile is currently selected
-                            //System.out.println("should deselect");
                             setSelected(null);
                             dehighlight();
                         }
@@ -289,9 +291,11 @@ public class FoWChess extends Application {
     public void start(Stage primaryStage) {
         //set globals
         turnsActive = true;
+        highlightedTiles = new Stack();
+        whoseTurn = 1;
 
         //JavaFX
-        Scene scene = init(8, 8, 50);
+        Scene scene = init(8, 8, 50, 2);
         primaryStage.setTitle("FoWChess");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
@@ -337,6 +341,8 @@ public class FoWChess extends Application {
         //setIsTurn is nonStatic, thus
         isTurn = true;
         switchActivePlayer();
+        tilesContainingVisibleEnemies = new ArrayList();
+        tilesUnderAttack = new ArrayList();
         for (Tile[] row : board) {
             for (Tile tile : row) {
                 tile.adaptLight();
@@ -344,9 +350,43 @@ public class FoWChess extends Application {
         }
         for (Tile[] row : board) {
             for (Tile tile : row) {
-                tile.adaptLight();
                 if ((tile.getMob() != null) && (tile.getLightlevel() > 0)) {
                     tile.adaptFigurine(size);
+                    if (tile.getMob().getOwnerId() != whoseTurn) {
+                        tilesContainingVisibleEnemies.add(tile);
+                    }
+                }
+            }
+        }
+        if (targetForEnPassant != null && targetForEnPassant.getOwnerId() == whoseTurn) {
+            targetForEnPassant = null;
+        }
+        for (Tile tile : tilesContainingVisibleEnemies) {
+            switch (tile.getMob().getName()) {//threatened tiles dependend on mob name
+                case "pawn":
+                    mph.getPawn().threaten(tile);
+                    break;
+                case "rook":
+                    mph.getRook().threaten(tile);
+                    break;
+                case "bishop":
+                    mph.getBishop().threaten(tile);
+                    break;
+                case "knight":
+                    mph.getKnight().threaten(tile);
+                    break;
+                case "queen":
+                    mph.getQueen().threaten(tile);
+                    break;
+                case "king":
+                    mph.getKing().threaten(tile);
+                    break;
+                default:
+                    break;
+            }
+            for (Tile threatenedTile : MovePatternHolder.getThreatenedTiles()){
+                if (!tilesUnderAttack.contains(threatenedTile)){
+                    tilesUnderAttack.add(threatenedTile);
                 }
             }
         }
@@ -358,11 +398,10 @@ public class FoWChess extends Application {
      * @param width: board with
      * @param height: board height
      * @param size
+     * @param numberOfPlayers
      * @return
      */
-    public Scene init(int width, int height, int size) {
-        highlightedTiles = new Stack();
-        targetsForEnPassant = new ArrayList();
+    public Scene init(int width, int height, int size, int numberOfPlayers) {
         if (width < 8) {//this is the minimal number of columns
             this.width = 8;
         } else {
@@ -373,11 +412,13 @@ public class FoWChess extends Application {
         } else {
             this.height = height;
         }
+
+        //get instances of Singletons to be used
         this.mph = MovePatternHolder.getInstance();
         this.logger = Logger.getInstance();
+
         Scene returnThis = makeScene(this.width, this.height, size);
         eventHandler(board);
-        whoseTurn = 1;
         mapButtons();
         return returnThis;
     }
@@ -399,10 +440,6 @@ public class FoWChess extends Application {
 
     public void setIsTurn(boolean isTurn) {
         this.isTurn = isTurn;
-    }
-
-    public static ArrayList<Mob> getTargetsForEnPassant() {
-        return targetsForEnPassant;
     }
 
     public void mapButtons() {//maps the buttons
@@ -492,6 +529,18 @@ public class FoWChess extends Application {
                 log.getChildren().add(logLabel[i]);
             }
         }
+    }
+
+    public static Mob getTargetForEnPassant() {
+        return targetForEnPassant;
+    }
+
+    public static void setTargetForEnPassant(Mob targetForEnPassant) {
+        FoWChess.targetForEnPassant = targetForEnPassant;
+    }
+
+    public static ArrayList<Tile> getTilesUnderAttack() {
+        return tilesUnderAttack;
     }
 
     /**

@@ -5,8 +5,10 @@
  */
 package MovePattern;
 
+import Factory.MovePatternHolder;
 import Objects.Tile;
 import fowchess.FoWChess;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,6 +54,19 @@ public class Queen extends MovePattern {
         if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
         }
+    }
+
+    @Override
+    public void threaten(Tile from) {
+        MovePatternHolder.clearThreatenedTiles();
+        mph.addNorthEast(from);
+        mph.addNorthWest(from);
+        mph.addSouthEast(from);
+        mph.addSouthWest(from);
+        mph.addNorth(from);
+        mph.addWest(from);
+        mph.addSouth(from);
+        mph.addEast(from);
     }
 
 }

@@ -62,7 +62,7 @@ public class Logger {
         addEntry(lastEntry);
     }
 
-    public void anotherNewEntry(Mob attacker, Tile battlefield) {
+    public void newEntryEnassant(Mob attacker, Tile battlefield) {
         lastEntry = attacker.getName() + " beats " + victimOfEnPassant.getName() + " en passant at (" + String.valueOf(battlefield.getX() + 1) + "," + String.valueOf(battlefield.getY() + 1) + ")";
         addEntry(lastEntry);
     }

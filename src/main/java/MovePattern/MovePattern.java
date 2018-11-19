@@ -30,6 +30,8 @@ public abstract class MovePattern {
     }
 
     public abstract void highlight(Tile from);
+    
+    public abstract void threaten(Tile from);
 
     public abstract void move(Tile from, Tile to);
 }

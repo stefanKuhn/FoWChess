@@ -5,6 +5,7 @@
  */
 package MovePattern;
 
+import Factory.MovePatternHolder;
 import Objects.Tile;
 import fowchess.FoWChess;
 
@@ -20,8 +21,6 @@ public class Pawn extends MovePattern {
 
     @Override
     public void highlight(Tile from) {
-        x = from.getX();
-        y = from.getY();
         if (from.getMob().getOwnerId() == 0) {
             if (from.isHn() && from.getN().getMob() == null) {
                 from.getN().highLight();
@@ -31,10 +30,10 @@ public class Pawn extends MovePattern {
                     }
                 }
             }
-            if (from.isHne() && (from.getNe().getMob() != null && from.getNe().getMob().getOwnerId() != 0 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 0 && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob()))) {
+            if (from.isHne() && (from.getNe().getMob() != null && from.getNe().getMob().getOwnerId() != 0 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 0 && FoWChess.getTargetForEnPassant() == from.getE().getMob())) {
                 from.getNe().highLight();
             }
-            if (from.isHnw() && (from.getNw().getMob() != null && from.getNw().getMob().getOwnerId() != 0 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 0 && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob()))) {
+            if (from.isHnw() && (from.getNw().getMob() != null && from.getNw().getMob().getOwnerId() != 0 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 0 && FoWChess.getTargetForEnPassant() == from.getW().getMob())) {
                 from.getNw().highLight();
             }
         } else {
@@ -46,10 +45,10 @@ public class Pawn extends MovePattern {
                     }
                 }
             }
-            if (from.isHse() && (from.getSe().getMob() != null && from.getSe().getMob().getOwnerId() != 1 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 1 && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob()))) {
+            if (from.isHse() && (from.getSe().getMob() != null && from.getSe().getMob().getOwnerId() != 1 || from.getE().getMob() != null && from.getE().getMob().getOwnerId() != 1 && FoWChess.getTargetForEnPassant() == from.getE().getMob())) {
                 from.getSe().highLight();
             }
-            if (from.isHsw() && (from.getSw().getMob() != null && from.getSw().getMob().getOwnerId() != 1 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 1 && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob()))) {
+            if (from.isHsw() && (from.getSw().getMob() != null && from.getSw().getMob().getOwnerId() != 1 || from.getW().getMob() != null && from.getW().getMob().getOwnerId() != 1 && FoWChess.getTargetForEnPassant() == from.getW().getMob())) {
                 from.getSw().highLight();
             }
         }
@@ -61,14 +60,12 @@ public class Pawn extends MovePattern {
         if (!tempMob.isHasMoved()) {
             tempMob.setHasMoved(true);
             if (Math.abs(to.getY() - from.getY()) == 2) {
-                FoWChess.getTargetsForEnPassant().add(tempMob);
+                FoWChess.setTargetForEnPassant(tempMob);
             }
-        } else if (FoWChess.getTargetsForEnPassant().contains(tempMob)) {
-            FoWChess.getTargetsForEnPassant().remove(tempMob);
-        } else if (to.getX() - from.getX() == 1 && !(from.getE().getMob() == null) && FoWChess.getTargetsForEnPassant().contains(from.getE().getMob())) {
+        } else if (to.getX() - from.getX() == 1 && !(from.getE().getMob() == null) && FoWChess.getTargetForEnPassant() == from.getE().getMob()) {
             log.setVictimOfEnPassant(from.getE().getMob());
             from.getE().setMob(null);
-        } else if (to.getX() - from.getX() == -1 && !(from.getW().getMob() == null) && FoWChess.getTargetsForEnPassant().contains(from.getW().getMob())) {
+        } else if (to.getX() - from.getX() == -1 && !(from.getW().getMob() == null) && FoWChess.getTargetForEnPassant() == from.getW().getMob()) {
             log.setVictimOfEnPassant(from.getW().getMob());
             from.getW().setMob(null);
         }
@@ -77,13 +74,33 @@ public class Pawn extends MovePattern {
                 log.newEntry(from.getMob(), to);
             }
         } else {
-            log.anotherNewEntry(from.getMob(), to);
+            log.newEntryEnassant(from.getMob(), to);
             log.setVictimOfEnPassant(null);
         }
         to.setMob(tempMob);
         from.setMob(null);
         if (FoWChess.getTurnsActive()) {
             FoWChess.endTurn();
+        }
+    }
+
+    @Override
+    public void threaten(Tile from) {
+        MovePatternHolder.clearThreatenedTiles();
+        if (from.getMob().getOwnerId() == 0) {
+            if (from.isHne() && (from.getNe().getMob() == null || from.getNe().getMob().getOwnerId() != 0)) {
+                MovePatternHolder.addThreatenedTile(from.getNe());
+            }
+            if (from.isHnw() && (from.getNw().getMob() == null || from.getNw().getMob().getOwnerId() != 0)) {
+                MovePatternHolder.addThreatenedTile(from.getNw());
+            }
+        } else {
+            if (from.isHse() && (from.getSe().getMob() == null || from.getSe().getMob().getOwnerId() != 1)) {
+                MovePatternHolder.addThreatenedTile(from.getSe());
+            }
+            if (from.isHsw() && (from.getSw().getMob() == null || from.getSw().getMob().getOwnerId() != 1)) {
+                MovePatternHolder.addThreatenedTile(from.getSw());
+            }
         }
     }
 }
